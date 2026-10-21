@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-secondary": "#ffffff", "inverse-on-surface": "#eff1f6", "on-tertiary": "#ffffff", "surface-container": "#eceef3", "surface-container-lowest": "#ffffff", "on-secondary-fixed": "#3e001e", "on-surface-variant": "#454650", "surface-variant": "#e0e2e7", "on-secondary-fixed-variant": "#8e004c", "inverse-primary": "#b7c4ff", "surface-container-low": "#f1f4f9", "primary": "#000b37", "on-error-container": "#93000a", "eduanchors-blue": "#1E3C72", "surface-container-high": "#e6e8ed", "on-primary": "#ffffff", "error-container": "#ffdad6", "surface-card": "#FFFFFF", "surface-dim": "#d8dadf", "on-error": "#ffffff", "eduanchors-teal": "#0E9F6E", "error": "#ba1a1a", "secondary-fixed-dim": "#ffb0c9", "primary-fixed-dim": "#b7c4ff", "tertiary-container": "#002b21", "text-primary": "#0B1536", "tertiary-fixed": "#94f5d6", "on-tertiary-fixed": "#002018", "surface-container-highest": "#e0e2e7", "surface-tint": "#4a5b9b", "on-tertiary-fixed-variant": "#005140", "text-secondary": "#4E5D78", "primary-container": "#0a1f5e", "outline": "#757681", "surface-bright": "#f7f9fe", "on-primary-fixed": "#001552", "outline-variant": "#c5c5d2", "urgent-helpline": "#E02424", "secondary": "#b41764", "inverse-surface": "#2d3135", "background": "#f7f9fe", "on-primary-fixed-variant": "#324381", "surface-subtle": "F0F4FA", "on-background": "#181c20", "tertiary-fixed-dim": "#78d8ba", "on-secondary-container": "#610032", "surface": "#f7f9fe", "primary-fixed": "#dce1ff", "on-primary-container": "#7889cd", "secondary-fixed": "#ffd9e2", "secondary-container": "#fe579d", "text-muted": "#8A97AB", "border-subtle": "#E2E8F0", "on-tertiary-container": "#389c81", "on-surface": "#181c20", "tertiary": "#00130d" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin-lg": "1.25rem", "gutter": "1rem", "margin": "1rem", "space-2xl": "2.5rem", "space-xl": "2rem", "space-xs": "0.5rem", "space-sm": "0.75rem", "space-lg": "1.5rem", "space-md": "1rem", "space-2xs": "0.25rem", "gutter-sm": "0.75rem" }, "fontFamily": { "body-md": ["Inter"], "body-sm": ["Inter"], "headline-md": ["Inter"], "display-md": ["Inter"], "body-lg": ["Inter"], "label-lg": ["Inter"], "display-lg": ["Inter"], "label-md": ["Inter"], "headline-lg": ["Inter"], "title-sm": ["Inter"], "label-sm": ["Inter"] }, "fontSize": { "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }], "headline-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "display-md": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "title-sm": ["16px", { "lineHeight": "22px", "fontWeight": "600" }], "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-margin flex items-center justify-between gap-space-xs"><div class="flex items-center gap-space-xs"><img alt="AWSAR India Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-Z9Ftz69gAmqH-Kvb1-l_9joHo3wqn9Tf_x9gqg3CjwocuP_ooDaW95L7zVzDhyeDiIXohWy-bSv5C-8lFmidecq17b-zXhdrwNr6ae1_h_J4sjuSSpilKKRJuH7Narw05IP0usDH8uWZ3WODxf24J7Gk4UxZVAW8sF_7sAtJkJ45heBh9fN2leJOLoQmVlJfy2OpbsJUkpgh3WKN4mNw4485jWUG_qDbVLv5ZpdJuCfyzp8IkJO-"/><div class="flex flex-col"><span class="font-label-lg text-label-lg font-bold tracking-tight text-primary leading-tight">AWSAR INDIA</span><span class="font-label-sm text-label-sm text-text-secondary leading-none">Media</span></div></div><div class="flex items-center gap-space-xs"><button aria-label="Switch Language" class="min-h-[44px] min-w-[44px] px-space-xs py-space-2xs rounded-full bg-surface-container flex items-center justify-center font-label-md text-label-md text-text-primary hover:bg-surface-variant transition-colors"><span class="font-semibold">EN</span><span class="mx-space-2xs text-text-muted">|</span><span class="font-medium text-text-secondary">हिं</span></button><a aria-label="Child Helpline 1098" class="min-h-[44px] px-space-xs py-space-2xs rounded-full bg-urgent-helpline text-on-error flex items-center justify-center gap-space-2xs shadow-[0_2px_8px_-2px_rgba(224,36,36,0.3)] hover:opacity-90 active:scale-95 transition-all" href="tel:1098"><span class="material-symbols-outlined text-[16px]">call</span><span class="font-label-md text-label-md font-bold">1098</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full px-margin pb-space-xl">
+<!-- Header Intro Section -->
+<section class="pt-space-md pb-space-sm">
+<div class="flex items-center gap-space-2xs mb-space-2xs">
+<span class="inline-flex w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Media &amp; Publications</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary tracking-tight">Our Stories &amp; Reports</h1>
+<p class="font-body-sm text-body-sm text-text-secondary mt-space-2xs leading-relaxed">
+      Field updates, visual documentation, and certified disclosures.
+    </p>
+</section>
+<!-- Filter / Tab Chips -->
+<div class="flex items-center gap-space-xs overflow-x-auto no-scrollbar py-space-xs -mx-margin px-margin">
+<button class="filter-chip px-space-md py-space-2xs rounded-full bg-primary text-on-primary font-label-md text-label-md shadow-sm shrink-0 transition-transform active:scale-95" data-category="all">
+      All Archives
+    </button>
+<button class="filter-chip px-space-md py-space-2xs rounded-full bg-surface-container text-text-secondary font-label-md text-label-md shrink-0 hover:bg-surface-variant transition-colors" data-category="photos">
+      Photos (128)
+    </button>
+<button class="filter-chip px-space-md py-space-2xs rounded-full bg-surface-container text-text-secondary font-label-md text-label-md shrink-0 hover:bg-surface-variant transition-colors" data-category="videos">
+      Video Stories
+    </button>
+<button class="filter-chip px-space-md py-space-2xs rounded-full bg-surface-container text-text-secondary font-label-md text-label-md shrink-0 hover:bg-surface-variant transition-colors" data-category="reports">
+      PDF Disclosures
+    </button>
+</div>
+<!-- Section 1: Photo Gallery -->
+<section class="mt-space-lg">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-2xs">
+<span class="material-symbols-outlined text-[20px] text-primary">photo_library</span>
+<h2 class="font-title-sm text-title-sm text-primary font-bold">Field Documentation</h2>
+</div>
+<button class="font-label-sm text-label-sm font-semibold text-secondary flex items-center gap-0.5 active:opacity-75">
+        View all (128)
+        <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+<!-- 3-Column Square Thumbnail Grid -->
+<div class="grid grid-cols-3 gap-space-2xs">
+<!-- Card 1 -->
+<div class="group relative aspect-square rounded-xl overflow-hidden bg-surface-container shadow-sm cursor-pointer" onclick="openPhotoModal('Children learning in community classroom', 'Balwadi grassroots learning session conducted under warm morning sun with primary literacy modules.')">
+<img alt="Community classroom" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Vibrant close-up of young rural Indian schoolchildren smiling and enthusiastically reading open colourful Hindi textbooks in an open-air village community classroom, warm morning sunlight, natural candid photojournalistic style with soft bokeh background, deep midnight navy accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpAhZ2_C57OIrulylIyVPBnF3vTEju3EIC85pNHli3CsUb7-cbx_W-2CYij6ptsg41CLxC8XgoaB2exi5uzCQUqS77R68KjkNUrO_AjX447AWkrGpOHt1s63rcW2RF5ui9kkaiNtfRkH19YIJOuJQd56onrKEN8VTl7CglBB86gVyopD9rtnHykN1hg50BXtjiF9wzsXbQJdxvfzYoCuobwD9OWVS6tHtby7DxNiDNqPNLBwgrNbul"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-space-2xs">
+<span class="font-label-sm text-label-sm text-on-primary line-clamp-1">Education</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group relative aspect-square rounded-xl overflow-hidden bg-surface-container shadow-sm cursor-pointer" onclick="openPhotoModal('Women\'s SHG handicraft training', 'Micro-enterprise and artisanal skill workshops empowering rural women with handloom embroidery.')">
+<img alt="Handicraft training" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Indian women seated in a semi-circle during a self-help group livelihood handicraft training workshop, hands carefully threading bright vibrant magenta fabrics and traditional embroidery, warm indoor lighting, focused empowered expressions, authentic documentary style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4P0kSnokJgXGmgZW4UgfBKo8ZvCHdoLC9Pnl5KdL4-Z6glfIOcd_ihCN6nRPlGGa_Efy_1dvkdIBaNQoSdxcMFyG7BBzjcIqIHeCF2Ie5gduTOVunZP02s0eEoF0rQzld409hmFe-ia5OKw5oSLBR9xfxeJg-rHFbr828YMHxiobQnGBhX5jXf0wIY0emvBZucJnWaF-DQMgtKOWS1U0aQD431idwdjuX79sImEHof8PVYANYavlU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-space-2xs">
+<span class="font-label-sm text-label-sm text-on-primary line-clamp-1">Livelihood</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group relative aspect-square rounded-xl overflow-hidden bg-surface-container shadow-sm cursor-pointer" onclick="openPhotoModal('Drinking water filtration inauguration', 'Community-led clean RO water outlet installation in rural peri-urban cluster.')">
+<img alt="Water filtration" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Inauguration moment of an automated community solar drinking water filtration tap in an Indian village, pristine clear water pouring into a stainless steel vessel, villagers cheering joyfully in the background, bright natural daytime lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuClcSkL2OGCaVSemXri3_O6SWBXO9U-mgF20QBa_uE0dNiaLh8icmUoJh8DSNf-0-96rLJ8Cz7bryvaB2Bh1ZJCjBEwvCN2-SiJa4y-qBpsFPwhgmaQZ2BseKw7XGXijZyrnjMuWENlTY-jEzvTG7P4-348ewTDAiylwfKppmqXKD8aGCl4wU4JPCDdXkSQKTp0SX22sw-VNNo7tUlnKIkica2NDMw75O0IfRF2MtpdV-CM5-1wetho"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-space-2xs">
+<span class="font-label-sm text-label-sm text-on-primary line-clamp-1">Clean Water</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group relative aspect-square rounded-xl overflow-hidden bg-surface-container shadow-sm cursor-pointer" onclick="openPhotoModal('Disaster relief food distribution drive', 'Frontline volunteers distributing fortified nutrition kits to vulnerable families.')">
+<img alt="Relief drive" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Humanitarian disaster relief frontline workers in volunteer jackets handing sealed nutritional food ration boxes and clean water rations to rural families, orderly queue with compassionate interactions, overcast soft outdoor light, documentary clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuChXku2GFso7MJjJo5QP5ngR500Ec7PyN8TwSXKYz6Odcey8MTYqRny-qSHlBp6Ea85ZTLrdf_PSB9hzGA1Fs4sAUKPuRSs5ZSKQiARihROOIKzzwUNqgXOcym3H45MD_GHjYoRvL6Deza4rLhbQVHnVgbUce4d6goCQsQ-Bzw2tudYIN9YLfyb3TmYUJ1ZagpXBk8iSBn4mIk3EcVne1k9gx1eJi7N_N97YHXJxJg-qESyXKO5lnKn"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-space-2xs">
+<span class="font-label-sm text-label-sm text-on-primary line-clamp-1">Relief</span>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="group relative aspect-square rounded-xl overflow-hidden bg-surface-container shadow-sm cursor-pointer" onclick="openPhotoModal('Health checkup and immunization camp', 'Free mobile medical clinic offering preventative screening and child vaccinations.')">
+<img alt="Health checkup camp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Caring female doctor with a stethoscope examining an attentive toddler held by his mother inside a clean mobile rural medical clinic van, gentle warm expression, crisp clinical instruments, empathetic healthcare social work photo." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBb8moK7hLSwUK8GSF5YOAEHiD-sBMsM_YLKk7Dlz2H_IaXP1hmhUyBvckGBiHst95nyGKEJz0IwI2LRnvb5jt7QudzABBT0FfVJkZoQdw4CzLfvM58VMPKVCyBsodESKkNKCdKXJ1km6hH0CYZKNqd5BE1j8wFM8jWlpTzn-X-LPIa-AybmWcBxL6hAs57HsdeqqDo1HwsHP3r3OBE3CxsxL52YHyqRR5Uaj28AmWZsmywzd2-Kx_D"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-space-2xs">
+<span class="font-label-sm text-label-sm text-on-primary line-clamp-1">Healthcare</span>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="group relative aspect-square rounded-xl overflow-hidden bg-surface-container shadow-sm cursor-pointer" onclick="openPhotoModal('Tree plantation and environmental drive', 'Youth volunteers restoring green corridors with native sapling planting.')">
+<img alt="Tree plantation" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Youth volunteers and school students planting fresh green neem saplings into rich dark soil during an environmental conservation drive in an Indian suburban schoolground, sun flare, rich green foliage, vibrant hopeful atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7Z0jXn830KuqNM3IwZ34kHYIJlM886BrqUvdwjDnTzcgyoz_2tmOBmNz-4OeQwCgDydsJOH-QzB58Yn2rgBbV7Vt7uXwB-hDEJyNm-_ZVeYEVlptXZrJ45bGiXHYlrhbVBtgWFcC_QoHeYgeAIM6zvcM1hzwiUGUOX85ioVaef4TiQAmi38MeXMNAVlYZWn-e7deFxFripk_b-zf6oFs263x88AN9ZsXTruLGv8wWtv9AG5B30e1q"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-space-2xs">
+<span class="font-label-sm text-label-sm text-on-primary line-clamp-1">Ecology</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Video Stories -->
+<section class="mt-space-xl">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-2xs">
+<span class="material-symbols-outlined text-[20px] text-secondary">smart_display</span>
+<h2 class="font-title-sm text-title-sm text-primary font-bold">Impact Videos</h2>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted">Broadcast Quality</span>
+</div>
+<div class="flex flex-col gap-space-md">
+<!-- Video Card 1 -->
+<article class="bg-surface-card rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+<div class="relative w-full aspect-video bg-primary overflow-hidden">
+<img alt="Rani's Story" class="w-full h-full object-cover opacity-90" data-alt="Cinematic frame of an Indian schoolgirl in uniform holding a notebook and looking towards her future school with determination, soft Delhi morning haze and golden hour backlight, cinematic film still depth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9Io2FiiTTrWN8kPRvtM94K1fgh3vDeHBgd5WFMt5L4HkD9taLVwq6suWy4OPLuk0cq9YiQIomVOfRZIPvdG4MJZLPHtxQmbspCu5tzzCZPAPopcUvNXeRR5KS7tO3QvpKACOKsyxJG9QGK2T4Z34eOE2nguAFQ3Ly7TAhTIC4zw-g9G3H7fFWLRiBj00YSBnuCyz5Rpeh3By7ct20d4SLQqrPsOxNOY0c9XO_f9NqdjxSD1n-ceky"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/30 to-transparent"></div>
+<!-- Play Trigger Button -->
+<button aria-label="Play Rani's Story video" class="absolute inset-0 m-auto w-12 h-12 rounded-full bg-surface-card/90 backdrop-blur-md flex items-center justify-center text-secondary shadow-lg hover:scale-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[26px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<!-- Duration Pill -->
+<div class="absolute bottom-space-xs right-space-xs px-space-xs py-space-2xs rounded-full bg-primary/80 backdrop-blur-sm flex items-center gap-1 text-on-primary">
+<span class="material-symbols-outlined text-[12px]">schedule</span>
+<span class="font-label-sm text-label-sm">3:45 mins • HD</span>
+</div>
+<div class="absolute top-space-xs left-space-xs px-space-xs py-space-2xs rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm font-semibold">
+            Child Welfare
+          </div>
+</div>
+<div class="p-space-md">
+<h3 class="font-headline-md text-headline-md font-bold text-primary leading-snug">
+            From Vulnerability to School: Rani's Story in East Delhi
+          </h3>
+<p class="font-body-sm text-body-sm text-text-secondary mt-space-2xs line-clamp-2">
+            Witness how an emergency helpline referral transformed an 11-year-old child laborer's journey into a formalized scholarship student.
+          </p>
+<div class="flex items-center justify-between mt-space-sm pt-space-xs text-text-muted">
+<span class="font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">visibility</span> 14.2K views
+            </span>
+<button class="font-label-sm text-label-sm font-semibold text-eduanchors-blue flex items-center gap-0.5 hover:underline">
+              Share Story
+              <span class="material-symbols-outlined text-[14px]">share</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Video Card 2 -->
+<article class="bg-surface-card rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+<div class="relative w-full aspect-video bg-primary overflow-hidden">
+<img alt="Model Village Water" class="w-full h-full object-cover opacity-90" data-alt="Wide cinematic drone perspective of Badarpur community gathering around an upgraded clean water plant in Delhi NCR, bright azure water tanks, children drinking happily, sunlight glinting off stainless steel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCngZk8kLb3-5kGkwLfD3Gb6UeH5Fyn9ygDWtcEvUbcOnh4FGRdTHcWMp5LbniZx-rm-_-Qs41vPf028EbiN6GhD5CQo5F6pngg9lFdOcmaRfXA7RtFkO1w8ocZxc90amwl11hzGsjwnSJWu85mI3ELFmJHUfXsf5MSv-RKB_gxtLEhXJFA87yYyx-dc0AVzMICCcmPpiTaXHvzOWil1JcXw9fp-8XD-tn2cRXClb7SdwBq0n2V7ER9"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/30 to-transparent"></div>
+<!-- Play Trigger Button -->
+<button aria-label="Play Drinking Water Transformation video" class="absolute inset-0 m-auto w-12 h-12 rounded-full bg-surface-card/90 backdrop-blur-md flex items-center justify-center text-secondary shadow-lg hover:scale-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[26px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<!-- Duration Pill -->
+<div class="absolute bottom-space-xs right-space-xs px-space-xs py-space-2xs rounded-full bg-primary/80 backdrop-blur-sm flex items-center gap-1 text-on-primary">
+<span class="material-symbols-outlined text-[12px]">schedule</span>
+<span class="font-label-sm text-label-sm">5:12 mins • HD</span>
+</div>
+<div class="absolute top-space-xs left-space-xs px-space-xs py-space-2xs rounded-full bg-eduanchors-teal text-on-primary font-label-sm text-label-sm font-semibold">
+            Infrastructure
+          </div>
+</div>
+<div class="p-space-md">
+<h3 class="font-headline-md text-headline-md font-bold text-primary leading-snug">
+            Model Village Development: Transforming Drinking Water in Badarpur
+          </h3>
+<p class="font-body-sm text-body-sm text-text-secondary mt-space-2xs line-clamp-2">
+            Eliminating waterborne diseases across 1,400 households through participatory water testing and solar automated purification booths.
+          </p>
+<div class="flex items-center justify-between mt-space-sm pt-space-xs text-text-muted">
+<span class="font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">visibility</span> 9.8K views
+            </span>
+<button class="font-label-sm text-label-sm font-semibold text-eduanchors-blue flex items-center gap-0.5 hover:underline">
+              Share Story
+              <span class="material-symbols-outlined text-[14px]">share</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+</section>
+<!-- Section 3: Annual Reports & Publications -->
+<section class="mt-space-xl">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-2xs">
+<span class="material-symbols-outlined text-[20px] text-primary">verified_user</span>
+<h2 class="font-title-sm text-title-sm text-primary font-bold">Certified Reports &amp; Audits</h2>
+</div>
+<span class="font-label-sm text-label-sm text-eduanchors-teal font-semibold flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> 100% Audited
+      </span>
+</div>
+<!-- PDF Document Download List -->
+<div class="flex flex-col gap-space-xs">
+<!-- Report Item 1 -->
+<div class="bg-surface-card p-space-sm rounded-xl shadow-sm flex items-center justify-between gap-space-sm hover:shadow transition-shadow">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-10 h-10 rounded-lg bg-error-container text-error flex flex-col items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+<span class="font-label-sm text-label-sm leading-none font-bold uppercase -mt-0.5">PDF</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg font-bold text-primary truncate">AWSAR Annual Impact Report 2024-25</span>
+<div class="flex items-center gap-space-2xs font-body-sm text-body-sm text-text-secondary mt-0.5">
+<span>Audited</span>
+<span class="w-1 h-1 rounded-full bg-text-muted"></span>
+<span class="text-text-muted">4.2 MB</span>
+</div>
+</div>
+</div>
+<button aria-label="Download AWSAR Annual Impact Report 2024-25" class="min-h-[44px] min-w-[44px] w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary active:scale-90 transition-all shrink-0" onclick="simulateDownload(this, 'Annual Impact Report 2024-25')">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</div>
+<!-- Report Item 2 -->
+<div class="bg-surface-card p-space-sm rounded-xl shadow-sm flex items-center justify-between gap-space-sm hover:shadow transition-shadow">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-10 h-10 rounded-lg bg-error-container text-error flex flex-col items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+<span class="font-label-sm text-label-sm leading-none font-bold uppercase -mt-0.5">PDF</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg font-bold text-primary truncate">FCRA Statutory Audit &amp; Compliance Disclosure</span>
+<div class="flex items-center gap-space-2xs font-body-sm text-body-sm text-text-secondary mt-0.5">
+<span>Govt. Filing</span>
+<span class="w-1 h-1 rounded-full bg-text-muted"></span>
+<span class="text-text-muted">1.8 MB</span>
+</div>
+</div>
+</div>
+<button aria-label="Download FCRA Statutory Audit &amp; Compliance Disclosure" class="min-h-[44px] min-w-[44px] w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary active:scale-90 transition-all shrink-0" onclick="simulateDownload(this, 'FCRA Statutory Audit Disclosure')">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</div>
+<!-- Report Item 3 -->
+<div class="bg-surface-card p-space-sm rounded-xl shadow-sm flex items-center justify-between gap-space-sm hover:shadow transition-shadow">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-10 h-10 rounded-lg bg-error-container text-error flex flex-col items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+<span class="font-label-sm text-label-sm leading-none font-bold uppercase -mt-0.5">PDF</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg font-bold text-primary truncate">Baseline Research: Child Nutrition in Urban Settlements</span>
+<div class="flex items-center gap-space-2xs font-body-sm text-body-sm text-text-secondary mt-0.5">
+<span>Field Data</span>
+<span class="w-1 h-1 rounded-full bg-text-muted"></span>
+<span class="text-text-muted">3.5 MB</span>
+</div>
+</div>
+</div>
+<button aria-label="Download Baseline Research Child Nutrition" class="min-h-[44px] min-w-[44px] w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary active:scale-90 transition-all shrink-0" onclick="simulateDownload(this, 'Child Nutrition Baseline Research')">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</div>
+<!-- Report Item 4 -->
+<div class="bg-surface-card p-space-sm rounded-xl shadow-sm flex items-center justify-between gap-space-sm hover:shadow transition-shadow">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-10 h-10 rounded-lg bg-error-container text-error flex flex-col items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+<span class="font-label-sm text-label-sm leading-none font-bold uppercase -mt-0.5">PDF</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg font-bold text-primary truncate">Women SHG Micro-Enterprise Assessment 2024</span>
+<div class="flex items-center gap-space-2xs font-body-sm text-body-sm text-text-secondary mt-0.5">
+<span>Impact Study</span>
+<span class="w-1 h-1 rounded-full bg-text-muted"></span>
+<span class="text-text-muted">2.1 MB</span>
+</div>
+</div>
+</div>
+<button aria-label="Download Women SHG Micro-Enterprise Assessment 2024" class="min-h-[44px] min-w-[44px] w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary active:scale-90 transition-all shrink-0" onclick="simulateDownload(this, 'Women SHG Micro-Enterprise Assessment')">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Interactive Transparency Trust Banner -->
+<aside class="mt-space-lg p-space-md rounded-xl bg-surface-container-low flex items-start gap-space-sm shadow-sm">
+<div class="w-9 h-9 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">gavel</span>
+</div>
+<div class="flex flex-col min-w-0">
+<h3 class="font-label-lg text-label-lg text-primary font-bold">Public Accountability Commitment</h3>
+<p class="font-body-sm text-body-sm text-text-secondary mt-0.5">
+        AWSAR adheres to the highest transparency standards under the Societies Registration Act &amp; NITI Aayog Darpan portal.
+      </p>
+</div>
+</aside>
+<!-- Photo Lightbox Modal (Dynamic UI micro-interaction) -->
+<div class="fixed inset-0 z-50 bg-primary/80 backdrop-blur-sm hidden items-center justify-center p-margin transition-opacity duration-200" id="photoLightbox" onclick="closePhotoModal(event)">
+<div class="bg-surface-card rounded-xl max-w-sm w-full overflow-hidden shadow-2xl p-space-md flex flex-col relative" onclick="event.stopPropagation()">
+<div class="flex items-center justify-between pb-space-xs">
+<h3 class="font-title-sm text-title-sm text-primary font-bold truncate pr-space-xs" id="modalTitle">Image Preview</h3>
+<button aria-label="Close dialog" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-text-secondary hover:text-primary active:scale-90" onclick="closePhotoModal()">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<div class="w-full aspect-square rounded-lg bg-surface-container my-space-xs overflow-hidden relative">
+<img alt="Field preview" class="w-full h-full object-cover" data-alt="High-resolution verified photo taken during AWSAR India field humanitarian mission." id="modalImage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGKjoaYQ0tRsI6jx6Zc2rbT1j1J1HSZa4Rn4c_t5dvMibAkZkk2m_ynKbraLRAJbLGzLWDkX5xKCNfJ1cm_lL5w0zT8Y89xQ2K2gGVelG1QNyRKGwa7dpizOlCybaLomhgWqEqs9vQgkVb4ZK6CdK57POdEbwzGl7wJyF32OdmXZJO1AU8x-OsaxeikWVJBggl1OOA6AngdWKZZtpzj4TzzwBM2OlPGxQPf5u_uDCkE6X4M4wGKhk0"/>
+</div>
+<p class="font-body-sm text-body-sm text-text-secondary mt-space-2xs leading-relaxed" id="modalDesc"></p>
+<div class="mt-space-md flex justify-end gap-space-xs">
+<button class="px-space-md py-space-xs rounded-full bg-primary text-on-primary font-label-md text-label-md font-semibold" onclick="closePhotoModal()">Done</button>
+</div>
+</div>
+</div>
+<!-- Micro-interaction Toast Notice -->
+<div class="fixed bottom-20 inset-x-margin max-w-sm mx-auto z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none" id="downloadToast">
+<div class="bg-primary text-on-primary px-space-md py-space-sm rounded-xl shadow-xl flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-eduanchors-teal text-[20px]">check_circle</span>
+<span class="font-body-sm text-body-sm flex-1 truncate" id="toastMsg">Downloading report...</span>
+</div>
+</div>
+</div>
+<script>
+  function openPhotoModal(title, desc) {
+    const modal = document.getElementById('photoLightbox');
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalDesc').textContent = desc;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  function closePhotoModal(e) {
+    const modal = document.getElementById('photoLightbox');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+
+  function simulateDownload(btn, filename) {
+    const originalContent = btn.innerHTML;
+    btn.innerHTML = `<span class="material-symbols-outlined text-[18px] animate-spin">progress_activity</span>`;
+    
+    setTimeout(() => {
+      btn.innerHTML = `<span class="material-symbols-outlined text-[20px] text-eduanchors-teal">download_done</span>`;
+      const toast = document.getElementById('downloadToast');
+      document.getElementById('toastMsg').textContent = `Downloaded: ${filename}`;
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-24', 'opacity-0');
+        setTimeout(() => {
+          btn.innerHTML = originalContent;
+        }, 1500);
+      }, 2500);
+    }, 650);
+  }
+
+  // Interactive Chip Filters
+  document.querySelectorAll('.filter-chip').forEach(chip => {
+    chip.addEventListener('click', function() {
+      document.querySelectorAll('.filter-chip').forEach(c => {
+        c.className = 'filter-chip px-space-md py-space-2xs rounded-full bg-surface-container text-text-secondary font-label-md text-label-md shrink-0 hover:bg-surface-variant transition-colors';
+      });
+      this.className = 'filter-chip px-space-md py-space-2xs rounded-full bg-primary text-on-primary font-label-md text-label-md shadow-sm shrink-0 transition-transform active:scale-95';
+    });
+  });
+</script></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/95 backdrop-blur-xl shadow-[0_-4px_16px_rgba(10,31,94,0.06)]" data-active-classes="text-secondary"><div class="flex justify-around items-center h-16 px-space-2xs"><a class="flex flex-col items-center justify-center gap-space-2xs min-h-[44px] min-w-[44px] flex-1 text-on-surface-variant hover:text-on-surface transition-colors" data-path="home" href="#"><span class="material-symbols-outlined text-[22px]">home</span><span class="font-label-sm text-label-sm">Home</span></a><a class="flex flex-col items-center justify-center gap-space-2xs min-h-[44px] min-w-[44px] flex-1 text-on-surface-variant hover:text-on-surface transition-colors" data-path="programmes" href="#"><span class="material-symbols-outlined text-[22px]">dashboard</span><span class="font-label-sm text-label-sm">Programmes</span></a><a class="relative flex flex-col items-center justify-center gap-space-2xs min-h-[44px] min-w-[44px] flex-1 text-on-surface-variant hover:text-on-surface transition-colors" data-path="opportunities" href="#"><span class="relative flex items-center justify-center"><span class="material-symbols-outlined text-[22px]">school</span><span class="absolute -top-0.5 -right-1 w-2 h-2 rounded-full bg-eduanchors-teal ring-2 ring-surface"></span></span><span class="font-label-sm text-label-sm">Opportunities</span></a><a aria-current="page" class="flex flex-col items-center justify-center gap-space-2xs min-h-[44px] min-w-[44px] flex-1 transition-colors text-secondary" data-path="media" href="#"><span class="material-symbols-outlined text-[22px]">perm_media</span><span class="font-label-sm text-label-sm">Media</span></a><a class="flex flex-col items-center justify-center gap-space-2xs min-h-[44px] min-w-[44px] flex-1 text-on-surface-variant hover:text-on-surface transition-colors" data-path="get-involved" href="#"><span class="material-symbols-outlined text-[22px]">volunteer_activism</span><span class="font-label-sm text-label-sm">Get Involved</span></a></div></nav></body></html>

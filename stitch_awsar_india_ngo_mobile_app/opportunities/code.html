@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-secondary": "#ffffff", "inverse-on-surface": "#eff1f6", "on-tertiary": "#ffffff", "surface-container": "#eceef3", "surface-container-lowest": "#ffffff", "on-secondary-fixed": "#3e001e", "on-surface-variant": "#454650", "surface-variant": "#e0e2e7", "on-secondary-fixed-variant": "#8e004c", "inverse-primary": "#b7c4ff", "surface-container-low": "#f1f4f9", "primary": "#000b37", "on-error-container": "#93000a", "eduanchors-blue": "#1E3C72", "surface-container-high": "#e6e8ed", "on-primary": "#ffffff", "error-container": "#ffdad6", "surface-card": "#FFFFFF", "surface-dim": "#d8dadf", "on-error": "#ffffff", "eduanchors-teal": "#0E9F6E", "error": "#ba1a1a", "secondary-fixed-dim": "#ffb0c9", "primary-fixed-dim": "#b7c4ff", "tertiary-container": "#002b21", "text-primary": "#0B1536", "tertiary-fixed": "#94f5d6", "on-tertiary-fixed": "#002018", "surface-container-highest": "#e0e2e7", "surface-tint": "#4a5b9b", "on-tertiary-fixed-variant": "#005140", "text-secondary": "#4E5D78", "primary-container": "#0a1f5e", "outline": "#757681", "surface-bright": "#f7f9fe", "on-primary-fixed": "#001552", "outline-variant": "#c5c5d2", "urgent-helpline": "#E02424", "secondary": "#b41764", "inverse-surface": "#2d3135", "background": "#f7f9fe", "on-primary-fixed-variant": "#324381", "surface-subtle": "F0F4FA", "on-background": "#181c20", "tertiary-fixed-dim": "#78d8ba", "on-secondary-container": "#610032", "surface": "#f7f9fe", "primary-fixed": "#dce1ff", "on-primary-container": "#7889cd", "secondary-fixed": "#ffd9e2", "secondary-container": "#fe579d", "text-muted": "#8A97AB", "border-subtle": "#E2E8F0", "on-tertiary-container": "#389c81", "on-surface": "#181c20", "tertiary": "#00130d" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin-lg": "1.25rem", "gutter": "1rem", "margin": "1rem", "space-2xl": "2.5rem", "space-xl": "2rem", "space-xs": "0.5rem", "space-sm": "0.75rem", "space-lg": "1.5rem", "space-md": "1rem", "space-2xs": "0.25rem", "gutter-sm": "0.75rem" }, "fontFamily": { "body-md": ["Inter"], "body-sm": ["Inter"], "headline-md": ["Inter"], "display-md": ["Inter"], "body-lg": ["Inter"], "label-lg": ["Inter"], "display-lg": ["Inter"], "label-md": ["Inter"], "headline-lg": ["Inter"], "title-sm": ["Inter"], "label-sm": ["Inter"] }, "fontSize": { "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }], "headline-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "display-md": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "title-sm": ["16px", { "lineHeight": "22px", "fontWeight": "600" }], "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-margin flex items-center justify-between gap-space-xs"><div class="flex items-center gap-space-xs"><img alt="AWSAR India Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-Z9Ftz69gAmqH-Kvb1-l_9joHo3wqn9Tf_x9gqg3CjwocuP_ooDaW95L7zVzDhyeDiIXohWy-bSv5C-8lFmidecq17b-zXhdrwNr6ae1_h_J4sjuSSpilKKRJuH7Narw05IP0usDH8uWZ3WODxf24J7Gk4UxZVAW8sF_7sAtJkJ45heBh9fN2leJOLoQmVlJfy2OpbsJUkpgh3WKN4mNw4485jWUG_qDbVLv5ZpdJuCfyzp8IkJO-"/><div class="flex flex-col"><span class="font-label-lg text-label-lg font-bold tracking-tight text-primary leading-tight">AWSAR INDIA</span><span class="font-label-sm text-label-sm text-text-secondary leading-none">Opportunities</span></div></div><div class="flex items-center gap-space-xs"><button aria-label="Switch Language" class="min-h-[44px] min-w-[44px] px-space-xs py-space-2xs rounded-full bg-surface-container flex items-center justify-center font-label-md text-label-md text-text-primary hover:bg-surface-variant transition-colors"><span class="font-semibold">EN</span><span class="mx-space-2xs text-text-muted">|</span><span class="font-medium text-text-secondary">हिं</span></button><a aria-label="Child Helpline 1098" class="min-h-[44px] px-space-xs py-space-2xs rounded-full bg-urgent-helpline text-on-error flex items-center justify-center gap-space-2xs shadow-[0_2px_8px_-2px_rgba(224,36,36,0.3)] hover:opacity-90 active:scale-95 transition-all" href="tel:1098"><span class="material-symbols-outlined text-[16px]">call</span><span class="font-label-md text-label-md font-bold">1098</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Brand Showcase & Intro Header -->
+<section class="px-margin pt-space-md pb-space-xs">
+<div class="relative overflow-hidden rounded-xl bg-gradient-to-br from-primary-container via-eduanchors-blue to-primary p-space-md shadow-md text-on-primary">
+<!-- Decorative Backdrop Graphic -->
+<div class="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-eduanchors-teal/20 blur-2xl pointer-events-none"></div>
+<div class="absolute -left-6 -bottom-6 w-28 h-28 rounded-full bg-secondary/15 blur-xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col gap-space-2xs">
+<div class="flex items-center gap-space-xs">
+<span class="inline-flex items-center gap-1 px-space-xs py-0.5 rounded-full bg-eduanchors-teal/25 text-tertiary-fixed font-label-sm text-label-sm tracking-wide">
+<span class="material-symbols-outlined text-[14px]">auto_awesome</span>
+            POWERED BY EDUANCHORS
+          </span>
+<span class="inline-flex items-center px-space-2xs py-0.5 rounded bg-surface/10 text-on-primary/80 font-label-sm text-label-sm">
+            Verified 2026
+          </span>
+</div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-primary mt-space-2xs tracking-tight">
+          EduAnchors Opportunities
+        </h1>
+<p class="font-body-sm text-body-sm text-on-primary/85 leading-relaxed">
+          Discover verified scholarships, mentorships, and internships for student growth.
+        </p>
+<!-- Dynamic Counter Row -->
+<div class="mt-space-xs pt-space-xs flex items-center justify-between text-on-primary/90 bg-black/15 rounded-lg px-space-sm py-space-2xs backdrop-blur-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-eduanchors-teal animate-pulse"></span>
+<span class="font-label-md text-label-md font-semibold">33 Open Pathways</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-primary/75">Updated 2h ago</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Search & Location Input Bar -->
+<section class="px-margin pt-space-xs">
+<div class="relative flex items-center w-full">
+<span class="material-symbols-outlined absolute left-space-sm text-outline pointer-events-none text-[20px]">
+        search
+      </span>
+<input aria-label="Search opportunities by keyword, field, or location" class="w-full h-12 pl-11 pr-11 bg-surface-card rounded-xl font-body-md text-body-md text-on-surface shadow-sm placeholder:text-text-muted focus:outline-none focus:bg-surface-container-lowest transition-all" id="opportunity-search" placeholder="Search by keyword, field, or location..." type="text"/>
+<button aria-label="Refine search filters" class="absolute right-2 w-8 h-8 rounded-lg flex items-center justify-center bg-surface-container hover:bg-surface-variant text-on-surface-variant transition-colors" id="filter-modal-trigger">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+</div>
+</section>
+<!-- Filter Chips (Horizontal Scrollable Strip) -->
+<section aria-label="Opportunity Categories" class="pt-space-sm pb-space-xs">
+<div class="flex items-center gap-space-xs overflow-x-auto px-margin scrollbar-none py-1" id="filter-pill-group">
+<button class="filter-pill active shrink-0 h-8 px-space-md rounded-full bg-primary-container text-on-primary font-label-md text-label-md font-semibold shadow-sm transition-transform active:scale-95" data-category="all">
+        All
+      </button>
+<button class="filter-pill shrink-0 h-8 px-space-md rounded-full bg-surface-card text-text-secondary font-label-md text-label-md font-medium shadow-sm hover:bg-surface-container transition-transform active:scale-95" data-category="scholarship">
+        Scholarships (14)
+      </button>
+<button class="filter-pill shrink-0 h-8 px-space-md rounded-full bg-surface-card text-text-secondary font-label-md text-label-md font-medium shadow-sm hover:bg-surface-container transition-transform active:scale-95" data-category="mentorship">
+        Mentorships (8)
+      </button>
+<button class="filter-pill shrink-0 h-8 px-space-md rounded-full bg-surface-card text-text-secondary font-label-md text-label-md font-medium shadow-sm hover:bg-surface-container transition-transform active:scale-95" data-category="internship">
+        Internships (11)
+      </button>
+</div>
+</section>
+<!-- Opportunity Listing Cards Stream -->
+<section class="px-margin flex flex-col gap-space-md pt-space-xs" id="opportunity-list">
+<!-- Card 1: AWSAR Pratibha Fellowship -->
+<article class="relative bg-surface-card rounded-xl shadow-sm p-space-md flex flex-col gap-space-xs overflow-hidden transition-all duration-200" data-card-category="scholarship">
+<!-- EduAnchors Left Accent Bar -->
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-eduanchors-teal"></div>
+<div class="flex items-start justify-between gap-space-xs">
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="inline-flex items-center gap-1 px-space-xs py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-sm text-label-sm font-bold">
+<span class="material-symbols-outlined text-[13px]">school</span>
+            Scholarship
+          </span>
+<span class="inline-flex items-center gap-1 px-space-2xs py-0.5 rounded bg-surface-container text-text-secondary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[12px] text-eduanchors-teal">verified</span>
+            100% Funded
+          </span>
+</div>
+<button aria-label="Bookmark AWSAR Pratibha Fellowship" class="bookmark-btn text-text-muted hover:text-secondary active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[20px]">bookmark</span>
+</button>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-md text-headline-md text-text-primary tracking-tight">
+          AWSAR Pratibha Fellowship 2026
+        </h2>
+<span class="font-label-md text-label-md text-text-secondary font-medium mt-0.5">
+          AWSAR India Foundation
+        </span>
+</div>
+<!-- Specific Details Grid -->
+<div class="bg-surface-container-low rounded-lg p-space-xs flex flex-col gap-1">
+<div class="flex items-center gap-1.5 text-text-primary font-label-md text-label-md font-semibold">
+<span class="material-symbols-outlined text-eduanchors-teal text-[16px]">payments</span>
+<span>₹50,000 / year</span>
+<span class="text-text-muted font-normal">•</span>
+<span class="font-normal text-text-secondary truncate">PAN-India</span>
+</div>
+<div class="flex items-center gap-1.5 text-text-secondary font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-text-muted text-[16px]">groups</span>
+<span class="truncate">Undergraduate girls in STEM streams</span>
+</div>
+</div>
+<!-- Footer & Action -->
+<div class="flex items-center justify-between gap-space-xs pt-space-2xs">
+<div class="flex items-center gap-1 text-urgent-helpline font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[15px]">timer</span>
+<span>Ends in 12 days</span>
+</div>
+<button class="min-h-[40px] px-space-md rounded-lg bg-eduanchors-teal text-on-primary font-label-md text-label-md font-bold flex items-center justify-center gap-1 shadow-sm hover:brightness-105 active:scale-95 transition-all" onclick="triggerApplication('AWSAR Pratibha Fellowship 2026')">
+<span>Apply Now</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Card 2: 1-on-1 Civil Services Mentorship -->
+<article class="relative bg-surface-card rounded-xl shadow-sm p-space-md flex flex-col gap-space-xs overflow-hidden transition-all duration-200" data-card-category="mentorship">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-eduanchors-blue"></div>
+<div class="flex items-start justify-between gap-space-xs">
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="inline-flex items-center gap-1 px-space-xs py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-label-sm font-bold">
+<span class="material-symbols-outlined text-[13px]">psychology</span>
+            Mentorship
+          </span>
+<span class="inline-flex items-center px-space-2xs py-0.5 rounded bg-surface-container text-text-secondary font-label-sm text-label-sm">
+            Cohort 4
+          </span>
+</div>
+<button aria-label="Bookmark 1-on-1 Civil Services Mentorship" class="bookmark-btn text-text-muted hover:text-secondary active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[20px]">bookmark</span>
+</button>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-md text-headline-md text-text-primary tracking-tight">
+          1-on-1 Civil Services Mentorship
+        </h2>
+<span class="font-label-md text-label-md text-text-secondary font-medium mt-0.5">
+          EduAnchors &amp; Senior Officers Network
+        </span>
+</div>
+<div class="bg-surface-container-low rounded-lg p-space-xs flex flex-col gap-1">
+<div class="flex items-center gap-1.5 text-text-primary font-label-md text-label-md font-semibold">
+<span class="material-symbols-outlined text-eduanchors-blue text-[16px]">schedule</span>
+<span>6 Months Guided Program</span>
+</div>
+<div class="flex items-center gap-1.5 text-text-secondary font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-text-muted text-[16px]">pin_drop</span>
+<span class="truncate">Free for Delhi NCR underprivileged youth</span>
+</div>
+</div>
+<div class="flex items-center justify-between gap-space-xs pt-space-2xs">
+<div class="flex items-center gap-1 text-text-secondary font-label-sm text-label-sm font-medium">
+<span class="material-symbols-outlined text-[15px] text-text-muted">update</span>
+<span>Rolling admissions</span>
+</div>
+<button class="min-h-[40px] px-space-md rounded-lg bg-eduanchors-teal text-on-primary font-label-md text-label-md font-bold flex items-center justify-center gap-1 shadow-sm hover:brightness-105 active:scale-95 transition-all" onclick="triggerApplication('1-on-1 Civil Services Mentorship')">
+<span>Apply Now</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Card 3: Grassroots Community Research Intern -->
+<article class="relative bg-surface-card rounded-xl shadow-sm p-space-md flex flex-col gap-space-xs overflow-hidden transition-all duration-200" data-card-category="internship">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-secondary"></div>
+<div class="flex items-start justify-between gap-space-xs">
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="inline-flex items-center gap-1 px-space-xs py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant font-label-sm text-label-sm font-bold">
+<span class="material-symbols-outlined text-[13px]">work</span>
+            Internship
+          </span>
+<span class="inline-flex items-center px-space-2xs py-0.5 rounded bg-surface-container text-text-secondary font-label-sm text-label-sm">
+            Fieldwork
+          </span>
+</div>
+<button aria-label="Bookmark Community Research Intern" class="bookmark-btn text-text-muted hover:text-secondary active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[20px]">bookmark</span>
+</button>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-md text-headline-md text-text-primary tracking-tight">
+          Grassroots Community Research Intern
+        </h2>
+<span class="font-label-md text-label-md text-text-secondary font-medium mt-0.5">
+          AWSAR Research Cell, New Delhi
+        </span>
+</div>
+<div class="bg-surface-container-low rounded-lg p-space-xs flex flex-col gap-1">
+<div class="flex items-center gap-1.5 text-text-primary font-label-md text-label-md font-semibold">
+<span class="material-symbols-outlined text-secondary text-[16px]">paid</span>
+<span>Stipend ₹12,000/mo</span>
+<span class="text-text-muted font-normal">•</span>
+<span class="font-normal text-text-secondary">3 Months</span>
+</div>
+<div class="flex items-center gap-1.5 text-text-secondary font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-text-muted text-[16px]">location_on</span>
+<span class="truncate">Delhi On-site field assessment</span>
+</div>
+</div>
+<div class="flex items-center justify-between gap-space-xs pt-space-2xs">
+<div class="flex items-center gap-1 text-text-secondary font-label-sm text-label-sm font-medium">
+<span class="material-symbols-outlined text-[15px] text-text-muted">calendar_today</span>
+<span>Apply by Nov 15</span>
+</div>
+<button class="min-h-[40px] px-space-md rounded-lg bg-eduanchors-teal text-on-primary font-label-md text-label-md font-bold flex items-center justify-center gap-1 shadow-sm hover:brightness-105 active:scale-95 transition-all" onclick="triggerApplication('Grassroots Community Research Intern')">
+<span>Apply Now</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Card 4: Eklavya Higher Education Grant -->
+<article class="relative bg-surface-card rounded-xl shadow-sm p-space-md flex flex-col gap-space-xs overflow-hidden transition-all duration-200" data-card-category="scholarship">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-eduanchors-teal"></div>
+<div class="flex items-start justify-between gap-space-xs">
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="inline-flex items-center gap-1 px-space-xs py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-sm text-label-sm font-bold">
+<span class="material-symbols-outlined text-[13px]">school</span>
+            Scholarship
+          </span>
+<span class="inline-flex items-center gap-1 px-space-2xs py-0.5 rounded bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">
+            Urgent
+          </span>
+</div>
+<button aria-label="Bookmark Eklavya Higher Education Grant" class="bookmark-btn text-text-muted hover:text-secondary active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[20px]">bookmark</span>
+</button>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-md text-headline-md text-text-primary tracking-tight">
+          Eklavya Higher Education Grant
+        </h2>
+<span class="font-label-md text-label-md text-text-secondary font-medium mt-0.5">
+          Partner Corporate CSR
+        </span>
+</div>
+<div class="bg-surface-container-low rounded-lg p-space-xs flex flex-col gap-1">
+<div class="flex items-center gap-1.5 text-text-primary font-label-md text-label-md font-semibold">
+<span class="material-symbols-outlined text-eduanchors-teal text-[16px]">local_activity</span>
+<span>Full Tuition Fee Cover</span>
+</div>
+<div class="flex items-center gap-1.5 text-text-secondary font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-text-muted text-[16px]">construction</span>
+<span class="truncate">Vocational &amp; Technical Diplomas</span>
+</div>
+</div>
+<div class="flex items-center justify-between gap-space-xs pt-space-2xs">
+<div class="flex items-center gap-1 text-urgent-helpline font-label-sm text-label-sm font-bold">
+<span class="material-symbols-outlined text-[15px]">alarm_on</span>
+<span>Closing Soon</span>
+</div>
+<button class="min-h-[40px] px-space-md rounded-lg bg-eduanchors-teal text-on-primary font-label-md text-label-md font-bold flex items-center justify-center gap-1 shadow-sm hover:brightness-105 active:scale-95 transition-all" onclick="triggerApplication('Eklavya Higher Education Grant')">
+<span>Apply Now</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</article>
+</section>
+<!-- Visual Story: Student Success Showcase -->
+<section class="px-margin pt-space-md">
+<div class="bg-surface-card rounded-xl p-space-md shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-full bg-eduanchors-teal/15 text-eduanchors-teal flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">workspace_premium</span>
+</div>
+<div>
+<h3 class="font-title-sm text-title-sm text-text-primary">EduAnchors Impact</h3>
+<p class="font-body-sm text-body-sm text-text-secondary">Over 1,420 students funded in 2025</p>
+</div>
+</div>
+<!-- Student Story Snippet with verified avatar -->
+<div class="flex items-center gap-space-sm bg-surface-container-low rounded-lg p-space-xs">
+<img class="w-12 h-12 rounded-full object-cover shrink-0" data-alt="Close-up portrait of a cheerful Indian college student girl wearing glasses and an indigo kurta holding her engineering textbook on an Indian campus lawn under warm afternoon sunlight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmo1Vr9ICoxYVqOBYeI4AlHEIuXIUQJT4VCyo-SvH1pp2ITomUkV3YOL64Y_5DimYJJNs4VWwItUJEQZJ2Pj1pqaMnivXtBMOwuD-_JZEI7JjmhOFYi2YDEk9NmTth5gXs0n1Jq8txc3v_CneKPcyEwRpc-psRpgbgmD9Hja7MGx-A65uTnkVZLs3QWO6BqOHo1DWwZgf82wILsX4y7-TZllHDPCnnd-MpFvXUWwzHK2U2-psy4av1"/>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-semibold text-text-primary truncate">Pooja Sharma, IT Diploma Scholar</span>
+<span class="font-body-sm text-body-sm text-text-secondary line-clamp-1">"The Pratibha grant removed my fees anxiety completely."</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Helper Card: Academic Guidance & Counseling -->
+<section class="px-margin pt-space-md pb-space-lg">
+<div class="rounded-xl bg-gradient-to-r from-surface-card to-surface-container p-space-md shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[20px]">support_agent</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm font-bold text-text-primary">
+            Have questions about eligibility?
+          </span>
+<p class="font-body-sm text-body-sm text-text-secondary mt-0.5 leading-snug">
+            Talk to an EduAnchors academic counselor for free document guidance and form review.
+          </p>
+</div>
+</div>
+<!-- Quick Action CTAs -->
+<div class="grid grid-cols-2 gap-space-xs pt-space-2xs">
+<a class="min-h-[44px] px-space-xs rounded-lg bg-eduanchors-teal text-on-primary font-label-md text-label-md font-semibold flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition-transform" href="https://wa.me/919999999999?text=Hello%20AWSAR%20EduAnchors,%20I%20need%20help%20with%20scholarship%20eligibility" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+<span>WhatsApp Chat</span>
+</a>
+<button class="min-h-[44px] px-space-xs rounded-lg bg-surface-card text-primary font-label-md text-label-md font-semibold flex items-center justify-center gap-1.5 shadow-sm hover:bg-surface-container active:scale-95 transition-all" id="request-callback-btn" onclick="requestCounselorCall()">
+<span class="material-symbols-outlined text-[18px] text-primary">call</span>
+<span>Request Call</span>
+</button>
+</div>
+<!-- Verified trust mark note -->
+<div class="flex items-center justify-center gap-1 text-center font-label-sm text-label-sm text-text-muted mt-space-2xs">
+<span class="material-symbols-outlined text-[13px] text-eduanchors-teal">verified_user</span>
+<span>Zero fee advisory • AWSAR Child &amp; Youth Safeguard Verified</span>
+</div>
+</div>
+</section>
+<!-- Interactive Modal / Toast Container -->
+<div class="fixed bottom-20 left-1/2 -translate-x-1/2 z-40 hidden max-w-[90vw] bg-inverse-surface text-inverse-on-surface px-space-md py-space-xs rounded-full shadow-lg font-label-md text-label-md flex items-center gap-2" id="toast-notification">
+<span class="material-symbols-outlined text-eduanchors-teal text-[18px]">check_circle</span>
+<span id="toast-text">Application opened successfully</span>
+</div>
+</div>
+<script>
+  // Filter pill switching interaction
+  const pills = document.querySelectorAll('.filter-pill');
+  const cards = document.querySelectorAll('#opportunity-list article');
+  const searchInput = document.getElementById('opportunity-search');
+
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => {
+        p.classList.remove('bg-primary-container', 'text-on-primary', 'active');
+        p.classList.add('bg-surface-card', 'text-text-secondary');
+      });
+      pill.classList.remove('bg-surface-card', 'text-text-secondary');
+      pill.classList.add('bg-primary-container', 'text-on-primary', 'active');
+
+      const category = pill.getAttribute('data-category');
+      filterCards(category, searchInput.value.toLowerCase().trim());
+    });
+  });
+
+  // Real-time search filter
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      const activePill = document.querySelector('.filter-pill.active');
+      const activeCategory = activePill ? activePill.getAttribute('data-category') : 'all';
+      filterCards(activeCategory, e.target.value.toLowerCase().trim());
+    });
+  }
+
+  function filterCards(category, query) {
+    cards.forEach(card => {
+      const cardCategory = card.getAttribute('data-card-category');
+      const cardContent = card.innerText.toLowerCase();
+
+      const matchesCategory = (category === 'all' || cardCategory === category);
+      const matchesSearch = query === '' || cardContent.includes(query);
+
+      if (matchesCategory && matchesSearch) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  // Bookmarking delight feedback
+  const bookmarkButtons = document.querySelectorAll('.bookmark-btn');
+  bookmarkButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const icon = btn.querySelector('.material-symbols-outlined');
+      const isSaved = icon.getAttribute('style') && icon.getAttribute('style').includes('FILL');
+      
+      if (isSaved) {
+        icon.removeAttribute('style');
+        btn.classList.remove('text-secondary');
+        btn.classList.add('text-text-muted');
+        showToast('Removed from saved opportunities');
+      } else {
+        icon.setAttribute('style', "font-variation-settings: 'FILL' 1;");
+        btn.classList.remove('text-text-muted');
+        btn.classList.add('text-secondary');
+        showToast('Saved to your EduAnchors profile');
+      }
+    });
+  });
+
+  function triggerApplication(programTitle) {
+    showToast(`Opening portal: ${programTitle}`);
+  }
+
+  function requestCounselorCall() {
+    showToast('Callback registered. A counselor will reach out today.');
+  }
+
+  function showToast(message) {
+    const toast = document.getElementById('toast-notification');
+    const toastText = document.getElementById('toast-text');
+    if (!toast || !toastText) return;
+
+    toastText.textContent = message;
+    toast.classList.remove('hidden');
+    toast.classList.add('flex');
+
+    setTimeout(() => {
+      toast.classList.add('hidden');
+      toast.classList.remove('flex');
+    }, 2800);
+  }
+</script></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/95 backdrop-blur-xl shadow-[0_-4px_16px_rgba(10,31,94,0.06)]" data-active-classes="text-secondary"><div class="flex justify-around items-center h-16 px-space-2xs"><a class="flex flex-col items-center justify-center gap-space-2xs min-h-[44px] min-w-[44px] flex-1 text-on-surface-variant hover:text-on-surface transition-colors" data-path="home" href="#"><span class="material-symbols-outlined text-[22px]">home</span><span class="font-label-sm text-label-sm">Home</span></a><a class="flex flex-col items-center justify-center gap-space-2xs min-h-[44px] min-w-[44px] flex-1 text-on-surface-variant hover:text-on-surface transition-colors" data-path="programmes" href="#"><span class="material-symbols-outlined text-[22px]">dashboard</span><span class="font-label-sm text-label-sm">Programmes</span></a><a aria-current="page" class="relative flex flex-col items-center justify-center gap-space-2xs min-h-[44px] min-w-[44px] flex-1 transition-colors text-secondary" data-path="opportunities" href="#"><span class="relative flex items-center justify-center"><span class="material-symbols-outlined text-[22px]">school</span><span class="absolute -top-0.5 -right-1 w-2 h-2 rounded-full bg-eduanchors-teal ring-2 ring-surface"></span></span><span class="font-label-sm text-label-sm">Opportunities</span></a><a class="flex flex-col items-center justify-center gap-space-2xs min-h-[44px] min-w-[44px] flex-1 text-on-surface-variant hover:text-on-surface transition-colors" data-path="media" href="#"><span class="material-symbols-outlined text-[22px]">perm_media</span><span class="font-label-sm text-label-sm">Media</span></a><a class="flex flex-col items-center justify-center gap-space-2xs min-h-[44px] min-w-[44px] flex-1 text-on-surface-variant hover:text-on-surface transition-colors" data-path="get-involved" href="#"><span class="material-symbols-outlined text-[22px]">volunteer_activism</span><span class="font-label-sm text-label-sm">Get Involved</span></a></div></nav></body></html>

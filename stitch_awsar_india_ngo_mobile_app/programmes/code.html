@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-secondary": "#ffffff", "inverse-on-surface": "#eff1f6", "on-tertiary": "#ffffff", "surface-container": "#eceef3", "surface-container-lowest": "#ffffff", "on-secondary-fixed": "#3e001e", "on-surface-variant": "#454650", "surface-variant": "#e0e2e7", "on-secondary-fixed-variant": "#8e004c", "inverse-primary": "#b7c4ff", "surface-container-low": "#f1f4f9", "primary": "#000b37", "on-error-container": "#93000a", "eduanchors-blue": "#1E3C72", "surface-container-high": "#e6e8ed", "on-primary": "#ffffff", "error-container": "#ffdad6", "surface-card": "#FFFFFF", "surface-dim": "#d8dadf", "on-error": "#ffffff", "eduanchors-teal": "#0E9F6E", "error": "#ba1a1a", "secondary-fixed-dim": "#ffb0c9", "primary-fixed-dim": "#b7c4ff", "tertiary-container": "#002b21", "text-primary": "#0B1536", "tertiary-fixed": "#94f5d6", "on-tertiary-fixed": "#002018", "surface-container-highest": "#e0e2e7", "surface-tint": "#4a5b9b", "on-tertiary-fixed-variant": "#005140", "text-secondary": "#4E5D78", "primary-container": "#0a1f5e", "outline": "#757681", "surface-bright": "#f7f9fe", "on-primary-fixed": "#001552", "outline-variant": "#c5c5d2", "urgent-helpline": "#E02424", "secondary": "#b41764", "inverse-surface": "#2d3135", "background": "#f7f9fe", "on-primary-fixed-variant": "#324381", "surface-subtle": "F0F4FA", "on-background": "#181c20", "tertiary-fixed-dim": "#78d8ba", "on-secondary-container": "#610032", "surface": "#f7f9fe", "primary-fixed": "#dce1ff", "on-primary-container": "#7889cd", "secondary-fixed": "#ffd9e2", "secondary-container": "#fe579d", "text-muted": "#8A97AB", "border-subtle": "#E2E8F0", "on-tertiary-container": "#389c81", "on-surface": "#181c20", "tertiary": "#00130d" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin-lg": "1.25rem", "gutter": "1rem", "margin": "1rem", "space-2xl": "2.5rem", "space-xl": "2rem", "space-xs": "0.5rem", "space-sm": "0.75rem", "space-lg": "1.5rem", "space-md": "1rem", "space-2xs": "0.25rem", "gutter-sm": "0.75rem" }, "fontFamily": { "body-md": ["Inter"], "body-sm": ["Inter"], "headline-md": ["Inter"], "display-md": ["Inter"], "body-lg": ["Inter"], "label-lg": ["Inter"], "display-lg": ["Inter"], "label-md": ["Inter"], "headline-lg": ["Inter"], "title-sm": ["Inter"], "label-sm": ["Inter"] }, "fontSize": { "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }], "headline-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "display-md": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "title-sm": ["16px", { "lineHeight": "22px", "fontWeight": "600" }], "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-margin flex items-center justify-between gap-space-xs"><div class="flex items-center gap-space-xs"><img alt="AWSAR India Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-Z9Ftz69gAmqH-Kvb1-l_9joHo3wqn9Tf_x9gqg3CjwocuP_ooDaW95L7zVzDhyeDiIXohWy-bSv5C-8lFmidecq17b-zXhdrwNr6ae1_h_J4sjuSSpilKKRJuH7Narw05IP0usDH8uWZ3WODxf24J7Gk4UxZVAW8sF_7sAtJkJ45heBh9fN2leJOLoQmVlJfy2OpbsJUkpgh3WKN4mNw4485jWUG_qDbVLv5ZpdJuCfyzp8IkJO-"/><div class="flex flex-col"><span class="font-label-lg text-label-lg font-bold tracking-tight text-primary leading-tight">AWSAR INDIA</span><span class="font-label-sm text-label-sm text-text-secondary leading-none">Programmes</span></div></div><div class="flex items-center gap-space-xs"><button aria-label="Switch Language" class="min-h-[44px] min-w-[44px] px-space-xs py-space-2xs rounded-full bg-surface-container flex items-center justify-center font-label-md text-label-md text-text-primary hover:bg-surface-variant transition-colors"><span class="font-semibold">EN</span><span class="mx-space-2xs text-text-muted">|</span><span class="font-medium text-text-secondary">हिं</span></button><a aria-label="Child Helpline 1098" class="min-h-[44px] px-space-xs py-space-2xs rounded-full bg-urgent-helpline text-on-error flex items-center justify-center gap-space-2xs shadow-[0_2px_8px_-2px_rgba(224,36,36,0.3)] hover:opacity-90 active:scale-95 transition-all" href="tel:1098"><span class="material-symbols-outlined text-[16px]">call</span><span class="font-label-md text-label-md font-bold">1098</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Interactive Pillar State Bar & Search -->
+<div class="px-margin pt-space-xs pb-space-sm flex flex-col gap-space-sm">
+<!-- Section Introduction Header -->
+<div class="flex flex-col gap-space-2xs">
+<div class="inline-flex items-center gap-space-2xs self-start px-space-xs py-space-2xs rounded-full bg-surface-container-high text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm tracking-wider uppercase font-bold">WHAT WE DO</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">Our 9 Core Programmes</h1>
+<p class="font-body-md text-body-md text-text-secondary leading-relaxed">
+        Holistic grassroots interventions driving sustainable community transformation across rural and peri-urban India.
+      </p>
+</div>
+<!-- Filter Chips Horizontal Scroller -->
+<div class="flex items-center gap-space-2xs overflow-x-auto no-scrollbar py-space-2xs" id="program-filters">
+<button class="filter-btn active min-h-[36px] px-space-sm py-space-2xs rounded-full bg-primary text-on-primary font-label-md text-label-md whitespace-nowrap transition-transform active:scale-95 shadow-sm" onclick="filterPrograms('all', this)">
+        All Programmes (9)
+      </button>
+<button class="filter-btn min-h-[36px] px-space-sm py-space-2xs rounded-full bg-surface-container-lowest text-text-secondary font-label-md text-label-md whitespace-nowrap transition-transform active:scale-95 shadow-sm" onclick="filterPrograms('child-welfare', this)">
+        Child &amp; Youth
+      </button>
+<button class="filter-btn min-h-[36px] px-space-sm py-space-2xs rounded-full bg-surface-container-lowest text-text-secondary font-label-md text-label-md whitespace-nowrap transition-transform active:scale-95 shadow-sm" onclick="filterPrograms('community', this)">
+        Community &amp; Health
+      </button>
+<button class="filter-btn min-h-[36px] px-space-sm py-space-2xs rounded-full bg-surface-container-lowest text-text-secondary font-label-md text-label-md whitespace-nowrap transition-transform active:scale-95 shadow-sm" onclick="filterPrograms('governance', this)">
+        Policy &amp; Institutional
+      </button>
+</div>
+</div>
+<!-- Grassroots Impact Metric Strip -->
+<div class="mx-margin mb-space-md p-space-sm rounded-xl bg-gradient-to-r from-primary to-primary-container text-on-primary flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded-lg bg-surface-container-lowest/15 flex items-center justify-center backdrop-blur-sm">
+<span class="material-symbols-outlined text-[22px] text-tertiary-fixed">insights</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm font-bold text-on-primary">120,000+ Lives</span>
+<span class="font-label-sm text-label-sm text-surface-variant/80">Positively impacted in 2023-24</span>
+</div>
+</div>
+<div class="flex items-center justify-center pl-space-xs">
+<span class="font-label-sm text-label-sm bg-eduanchors-teal/20 text-tertiary-fixed px-space-xs py-space-2xs rounded-full font-bold">14 States</span>
+</div>
+</div>
+<!-- The 9 Core Programmes List -->
+<div class="px-margin flex flex-col gap-space-sm" id="program-list">
+<!-- 1. Research & Analysis -->
+<div class="program-card group bg-surface-card rounded-xl p-space-md shadow-sm transition-all duration-200 active:scale-[0.99] flex flex-col gap-space-xs" data-category="governance">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm flex-1 min-w-0">
+<div class="w-11 h-11 rounded-lg bg-surface-container-low text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">query_stats</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-sm text-label-sm text-text-muted">Pillar 01</span>
+<span class="w-1 h-1 rounded-full bg-text-muted"></span>
+<span class="font-label-sm text-label-sm text-eduanchors-teal font-semibold">Evidence-Led</span>
+</div>
+<h2 class="font-title-sm text-title-sm text-primary font-bold truncate">Research &amp; Analysis</h2>
+<p class="font-body-sm text-body-sm text-text-secondary line-clamp-2 mt-space-2xs">
+              Policy papers, nationwide data collection, participatory rural appraisals &amp; baseline field assessments.
+            </p>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant group-hover:text-secondary group-hover:bg-secondary-fixed transition-colors shrink-0">
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs pt-space-xs mt-space-2xs">
+<span class="font-label-sm text-label-sm bg-surface-container-low text-text-secondary px-space-xs py-space-2xs rounded-full">34 Policy Briefs</span>
+<span class="font-label-sm text-label-sm bg-surface-container-low text-text-secondary px-space-xs py-space-2xs rounded-full">Field Research</span>
+</div>
+</div>
+<!-- 2. Child Protection & Safety -->
+<div class="program-card group bg-surface-card rounded-xl p-space-md shadow-sm transition-all duration-200 active:scale-[0.99] flex flex-col gap-space-xs" data-category="child-welfare">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm flex-1 min-w-0">
+<div class="w-11 h-11 rounded-lg bg-error-container/40 text-urgent-helpline flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">verified_user</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-sm text-label-sm text-text-muted">Pillar 02</span>
+<span class="w-1 h-1 rounded-full bg-text-muted"></span>
+<span class="font-label-sm text-label-sm text-urgent-helpline font-semibold">Emergency Action</span>
+</div>
+<h2 class="font-title-sm text-title-sm text-primary font-bold truncate">Child Protection &amp; Safety</h2>
+<p class="font-body-sm text-body-sm text-text-secondary line-clamp-2 mt-space-2xs">
+              Child rights advocacy, emergency helpline 1098 collaboration, rescue operations and village-level safe spaces.
+            </p>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant group-hover:text-secondary group-hover:bg-secondary-fixed transition-colors shrink-0">
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs pt-space-xs mt-space-2xs">
+<span class="font-label-sm text-label-sm bg-error-container/30 text-on-error-container px-space-xs py-space-2xs rounded-full font-semibold">1098 Active Node</span>
+<span class="font-label-sm text-label-sm bg-surface-container-low text-text-secondary px-space-xs py-space-2xs rounded-full">Child-Friendly Corners</span>
+</div>
+</div>
+<!-- 3. Education & Early Childhood -->
+<div class="program-card group bg-surface-card rounded-xl p-space-md shadow-sm transition-all duration-200 active:scale-[0.99] flex flex-col gap-space-xs" data-category="child-welfare">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm flex-1 min-w-0">
+<div class="w-11 h-11 rounded-lg bg-surface-container-low text-eduanchors-blue flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">school</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-sm text-label-sm text-text-muted">Pillar 03</span>
+<span class="w-1 h-1 rounded-full bg-text-muted"></span>
+<span class="font-label-sm text-label-sm text-eduanchors-blue font-semibold">EduAnchors</span>
+</div>
+<h2 class="font-title-sm text-title-sm text-primary font-bold truncate">Education &amp; Early Childhood</h2>
+<p class="font-body-sm text-body-sm text-text-secondary line-clamp-2 mt-space-2xs">
+              Anganwadi preschool access, digital smart classrooms, bridging out-of-school gaps &amp; remedial coaching.
+            </p>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant group-hover:text-secondary group-hover:bg-secondary-fixed transition-colors shrink-0">
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs pt-space-xs mt-space-2xs">
+<span class="font-label-sm text-label-sm bg-surface-container-low text-text-secondary px-space-xs py-space-2xs rounded-full">48 Digital Labs</span>
+<span class="font-label-sm text-label-sm bg-surface-container-low text-text-secondary px-space-xs py-space-2xs rounded-full">Scholarships Enabled</span>
+</div>
+</div>
+<!-- 4. Health & Mental Well-being -->
+<div class="program-card group bg-surface-card rounded-xl p-space-md shadow-sm transition-all duration-200 active:scale-[0.99] flex flex-col gap-space-xs" data-category="community">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm flex-1 min-w-0">
+<div class="w-11 h-11 rounded-lg bg-secondary-fixed text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">vital_signs</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-sm text-label-sm text-text-muted">Pillar 04</span>
+<span class="w-1 h-1 rounded-full bg-text-muted"></span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Wellness First</span>
+</div>
+<h2 class="font-title-sm text-title-sm text-primary font-bold truncate">Health &amp; Mental Well-being</h2>
+<p class="font-body-sm text-body-sm text-text-secondary line-clamp-2 mt-space-2xs">
+              Primary rural clinics, maternal nutrition, adolescent psycho-social wellness, and confidential mental health counseling.
+            </p>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant group-hover:text-secondary group-hover:bg-secondary-fixed transition-colors shrink-0">
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs pt-space-xs mt-space-2xs">
+<span class="font-label-sm text-label-sm bg-surface-container-low text-text-secondary px-space-xs py-space-2xs rounded-full">Mobile OPD</span>
+<span class="font-label-sm text-label-sm bg-surface-container-low text-text-secondary px-space-xs py-space-2xs rounded-full">Youth Counseling</span>
+</div>
+</div>
+<!-- 5. Women's Empowerment -->
+<div class="program-card group bg-surface-card rounded-xl p-space-md shadow-sm transition-all duration-200 active:scale-[0.99] flex flex-col gap-space-xs" data-category="community">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm flex-1 min-w-0">
+<div class="w-11 h-11 rounded-lg bg-surface-container-low text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">diversity_1</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-sm text-label-sm text-text-muted">Pillar 05</span>
+<span class="w-1 h-1 rounded-full bg-text-muted"></span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Livelihoods</span>
+</div>
+<h2 class="font-title-sm text-title-sm text-primary font-bold truncate">Women's Empowerment</h2>
+<p class="font-body-sm text-body-sm text-text-secondary line-clamp-2 mt-space-2xs">
+              Federating Self-Help Groups (SHGs), digital and financial literacy, micro-enterprise training, and artisanal skill programs.
+            </p>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant group-hover:text-secondary group-hover:bg-secondary-fixed transition-colors shrink-0">
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs pt-space-xs mt-space-2xs">
+<span class="font-label-sm text-label-sm bg-surface-container-low text-text-secondary px-space-xs py-space-2xs rounded-full">650+ SHGs</span>
+<span class="font-label-sm text-label-sm bg-surface-container-low text-text-secondary px-space-xs py-space-2xs rounded-full">Bank Linkages</span>
+</div>
+</div>
+<!-- 6. Disaster Relief -->
+<div class="program-card group bg-surface-card rounded-xl p-space-md shadow-sm transition-all duration-200 active:scale-[0.99] flex flex-col gap-space-xs" data-category="community">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm flex-1 min-w-0">
+<div class="w-11 h-11 rounded-lg bg-surface-container-low text-urgent-helpline flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">emergency</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-sm text-label-sm text-text-muted">Pillar 06</span>
+<span class="w-1 h-1 rounded-full bg-text-muted"></span>
+<span class="font-label-sm text-label-sm text-urgent-helpline font-semibold">Rapid Response</span>
+</div>
+<h2 class="font-title-sm text-title-sm text-primary font-bold truncate">Disaster Relief</h2>
+<p class="font-body-sm text-body-sm text-text-secondary line-clamp-2 mt-space-2xs">
+              Immediate flood and drought relief, pre-positioned emergency ration kits, medical triage, and rehabilitation support.
+            </p>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant group-hover:text-secondary group-hover:bg-secondary-fixed transition-colors shrink-0">
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs pt-space-xs mt-space-2xs">
+<span class="font-label-sm text-label-sm bg-surface-container-low text-text-secondary px-space-xs py-space-2xs rounded-full">First Responder Teams</span>
+<span class="font-label-sm text-label-sm bg-surface-container-low text-text-secondary px-space-xs py-space-2xs rounded-full">Dry Ration Logistics</span>
+</div>
+</div>
+<!-- 7. Environment & Climate Resilience -->
+<div class="program-card group bg-surface-card rounded-xl p-space-md shadow-sm transition-all duration-200 active:scale-[0.99] flex flex-col gap-space-xs" data-category="community">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm flex-1 min-w-0">
+<div class="w-11 h-11 rounded-lg bg-tertiary-fixed-dim/40 text-eduanchors-teal flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">forest</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-sm text-label-sm text-text-muted">Pillar 07</span>
+<span class="w-1 h-1 rounded-full bg-text-muted"></span>
+<span class="font-label-sm text-label-sm text-eduanchors-teal font-semibold">Green Ecology</span>
+</div>
+<h2 class="font-title-sm text-title-sm text-primary font-bold truncate">Environment &amp; Climate Resilience</h2>
+<p class="font-body-sm text-body-sm text-text-secondary line-clamp-2 mt-space-2xs">
+              20,000+ trees planted, rainwater harvesting reservoirs, community seed banks &amp; regenerative sustainable agriculture.
+            </p>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant group-hover:text-secondary group-hover:bg-secondary-fixed transition-colors shrink-0">
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs pt-space-xs mt-space-2xs">
+<span class="font-label-sm text-label-sm bg-tertiary-fixed-dim/20 text-on-tertiary-fixed-variant px-space-xs py-space-2xs rounded-full font-semibold">20k+ Saplings</span>
+<span class="font-label-sm text-label-sm bg-surface-container-low text-text-secondary px-space-xs py-space-2xs rounded-full">Rainwater Check-dams</span>
+</div>
+</div>
+<!-- 8. Model Villages -->
+<div class="program-card group bg-surface-card rounded-xl p-space-md shadow-sm transition-all duration-200 active:scale-[0.99] flex flex-col gap-space-xs" data-category="governance">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm flex-1 min-w-0">
+<div class="w-11 h-11 rounded-lg bg-surface-container-low text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">holiday_village</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-sm text-label-sm text-text-muted">Pillar 08</span>
+<span class="w-1 h-1 rounded-full bg-text-muted"></span>
+<span class="font-label-sm text-label-sm text-primary font-semibold">Adarsh Gram</span>
+</div>
+<h2 class="font-title-sm text-title-sm text-primary font-bold truncate">Model Villages</h2>
+<p class="font-body-sm text-body-sm text-text-secondary line-clamp-2 mt-space-2xs">
+              Integrated rural transformation focusing on 100% piped drinking water, solar lighting, waste segregation &amp; Gram Panchayat governance.
+            </p>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant group-hover:text-secondary group-hover:bg-secondary-fixed transition-colors shrink-0">
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs pt-space-xs mt-space-2xs">
+<span class="font-label-sm text-label-sm bg-surface-container-low text-text-secondary px-space-xs py-space-2xs rounded-full">18 Gram Panchayats</span>
+<span class="font-label-sm text-label-sm bg-surface-container-low text-text-secondary px-space-xs py-space-2xs rounded-full">Solar Micro-grids</span>
+</div>
+</div>
+<!-- 9. Technical Assistance -->
+<div class="program-card group bg-surface-card rounded-xl p-space-md shadow-sm transition-all duration-200 active:scale-[0.99] flex flex-col gap-space-xs" data-category="governance">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm flex-1 min-w-0">
+<div class="w-11 h-11 rounded-lg bg-surface-container-low text-eduanchors-blue flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">precision_manufacturing</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-sm text-label-sm text-text-muted">Pillar 09</span>
+<span class="w-1 h-1 rounded-full bg-text-muted"></span>
+<span class="font-label-sm text-label-sm text-primary font-semibold">Institutional Support</span>
+</div>
+<h2 class="font-title-sm text-title-sm text-primary font-bold truncate">Technical Assistance</h2>
+<p class="font-body-sm text-body-sm text-text-secondary line-clamp-2 mt-space-2xs">
+              Capacity building for grassroots NGOs, impact monitoring systems, and institutional training in collaboration with NIPCCD &amp; IIPA.
+            </p>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant group-hover:text-secondary group-hover:bg-secondary-fixed transition-colors shrink-0">
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs pt-space-xs mt-space-2xs">
+<span class="font-label-sm text-label-sm bg-surface-container-low text-text-secondary px-space-xs py-space-2xs rounded-full">NIPCCD / IIPA Tied</span>
+<span class="font-label-sm text-label-sm bg-surface-container-low text-text-secondary px-space-xs py-space-2xs rounded-full">120+ NGO Mentees</span>
+</div>
+</div>
+</div>
+<!-- Grassroots Field In-action Carousel Preview -->
+<div class="pt-space-xl px-margin flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md text-primary tracking-tight">On-Ground Action</h3>
+<span class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider">Field Dispatch</span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm pt-space-2xs">
+<div class="relative rounded-xl overflow-hidden shadow-sm bg-surface-container aspect-[4/3]">
+<img class="w-full h-full object-cover" data-alt="Indian social workers conducting an interactive child safety awareness session in an open village courtyard under banyan tree light, natural warm documentary photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbNEMpB7l2z7HBKmq76TO-c1IW38d0YDQABxs9K7POaOLmw12z8A0YlwXxMkmcHWws2ElEMpAZeusc5zytk2M8gR5l2BHXlIQEX7YxnwGPLA8aG_w5634WDZ7Fqy3EsGznXgEbHmxF6L0jjKyD2rDHj1qcZGRDTUpSQ5bykKTNJhXmstLzEuJiSqjjqfZJ7NoN_rDN-mGU3FqvxtMCYHCk4PuACl926e-gPAyUiVOxKL-BycQn7yMe"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent flex items-end p-space-xs">
+<span class="font-label-sm text-label-sm text-on-primary font-medium">Child Safety Camps</span>
+</div>
+</div>
+<div class="relative rounded-xl overflow-hidden shadow-sm bg-surface-container aspect-[4/3]">
+<img class="w-full h-full object-cover" data-alt="Rural Indian women attending an organic livelihood workshop showcasing handmade handicrafts and textiles in Rajasthan, dignified portraits, soft natural sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhKQbgxhWKCK6kTqpryeAjvID1AmcU9mRT6BVDkxIJ1M4tWSt_biIR_1R7jI4DAEjYaA3qGdrBlV1BMXHcUZlo6bKoTydPzCU76Je0y1dHgPfJ_vjXZf9xOKWYHubh6JcifpQhXNVlXLlko6QaHUJZA8gCBTx-z_1MifjqssjAEWTi7UBKxmtTpKZy6vlAxSvXFpKyTby_Oz2IrqKfbfmm8JthZFFFqud26nWmE_ppoIPDTvPE6Qja"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent flex items-end p-space-xs">
+<span class="font-label-sm text-label-sm text-on-primary font-medium">SHG Enterprises</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Partnership CTA Section -->
+<div class="px-margin pt-space-xl pb-space-lg">
+<div class="rounded-xl bg-surface-card p-space-lg shadow-md flex flex-col items-center text-center gap-space-sm relative overflow-hidden">
+<!-- Decorative background accent blob -->
+<div class="absolute -right-10 -bottom-10 w-32 h-32 rounded-full bg-secondary-fixed/30 pointer-events-none"></div>
+<div class="absolute -left-10 -top-10 w-28 h-28 rounded-full bg-primary-fixed/20 pointer-events-none"></div>
+<div class="w-12 h-12 rounded-full bg-secondary-fixed text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[26px]">handshake</span>
+</div>
+<div class="flex flex-col gap-space-2xs relative z-10">
+<span class="font-label-md text-label-md text-secondary font-bold uppercase tracking-wider">COLLABORATION &amp; IMPACT</span>
+<h3 class="font-headline-md text-headline-md text-primary font-bold">Looking for partnership?</h3>
+<p class="font-body-sm text-body-sm text-text-secondary max-w-xs">
+          We collaborate with CSR funds, state institutions, academia, and global donors to amplify grassroots change.
+        </p>
+</div>
+<div class="flex flex-col w-full gap-space-xs pt-space-2xs relative z-10">
+<button class="w-full min-h-[48px] px-space-md py-space-sm rounded-xl bg-secondary text-on-secondary font-label-lg text-label-lg font-bold flex items-center justify-center gap-space-xs shadow-md active:scale-98 transition-all" onclick="handlePartnerClick()">
+<span>Become a Partner</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<button class="w-full min-h-[44px] px-space-md py-space-xs rounded-xl bg-surface-container-low text-primary font-label-md text-label-md font-semibold flex items-center justify-center hover:bg-surface-variant transition-colors" onclick="handleProposalClick()">
+          Download Program Dossier (PDF)
+        </button>
+</div>
+</div>
+</div>
+<!-- Inline Micro-interaction Script -->
+<script>
+    function filterPrograms(category, buttonElement) {
+      const cards = document.querySelectorAll('.program-card');
+      const buttons = document.querySelectorAll('.filter-btn');
+
+      // Update button styling states
+      buttons.forEach(btn => {
+        btn.classList.remove('bg-primary', 'text-on-primary');
+        btn.classList.add('bg-surface-container-lowest', 'text-text-secondary');
+      });
+      buttonElement.classList.remove('bg-surface-container-lowest', 'text-text-secondary');
+      buttonElement.classList.add('bg-primary', 'text-on-primary');
+
+      // Filter visible items with smooth transitions
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.classList.remove('hidden');
+          card.style.opacity = '0';
+          setTimeout(() => {
+            card.style.opacity = '1';
+          }, 50);
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    function handlePartnerClick() {
+      const toast = document.createElement('div');
+      toast.className = 'fixed bottom-20 left-1/2 -translate-x-1/2 bg-primary text-on-primary font-label-md text-label-md px-4 py-2 rounded-full shadow-lg z-50 transition-opacity duration-300';
+      toast.textContent = 'Redirecting to Partnership Desk...';
+      document.body.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+      }, 2000);
+    }
+
+    function handleProposalClick() {
+      const toast = document.createElement('div');
+      toast.className = 'fixed bottom-20 left-1/2 -translate-x-1/2 bg-secondary text-on-secondary font-label-md text-label-md px-4 py-2 rounded-full shadow-lg z-50 transition-opacity duration-300';
+      toast.textContent = 'Downloading AWSAR Programmes Dossier...';
+      document.body.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+      }, 2000);
+    }
+  </script>
+</div></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/95 backdrop-blur-xl shadow-[0_-4px_16px_rgba(10,31,94,0.06)]" data-active-classes="text-secondary"><div class="flex justify-around items-center h-16 px-space-2xs"><a class="flex flex-col items-center justify-center gap-space-2xs min-h-[44px] min-w-[44px] flex-1 text-on-surface-variant hover:text-on-surface transition-colors" data-path="home" href="#"><span class="material-symbols-outlined text-[22px]">home</span><span class="font-label-sm text-label-sm">Home</span></a><a aria-current="page" class="flex flex-col items-center justify-center gap-space-2xs min-h-[44px] min-w-[44px] flex-1 transition-colors text-secondary" data-path="programmes" href="#"><span class="material-symbols-outlined text-[22px]">dashboard</span><span class="font-label-sm text-label-sm">Programmes</span></a><a class="relative flex flex-col items-center justify-center gap-space-2xs min-h-[44px] min-w-[44px] flex-1 text-on-surface-variant hover:text-on-surface transition-colors" data-path="opportunities" href="#"><span class="relative flex items-center justify-center"><span class="material-symbols-outlined text-[22px]">school</span><span class="absolute -top-0.5 -right-1 w-2 h-2 rounded-full bg-eduanchors-teal ring-2 ring-surface"></span></span><span class="font-label-sm text-label-sm">Opportunities</span></a><a class="flex flex-col items-center justify-center gap-space-2xs min-h-[44px] min-w-[44px] flex-1 text-on-surface-variant hover:text-on-surface transition-colors" data-path="media" href="#"><span class="material-symbols-outlined text-[22px]">perm_media</span><span class="font-label-sm text-label-sm">Media</span></a><a class="flex flex-col items-center justify-center gap-space-2xs min-h-[44px] min-w-[44px] flex-1 text-on-surface-variant hover:text-on-surface transition-colors" data-path="get-involved" href="#"><span class="material-symbols-outlined text-[22px]">volunteer_activism</span><span class="font-label-sm text-label-sm">Get Involved</span></a></div></nav></body></html>
