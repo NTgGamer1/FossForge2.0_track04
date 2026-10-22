@@ -7,6 +7,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { RootNavigator } from './src/navigation/RootNavigator';
 import { AuthProvider } from './src/contexts/AuthContext';
+import { LanguageProvider } from './src/contexts/LanguageContext';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -23,12 +24,14 @@ export default function App() {
 
   return (
     <SafeAreaProvider>
-      <AuthProvider>
-        <StatusBar style="dark" />
-        <NavigationContainer>
-          <RootNavigator />
-        </NavigationContainer>
-      </AuthProvider>
+      <LanguageProvider>
+        <AuthProvider>
+          <StatusBar style="dark" />
+          <NavigationContainer>
+            <RootNavigator />
+          </NavigationContainer>
+        </AuthProvider>
+      </LanguageProvider>
     </SafeAreaProvider>
   );
 }

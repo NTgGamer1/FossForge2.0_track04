@@ -13,6 +13,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useContent } from '../hooks/useContent';
+import { useTranslation } from '../i18n/t';
 import { getImage } from '../data/images';
 import { Card } from '../components/Card';
 import { Text } from '../components/Text';
@@ -21,13 +22,6 @@ import type { GalleryItem } from '../types/content';
 
 type Segment = 'news' | 'photos' | 'videos' | 'reports' | 'social';
 const SEGMENTS: Segment[] = ['news', 'photos', 'videos', 'reports', 'social'];
-const SEGMENT_LABELS: Record<Segment, string> = {
-  news: 'News',
-  photos: 'Photos',
-  videos: 'Videos',
-  reports: 'Reports',
-  social: 'Social',
-};
 
 const SOCIAL_ICONS: Record<string, keyof typeof Ionicons.glyphMap> = {
   Facebook: 'logo-facebook',
@@ -237,11 +231,14 @@ function ReportsTab() {
 }
 
 function SocialTab() {
-  const { awsar } = useContent();
+  const { awsar, lang } = useContent();
+  const isHi = lang === 'hi';
   return (
     <View style={styles.segContent}>
       <Text variant="bodyMd" color="textSecondary" style={styles.followText}>
-        Follow AWSAR India on social media for updates on programmes, events, and impact.
+        {isHi
+          ? 'कार्यक्रमों, आयोजनों और प्रभाव पर अपडेट के लिए अवसर इंडिया को सोशल मीडिया पर फॉलो करें।'
+          : 'Follow AWSAR India on social media for updates on programmes, events, and impact.'}
       </Text>
       {awsar.media.social.map((s, i) => (
         <TouchableOpacity
@@ -270,6 +267,15 @@ function SocialTab() {
 export function MediaScreen() {
   const [segment, setSegment] = useState<Segment>('news');
   const insets = useSafeAreaInsets();
+  const { t } = useTranslation();
+
+  const segmentLabels: Record<Segment, string> = {
+    news: t('media.news'),
+    photos: t('media.photos'),
+    videos: t('media.videos'),
+    reports: t('media.reports'),
+    social: t('media.social'),
+  };
 
   const renderSegment = () => {
     switch (segment) {
@@ -296,11 +302,11 @@ export function MediaScreen() {
             onPress={() => setSegment(s)}
             style={[styles.segBtn, segment === s && styles.segBtnActive]}
             accessibilityRole="tab"
-            accessibilityLabel={SEGMENT_LABELS[s]}
+            accessibilityLabel={segmentLabels[s]}
             accessibilityState={{ selected: segment === s }}
           >
             <Text style={[styles.segBtnText, segment === s && styles.segBtnTextActive]}>
-              {SEGMENT_LABELS[s]}
+              {segmentLabels[s]}
             </Text>
           </TouchableOpacity>
         ))}

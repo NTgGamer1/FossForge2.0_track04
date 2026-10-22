@@ -1,4 +1,6 @@
-import en from "./en.json";
+import en from './en.json';
+import hi from './hi.json';
+import { useLanguage, type Language } from '../contexts/LanguageContext';
 
 type NestedKeyOf<T> = {
   [K in keyof T & string]: T[K] extends Record<string, string>
@@ -6,14 +8,33 @@ type NestedKeyOf<T> = {
     : never;
 }[keyof T & string];
 
-type TranslationKey = NestedKeyOf<typeof en>;
+export type TranslationKey = NestedKeyOf<typeof en>;
 
-/** Minimal t() stub — returns English string. Stage 7 swaps in i18next. */
-export function t(key: TranslationKey): string {
-  const [section, field] = key.split(".") as [keyof typeof en, string];
-  const sectionObj = en[section] as Record<string, string> | undefined;
+export function translate(key: TranslationKey, lang: Language = 'en'): string {
+  const dict = lang === 'hi' ? hi : en;
+  const [section, field] = key.split('.') as [keyof typeof en, string];
+  const sectionObj = (dict as Record<string, any>)[section];
   if (sectionObj && field in sectionObj) {
     return sectionObj[field];
   }
+  // Fallback to English
+  const enSection = en[section] as Record<string, string> | undefined;
+  if (enSection && field in enSection) {
+    return enSection[field];
+  }
   return key;
+}
+
+export function t(key: TranslationKey): string {
+  return translate(key, 'en');
+}
+
+export function useTranslation() {
+  const { lang, toggleLang, setLang } = useLanguage();
+  return {
+    t: (key: TranslationKey) => translate(key, lang),
+    lang,
+    toggleLang,
+    setLang,
+  };
 }

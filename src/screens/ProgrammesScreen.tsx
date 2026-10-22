@@ -10,6 +10,7 @@ import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { useContent } from '../hooks/useContent';
+import { useTranslation } from '../i18n/t';
 import { getName } from '../utils/lang';
 import { Card } from '../components/Card';
 import { SectionHeader } from '../components/SectionHeader';
@@ -33,16 +34,17 @@ function getTint(tint: string) {
   return tintMap[tint] ?? tintMap.blue;
 }
 
-function ProgrammeCard({ item }: { item: Programme }) {
+function ProgrammeCard({ item, lang }: { item: Programme; lang: 'en' | 'hi' }) {
   const navigation = useNavigation<NavProp>();
   const { bg, icon } = getTint(item.tint);
+  const displayName = getName(item, lang);
 
   return (
     <TouchableOpacity
       activeOpacity={0.75}
       onPress={() => navigation.navigate('ProgrammeDetail', { id: item.id })}
       accessibilityRole="button"
-      accessibilityLabel={getName(item)}
+      accessibilityLabel={displayName}
     >
       <Card style={styles.card}>
         <View style={styles.cardRow}>
@@ -51,7 +53,7 @@ function ProgrammeCard({ item }: { item: Programme }) {
           </View>
           <View style={styles.cardText}>
             <Text variant="titleSm" color="textPrimary" numberOfLines={2}>
-              {getName(item)}
+              {displayName}
             </Text>
             <Text variant="bodySm" color="textSecondary" numberOfLines={2} style={styles.summary}>
               {item.summary}
@@ -69,26 +71,33 @@ function ProgrammeCard({ item }: { item: Programme }) {
   );
 }
 
-function ListHeader({ count, impactQuote }: { count: number; impactQuote: string }) {
+function ListHeader({ count, impactQuote, lang }: { count: number; impactQuote: string; lang: 'en' | 'hi' }) {
   const { awsar } = useContent();
+  const { t } = useTranslation();
+  const isHi = lang === 'hi';
+
+  const introText = isHi
+    ? `अवसर ${count} कार्यक्रम क्षेत्रों में कार्य करता है — अनुसंधान और शिक्षा से लेकर बाल संरक्षण, स्वास्थ्य और महिला सशक्तिकरण तक।`
+    : `AWSAR works across ${count} programme areas — from research and education to child protection, health, and women's empowerment.`;
+
   return (
     <View style={styles.listHeader}>
       <SectionHeader
-        eyebrow="Our Work"
-        title="Programmes"
+        eyebrow={t('programmes.eyebrow')}
+        title={t('programmes.title')}
         icon="grid"
         iconColor={theme.colors.primary}
         iconBgColor={theme.colors.iconNavy}
       />
       <Text variant="bodyMd" color="textSecondary" style={styles.intro}>
-        {`AWSAR works across ${count} programme areas — from research and education to child protection, health, and women's empowerment.`}
+        {introText}
       </Text>
 
       {/* Impact row */}
       <View style={styles.impactSection}>
         <SectionHeader
-          eyebrow="Numbers That Matter"
-          title="Our Impact"
+          eyebrow={t('home.impactEyebrow')}
+          title={t('home.impactTitle')}
           icon="stats-chart"
           iconColor={theme.colors.secondary}
           iconBgColor={theme.colors.iconMagenta}
@@ -111,17 +120,17 @@ function ListHeader({ count, impactQuote }: { count: number; impactQuote: string
 }
 
 export function ProgrammesScreen() {
-  const { awsar } = useContent();
+  const { awsar, lang } = useContent();
   const programmes = awsar.programmes;
 
   return (
     <FlatList
       data={programmes}
       keyExtractor={(item) => item.id}
-      renderItem={({ item }) => <ProgrammeCard item={item} />}
+      renderItem={({ item }) => <ProgrammeCard item={item} lang={lang} />}
       ItemSeparatorComponent={() => <View style={styles.separator} />}
       ListHeaderComponent={
-        <ListHeader count={programmes.length} impactQuote={awsar.stats.impactQuote} />
+        <ListHeader count={programmes.length} impactQuote={awsar.stats.impactQuote} lang={lang} />
       }
       contentContainerStyle={styles.content}
       style={styles.screen}

@@ -12,19 +12,13 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 
 import { useContent } from '../hooks/useContent';
+import { useTranslation } from '../i18n/t';
 import { Card } from '../components/Card';
 import { SectionHeader } from '../components/SectionHeader';
 import { Text } from '../components/Text';
 import { fontFamilies, theme } from '../theme';
 
 type Section = 'donate' | 'volunteer' | 'partner' | 'contact';
-
-const SECTIONS: { key: Section; label: string; icon: keyof typeof Ionicons.glyphMap }[] = [
-  { key: 'donate', label: 'Donate', icon: 'heart' },
-  { key: 'volunteer', label: 'Volunteer', icon: 'hand-left' },
-  { key: 'partner', label: 'Partner', icon: 'business' },
-  { key: 'contact', label: 'Contact', icon: 'mail' },
-];
 
 function useForm(fields: string[]) {
   const [values, setValues] = useState<Record<string, string>>({});
@@ -93,16 +87,18 @@ function FormField({
 }
 
 function DonateSection() {
-  const { awsar } = useContent();
+  const { awsar, lang } = useContent();
+  const { t } = useTranslation();
   const { involve } = awsar;
   const [selectedTier, setSelectedTier] = useState<number | null>(null);
+  const isHi = lang === 'hi';
 
   return (
     <View style={styles.sectionBody}>
       <Card>
         <SectionHeader
-          eyebrow="Make a Difference"
-          title="Donate"
+          eyebrow={isHi ? 'सकारात्मक बदलाव लाएं' : 'Make a Difference'}
+          title={t('involve.donate')}
           icon="heart"
           iconColor={theme.colors.secondary}
           iconBgColor={theme.colors.iconMagenta}
@@ -145,10 +141,10 @@ function DonateSection() {
         style={styles.primaryBtn}
         onPress={() => Linking.openURL(involve.donateUrl)}
         accessibilityRole="button"
-        accessibilityLabel="Donate Now"
+        accessibilityLabel={t('common.donateNow')}
       >
         <Ionicons name="heart" size={16} color="#FFFFFF" />
-        <Text style={styles.primaryBtnText}>Donate Now</Text>
+        <Text style={styles.primaryBtnText}>{t('common.donateNow')}</Text>
       </TouchableOpacity>
 
       {/* Ways */}
@@ -170,8 +166,10 @@ function DonateSection() {
 }
 
 function VolunteerSection() {
-  const { awsar } = useContent();
+  const { awsar, lang } = useContent();
+  const { t } = useTranslation();
   const { volunteer } = awsar.involve;
+  const isHi = lang === 'hi';
   const form = useForm(volunteer.formFields);
   const requiredFields = volunteer.formFields
     .filter((f) => f.includes('*'))
@@ -191,7 +189,7 @@ function VolunteerSection() {
     <View style={styles.sectionBody}>
       <Card>
         <SectionHeader
-          eyebrow="Give Your Time"
+          eyebrow={isHi ? 'अपना समय दें' : 'Give Your Time'}
           title={volunteer.title}
           icon="hand-left"
           iconColor={theme.colors.primary}
@@ -228,12 +226,12 @@ function VolunteerSection() {
 
       {/* Form */}
       <Card>
-        <Text style={styles.formTitle}>Apply to Volunteer</Text>
+        <Text style={styles.formTitle}>{isHi ? 'स्वयंसेवा के लिए आवेदन करें' : 'Apply to Volunteer'}</Text>
         {volunteer.formFields.map((field) => (
           <FormField
             key={field}
             label={field}
-            multiline={field.includes('Why')}
+            multiline={field.includes('Why') || field.includes('क्यों')}
             values={form.values}
             errors={form.errors}
             setValue={form.setValue}
@@ -244,9 +242,9 @@ function VolunteerSection() {
           style={styles.primaryBtn}
           onPress={handleSubmit}
           accessibilityRole="button"
-          accessibilityLabel="Prepare my application"
+          accessibilityLabel={t('common.prepareApplication')}
         >
-          <Text style={styles.primaryBtnText}>Prepare my application</Text>
+          <Text style={styles.primaryBtnText}>{t('common.prepareApplication')}</Text>
         </TouchableOpacity>
       </Card>
     </View>
@@ -254,12 +252,14 @@ function VolunteerSection() {
 }
 
 function PartnerSection() {
-  const { awsar } = useContent();
+  const { awsar, lang } = useContent();
+  const { t } = useTranslation();
   const { partnerForm, ways } = awsar.involve;
+  const isHi = lang === 'hi';
   const form = useForm(partnerForm.fields);
 
   function handleSend() {
-    if (!form.validate(['Name', 'Email'])) return;
+    if (!form.validate(['Name', 'Email', 'नाम', 'ईमेल'])) return;
     const body = partnerForm.fields
       .map((f) => `${f.replace('*', '').trim()}: ${form.values[f.replace('*', '').trim()] ?? ''}`)
       .join('%0A');
@@ -272,14 +272,16 @@ function PartnerSection() {
     <View style={styles.sectionBody}>
       <Card>
         <SectionHeader
-          eyebrow="Work With Us"
-          title="Partner with AWSAR"
+          eyebrow={isHi ? 'हमारे साथ काम करें' : 'Work With Us'}
+          title={isHi ? 'अवसर के साथ साझेदारी करें' : 'Partner with AWSAR'}
           icon="business"
           iconColor={theme.colors.primary}
           iconBgColor={theme.colors.iconNavy}
         />
         <Text variant="bodyMd" color="textSecondary" style={styles.intro}>
-          We welcome partnerships with governments, foundations, corporates, academic institutions, and civil society.
+          {isHi
+            ? 'हम सरकारों, फाउंडेशनों, कॉर्पोरेट्स, शैक्षणिक संस्थानों और नागरिक समाज के साथ साझेदारी का स्वागत करते हैं।'
+            : 'We welcome partnerships with governments, foundations, corporates, academic institutions, and civil society.'}
         </Text>
       </Card>
 
@@ -298,12 +300,12 @@ function PartnerSection() {
       ))}
 
       <Card>
-        <Text style={styles.formTitle}>Send a Partnership Enquiry</Text>
+        <Text style={styles.formTitle}>{isHi ? 'साझेदारी पूछताछ भेजें' : 'Send a Partnership Enquiry'}</Text>
         {partnerForm.fields.map((field) => (
           <FormField
             key={field}
             label={field}
-            multiline={field.toLowerCase().includes('message')}
+            multiline={field.toLowerCase().includes('message') || field.includes('संदेश')}
             values={form.values}
             errors={form.errors}
             setValue={form.setValue}
@@ -313,9 +315,9 @@ function PartnerSection() {
           style={styles.primaryBtn}
           onPress={handleSend}
           accessibilityRole="button"
-          accessibilityLabel="Send Enquiry"
+          accessibilityLabel={t('common.sendEnquiry')}
         >
-          <Text style={styles.primaryBtnText}>Send Enquiry</Text>
+          <Text style={styles.primaryBtnText}>{t('common.sendEnquiry')}</Text>
         </TouchableOpacity>
       </Card>
     </View>
@@ -323,12 +325,14 @@ function PartnerSection() {
 }
 
 function ContactSection() {
-  const { awsar } = useContent();
+  const { awsar, lang } = useContent();
+  const { t } = useTranslation();
   const { contact, involve } = awsar;
+  const isHi = lang === 'hi';
   const form = useForm(involve.contactForm.fields);
 
   function handleSend() {
-    if (!form.validate(['Full name', 'Email', 'Message'])) return;
+    if (!form.validate(['Full name', 'Email', 'Message', 'पूरा नाम', 'ईमेल', 'संदेश'])) return;
     const body = involve.contactForm.fields
       .map((f) => `${f.replace('*', '').trim()}: ${form.values[f.replace('*', '').trim()] ?? ''}`)
       .join('%0A');
@@ -350,7 +354,7 @@ function ContactSection() {
               )
             }
             accessibilityRole="button"
-            accessibilityLabel="Get Directions"
+            accessibilityLabel={isHi ? 'दिशा-निर्देश प्राप्त करें' : 'Get Directions'}
             style={styles.officeAddressBtn}
           >
             <Ionicons name="location-outline" size={14} color={theme.colors.primary} />
@@ -361,16 +365,16 @@ function ContactSection() {
               style={styles.officeBtn}
               onPress={() => Linking.openURL(`tel:${contact.phone}`)}
               accessibilityRole="button"
-              accessibilityLabel="Call Office"
+              accessibilityLabel={t('common.call')}
             >
               <Ionicons name="call-outline" size={14} color={theme.colors.primary} />
-              <Text style={styles.officeBtnText}>Call</Text>
+              <Text style={styles.officeBtnText}>{t('common.call')}</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.officeBtn}
               onPress={() => Linking.openURL(`mailto:${office.email}`)}
               accessibilityRole="button"
-              accessibilityLabel="Email Office"
+              accessibilityLabel={t('common.email')}
             >
               <Ionicons name="mail-outline" size={14} color={theme.colors.primary} />
               <Text style={styles.officeBtnText}>{office.email}</Text>
@@ -383,12 +387,12 @@ function ContactSection() {
       ))}
 
       <Card>
-        <Text style={styles.formTitle}>Send a Message</Text>
+        <Text style={styles.formTitle}>{isHi ? 'एक संदेश भेजें' : 'Send a Message'}</Text>
         {involve.contactForm.fields.map((field) => (
           <FormField
             key={field}
             label={field}
-            multiline={field.toLowerCase().includes('message')}
+            multiline={field.toLowerCase().includes('message') || field.includes('संदेश')}
             values={form.values}
             errors={form.errors}
             setValue={form.setValue}
@@ -399,9 +403,9 @@ function ContactSection() {
           style={styles.primaryBtn}
           onPress={handleSend}
           accessibilityRole="button"
-          accessibilityLabel="Send Message"
+          accessibilityLabel={t('common.sendMessage')}
         >
-          <Text style={styles.primaryBtnText}>Send Message</Text>
+          <Text style={styles.primaryBtnText}>{t('common.sendMessage')}</Text>
         </TouchableOpacity>
       </Card>
     </View>
@@ -410,6 +414,16 @@ function ContactSection() {
 
 export function GetInvolvedScreen() {
   const [section, setSection] = useState<Section>('donate');
+  const { lang } = useContent();
+  const { t } = useTranslation();
+  const isHi = lang === 'hi';
+
+  const sectionsList: { key: Section; label: string; icon: keyof typeof Ionicons.glyphMap }[] = [
+    { key: 'donate', label: t('involve.donate'), icon: 'heart' },
+    { key: 'volunteer', label: t('involve.volunteer'), icon: 'hand-left' },
+    { key: 'partner', label: t('involve.partner'), icon: 'business' },
+    { key: 'contact', label: t('involve.contact'), icon: 'mail' },
+  ];
 
   return (
     <KeyboardAvoidingView
@@ -423,7 +437,7 @@ export function GetInvolvedScreen() {
         style={styles.tabBar}
         contentContainerStyle={styles.tabBarContent}
       >
-        {SECTIONS.map((s) => (
+        {sectionsList.map((s) => (
           <TouchableOpacity
             key={s.key}
             onPress={() => setSection(s.key)}
@@ -444,18 +458,20 @@ export function GetInvolvedScreen() {
         ))}
       </ScrollView>
 
-      {/* Account card placeholder (Stage 8 fills this) */}
+      {/* Account card placeholder */}
       <View style={styles.accountCardPlaceholder}>
         <Ionicons name="person-circle-outline" size={22} color={theme.colors.textMuted} />
         <Text variant="bodySm" color="textMuted" style={styles.accountText}>
-          Sign in to save bookmarks and track your applications
+          {isHi
+            ? 'बुकमार्क सहेजने और अपने आवेदनों को ट्रैक करने के लिए साइन इन करें'
+            : 'Sign in to save bookmarks and track your applications'}
         </Text>
         <TouchableOpacity
           style={styles.signInBtn}
           accessibilityRole="button"
-          accessibilityLabel="Sign In"
+          accessibilityLabel={t('involve.signIn')}
         >
-          <Text style={styles.signInBtnText}>Sign In</Text>
+          <Text style={styles.signInBtnText}>{t('involve.signIn')}</Text>
         </TouchableOpacity>
       </View>
 

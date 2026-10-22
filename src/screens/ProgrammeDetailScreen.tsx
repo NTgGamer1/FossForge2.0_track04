@@ -11,6 +11,7 @@ import { useNavigation, useRoute, type RouteProp } from '@react-navigation/nativ
 import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 
 import { useContent } from '../hooks/useContent';
+import { useTranslation } from '../i18n/t';
 import { getName } from '../utils/lang';
 import { Card } from '../components/Card';
 import { Chip } from '../components/Chip';
@@ -35,7 +36,9 @@ export function ProgrammeDetailScreen() {
   const route = useRoute<RouteT>();
   const navigation = useNavigation();
   const tabNav = useNavigation<TabNav>();
-  const { awsar } = useContent();
+  const { awsar, lang } = useContent();
+  const { t } = useTranslation();
+  const isHi = lang === 'hi';
 
   const programme: Programme | undefined = awsar.programmes.find(
     (p) => p.id === route.params.id,
@@ -44,12 +47,15 @@ export function ProgrammeDetailScreen() {
   if (!programme) {
     return (
       <View style={styles.center}>
-        <Text variant="bodyMd" color="textMuted">Programme not found.</Text>
+        <Text variant="bodyMd" color="textMuted">
+          {isHi ? 'कार्यक्रम नहीं मिला।' : 'Programme not found.'}
+        </Text>
       </View>
     );
   }
 
   const { bg, icon: iconColor } = tintMap[programme.tint] ?? tintMap.blue;
+  const displayName = getName(programme, lang);
 
   return (
     <ScrollView
@@ -62,11 +68,11 @@ export function ProgrammeDetailScreen() {
         style={styles.backBtn}
         onPress={() => navigation.goBack()}
         accessibilityRole="button"
-        accessibilityLabel="Go back"
+        accessibilityLabel={t('common.back')}
         hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
       >
         <Ionicons name="arrow-back" size={20} color={theme.colors.primary} />
-        <Text style={styles.backText}>Programmes</Text>
+        <Text style={styles.backText}>{t('programmes.title')}</Text>
       </TouchableOpacity>
 
       {/* Hero block */}
@@ -79,21 +85,21 @@ export function ProgrammeDetailScreen() {
           />
         </View>
         <Text variant="headlineLg" style={[styles.heroTitle, { color: theme.colors.textPrimary }]}>
-          {getName(programme)}
+          {displayName}
         </Text>
         <Text variant="bodyMd" style={[styles.heroHi, { color: theme.colors.textMuted }]}>
           {programme.hi}
         </Text>
         <View style={styles.metaRow}>
           <Ionicons name="location-outline" size={13} color={theme.colors.textMuted} />
-          <Text style={styles.metaText}>Delhi NCR & India</Text>
+          <Text style={styles.metaText}>{isHi ? 'दिल्ली एनसीआर एवं भारत' : 'Delhi NCR & India'}</Text>
         </View>
       </View>
 
       {/* Impact stat cards */}
       {programme.impact.length > 0 && (
         <Card style={styles.sectionCard}>
-          <Text style={styles.sectionTitle}>Impact</Text>
+          <Text style={styles.sectionTitle}>{t('programmes.impact')}</Text>
           <View style={styles.impactRow}>
             {programme.impact.map((stat, i) => (
               <View key={i} style={styles.impactItem}>
@@ -107,7 +113,7 @@ export function ProgrammeDetailScreen() {
 
       {/* Intro / About */}
       <Card style={styles.sectionCard}>
-        <Text style={styles.sectionTitle}>About</Text>
+        <Text style={styles.sectionTitle}>{isHi ? 'के बारे में' : 'About'}</Text>
         <Text variant="bodyMd" color="textSecondary">
           {programme.intro ?? programme.summary}
         </Text>
@@ -116,7 +122,7 @@ export function ProgrammeDetailScreen() {
       {/* Services (research) */}
       {programme.services && programme.services.length > 0 && (
         <Card style={styles.sectionCard}>
-          <Text style={styles.sectionTitle}>Services</Text>
+          <Text style={styles.sectionTitle}>{t('programmes.services')}</Text>
           <View style={styles.chipsWrap}>
             {programme.services.map((s) => (
               <Chip key={s} label={s} backgroundColor={theme.colors.surfaceSubtle} />
@@ -128,7 +134,7 @@ export function ProgrammeDetailScreen() {
       {/* Portfolio (research) */}
       {programme.portfolio && programme.portfolio.length > 0 && (
         <Card style={styles.sectionCard}>
-          <Text style={styles.sectionTitle}>Research Portfolio</Text>
+          <Text style={styles.sectionTitle}>{t('programmes.portfolio')}</Text>
           {programme.portfolio.map((p, i) => (
             <View key={i} style={[styles.portfolioItem, i > 0 && styles.portfolioItemBorder]}>
               <View style={styles.portfolioTag}>
@@ -145,7 +151,7 @@ export function ProgrammeDetailScreen() {
       {/* Interventions (child-protection) */}
       {programme.interventions && programme.interventions.length > 0 && (
         <Card style={styles.sectionCard}>
-          <Text style={styles.sectionTitle}>Key Interventions</Text>
+          <Text style={styles.sectionTitle}>{t('programmes.interventions')}</Text>
           {programme.interventions.map((intervention, i) => (
             <View key={i} style={styles.interventionRow}>
               <Ionicons name="checkmark-circle" size={16} color={theme.colors.eduanchorsTeal} />
@@ -163,18 +169,24 @@ export function ProgrammeDetailScreen() {
           <View style={styles.helplineRow}>
             <Ionicons name="call" size={18} color={theme.colors.urgentHelpline} />
             <View style={styles.helplineText}>
-              <Text style={styles.helplineTitle}>Child in danger? Call the national Child Helpline</Text>
+              <Text style={styles.helplineTitle}>
+                {isHi
+                  ? 'संकट में बच्चा? राष्ट्रीय बाल हेल्पलाइन पर कॉल करें'
+                  : 'Child in danger? Call the national Child Helpline'}
+              </Text>
               <Text style={styles.helplineNum}>1098</Text>
-              <Text style={styles.helplineSub}>24 hrs, toll-free | Emergency: 112</Text>
+              <Text style={styles.helplineSub}>
+                {isHi ? '24 घंटे, टोल-फ्री | आपातकाल: 112' : '24 hrs, toll-free | Emergency: 112'}
+              </Text>
             </View>
           </View>
           <TouchableOpacity
             style={styles.dialBtn}
             onPress={() => Linking.openURL('tel:1098')}
             accessibilityRole="button"
-            accessibilityLabel="Dial 1098"
+            accessibilityLabel={t('common.dialNow')}
           >
-            <Text style={styles.dialBtnText}>Dial 1098</Text>
+            <Text style={styles.dialBtnText}>{t('common.dialNow')}</Text>
           </TouchableOpacity>
         </Card>
       )}
@@ -185,19 +197,19 @@ export function ProgrammeDetailScreen() {
           style={styles.ctaVolunteer}
           onPress={() => (tabNav as any).navigate('GetInvolved')}
           accessibilityRole="button"
-          accessibilityLabel="Volunteer"
+          accessibilityLabel={t('common.volunteer')}
         >
           <Ionicons name="hand-left-outline" size={16} color={theme.colors.primary} />
-          <Text style={styles.ctaVolunteerText}>Volunteer</Text>
+          <Text style={styles.ctaVolunteerText}>{t('common.volunteer')}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.ctaDonate}
           onPress={() => (tabNav as any).navigate('GetInvolved')}
           accessibilityRole="button"
-          accessibilityLabel="Donate"
+          accessibilityLabel={t('common.donate')}
         >
           <Ionicons name="heart-outline" size={16} color="#FFFFFF" />
-          <Text style={styles.ctaDonateText}>Donate</Text>
+          <Text style={styles.ctaDonateText}>{t('common.donate')}</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>

@@ -11,6 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 
 import { useContent } from '../hooks/useContent';
+import { useTranslation } from '../i18n/t';
 import { Card } from '../components/Card';
 import { Chip } from '../components/Chip';
 import { HelplineBanner } from '../components/HelplineBanner';
@@ -21,20 +22,35 @@ import { fontFamilies, theme } from '../theme';
 
 type HomeNav = BottomTabNavigationProp<MainTabParamList, 'Home'>;
 
-const governanceBadges = [
+const governanceBadgesEn = [
   { icon: 'document-text' as const, title: 'FCRA · CSR1 · 12A · 80G Certified', sub: 'Tax Exemption & Foreign Contributions' },
   { icon: 'business' as const, title: 'Registered Society, Delhi (2001)', sub: 'Under the Societies Registration Act' },
   { icon: 'search' as const, title: 'Listed on Give.do, NGO Darpan & GuideStar India', sub: 'Independent NGO directories' },
   { icon: 'shield-checkmark' as const, title: 'Child safeguarding policy: on request', sub: 'Available to donors & partners' },
 ];
 
+const governanceBadgesHi = [
+  { icon: 'document-text' as const, title: 'FCRA · CSR1 · 12A · 80G प्रमाणित', sub: 'कर छूट एवं विदेशी अंशदान' },
+  { icon: 'business' as const, title: 'पंजीकृत समिति, दिल्ली (2001)', sub: 'सोसाइटीज रजिस्ट्रेशन एक्ट के तहत' },
+  { icon: 'search' as const, title: 'Give.do, NGO Darpan एवं GuideStar India पर सूचीबद्ध', sub: 'स्वतंत्र एनजीओ निर्देशिकाएं' },
+  { icon: 'shield-checkmark' as const, title: 'बाल सुरक्षा नीति: अनुरोध पर उपलब्ध', sub: 'दाताओं और साझेदारों के लिए' },
+];
+
 export function HomeScreen() {
   const navigation = useNavigation<HomeNav>();
-  const { awsar } = useContent();
+  const { awsar, lang } = useContent();
+  const { t } = useTranslation();
   const { org, stats, values, timeline, partners } = awsar;
   const yearsCount = `${new Date().getFullYear() - org.founded}+`;
   const [expandedValue, setExpandedValue] = useState<string | null>(null);
   const [timelineExpanded, setTimelineExpanded] = useState(false);
+
+  const governanceBadges = lang === 'hi' ? governanceBadgesHi : governanceBadgesEn;
+  const isHi = lang === 'hi';
+
+  const tagsList = isHi
+    ? ['छात्रवृत्ति', 'मेंटरशिप', 'इंटर्नशिप', 'नौकरियां']
+    : ['Scholarships', 'Mentorships', 'Internships', 'Jobs'];
 
   return (
     <ScrollView
@@ -55,9 +71,11 @@ export function HomeScreen() {
         <View style={styles.heroTopRow}>
           <View style={styles.missionPill}>
             <View style={styles.magentaDot} />
-            <Text style={styles.missionPillText}>NON-PROFIT MISSION</Text>
+            <Text style={styles.missionPillText}>
+              {t('home.mission')}
+            </Text>
           </View>
-          <Text style={styles.heroHindiText}>अवसर — Opportunities</Text>
+          <Text style={styles.heroHindiText}>{org.awsarMeaning}</Text>
         </View>
 
         <Text variant="displayMd" style={styles.heroTitleText}>
@@ -81,18 +99,18 @@ export function HomeScreen() {
             activeOpacity={0.85}
             onPress={() => navigation.navigate('Programmes')}
             accessibilityRole="button"
-            accessibilityLabel="Explore Our Work"
+            accessibilityLabel={t('common.explore')}
           >
-            <Text style={styles.exploreButtonText}>Explore Our Work →</Text>
+            <Text style={styles.exploreButtonText}>{t('common.explore')} →</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.donateButton}
             activeOpacity={0.8}
             onPress={() => navigation.navigate('GetInvolved')}
             accessibilityRole="button"
-            accessibilityLabel="Donate"
+            accessibilityLabel={t('common.donate')}
           >
-            <Text style={styles.donateButtonText}>Donate</Text>
+            <Text style={styles.donateButtonText}>{t('common.donate')}</Text>
           </TouchableOpacity>
         </View>
       </LinearGradient>
@@ -104,24 +122,24 @@ export function HomeScreen() {
             <Ionicons name="checkmark-circle" size={16} color={theme.colors.primary} />
           </View>
           <Text style={[styles.statNumber, { color: theme.colors.primary }]}>{yearsCount}</Text>
-          <Text style={styles.statLabel}>Years of Impact</Text>
-          <Text style={styles.statSub}>Since {org.founded}</Text>
+          <Text style={styles.statLabel}>{t('home.yearsLabel')}</Text>
+          <Text style={styles.statSub}>{isHi ? `${org.founded} से` : `Since ${org.founded}`}</Text>
         </View>
         <View style={styles.statCard}>
           <View style={[styles.statIconCircle, { backgroundColor: theme.colors.iconMagenta }]}>
             <Ionicons name="grid" size={16} color={theme.colors.secondary} />
           </View>
           <Text style={[styles.statNumber, { color: theme.colors.secondary }]}>9</Text>
-          <Text style={styles.statLabel}>Programmes</Text>
-          <Text style={styles.statSub}>Active Areas</Text>
+          <Text style={styles.statLabel}>{t('home.programmesLabel')}</Text>
+          <Text style={styles.statSub}>{isHi ? 'सक्रिय क्षेत्र' : 'Active Areas'}</Text>
         </View>
         <View style={styles.statCard}>
           <View style={[styles.statIconCircle, { backgroundColor: theme.colors.iconRed }]}>
             <Ionicons name="call" size={16} color={theme.colors.urgentHelpline} />
           </View>
           <Text style={[styles.statNumber, { color: theme.colors.urgentHelpline }]}>1098</Text>
-          <Text style={styles.statLabel}>National Child Helpline</Text>
-          <Text style={styles.statSub}>Toll-free, 24 hrs</Text>
+          <Text style={styles.statLabel}>{t('home.helplineLabel')}</Text>
+          <Text style={styles.statSub}>{t('home.helplineSub')}</Text>
         </View>
       </View>
 
@@ -142,8 +160,8 @@ export function HomeScreen() {
       {/* e. Vision Card */}
       <Card>
         <SectionHeader
-          eyebrow="What We Stand For"
-          title="Our Vision"
+          eyebrow={t('home.valuesEyebrow')}
+          title={t('home.visionTitle')}
           icon="eye"
           iconColor={theme.colors.primary}
           iconBgColor={theme.colors.iconNavy}
@@ -156,8 +174,8 @@ export function HomeScreen() {
       {/* f. Mission Card */}
       <Card>
         <SectionHeader
-          eyebrow="Purpose"
-          title="Our Mission"
+          eyebrow={isHi ? 'उद्देश्य' : 'Purpose'}
+          title={t('home.missionTitle')}
           icon="rocket"
           iconColor={theme.colors.secondary}
           iconBgColor={theme.colors.iconMagenta}
@@ -170,8 +188,8 @@ export function HomeScreen() {
       {/* g. Core Values */}
       <Card>
         <SectionHeader
-          eyebrow="What We Stand For"
-          title="Core Values"
+          eyebrow={t('home.valuesEyebrow')}
+          title={t('home.valuesTitle')}
           icon="sparkles"
           iconColor={theme.colors.secondary}
           iconBgColor={theme.colors.iconMagenta}
@@ -207,8 +225,8 @@ export function HomeScreen() {
       {/* h. Our Story */}
       <Card>
         <SectionHeader
-          eyebrow="Since 2001"
-          title="Our Story"
+          eyebrow={t('home.storyEyebrow')}
+          title={t('home.storyTitle')}
           icon="time"
           iconColor={theme.colors.primary}
           iconBgColor={theme.colors.iconNavy}
@@ -219,16 +237,16 @@ export function HomeScreen() {
         </View>
         {timelineExpanded && (
           <View style={styles.timeline}>
-            {timeline.map((t, i) => (
+            {timeline.map((tItem, i) => (
               <View key={i} style={styles.timelineItem}>
                 <View style={styles.timelineDotCol}>
                   <View style={styles.timelineDot} />
                   {i < timeline.length - 1 && <View style={styles.timelineLine} />}
                 </View>
                 <View style={styles.timelineContent}>
-                  <Text style={styles.timelineYear}>{t.year}</Text>
-                  <Text style={styles.timelineTitle}>{t.title}</Text>
-                  <Text variant="bodySm" color="textSecondary">{t.text}</Text>
+                  <Text style={styles.timelineYear}>{tItem.year}</Text>
+                  <Text style={styles.timelineTitle}>{tItem.title}</Text>
+                  <Text variant="bodySm" color="textSecondary">{tItem.text}</Text>
                 </View>
               </View>
             ))}
@@ -240,7 +258,9 @@ export function HomeScreen() {
           accessibilityRole="button"
         >
           <Text style={styles.expandBtnText}>
-            {timelineExpanded ? 'Hide timeline ↑' : 'Show our history ↓'}
+            {timelineExpanded
+              ? (isHi ? 'इतिहास छिपाएं ↑' : 'Hide timeline ↑')
+              : (isHi ? 'हमारा इतिहास देखें ↓' : 'Show our history ↓')}
           </Text>
         </TouchableOpacity>
       </Card>
@@ -250,22 +270,24 @@ export function HomeScreen() {
         <View style={styles.eduanchorsTopRow}>
           <View style={styles.eduanchorsPill}>
             <Ionicons name="school" size={12} color={theme.colors.eduanchorsTeal} />
-            <Text style={styles.eduanchorsPillText}>POWERED BY EDUANCHORS</Text>
+            <Text style={styles.eduanchorsPillText}>{t('home.eduanchorsEyebrow').toUpperCase()}</Text>
           </View>
-          <Text style={styles.eduanchorsYouthText}>For Youth</Text>
+          <Text style={styles.eduanchorsYouthText}>{isHi ? 'युवाओं के लिए' : 'For Youth'}</Text>
         </View>
         <Text variant="titleSm" color="textPrimary" style={styles.eduanchorsTitle}>
-          EduAnchors Opportunities
+          {t('home.eduanchorsTitle')}
         </Text>
         <Text variant="bodyMd" color="textSecondary" style={styles.eduanchorsBlurb}>
-          Access verified scholarships, mentorships, internships and careers for youth across Delhi NCR and beyond.
+          {isHi
+            ? 'दिल्ली एनसीआर और उससे आगे युवाओं के लिए छात्रवृत्ति, मेंटरशिप, इंटर्नशिप और करियर के अवसर प्राप्त करें।'
+            : 'Access verified scholarships, mentorships, internships and careers for youth across Delhi NCR and beyond.'}
         </Text>
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.tagsScroll}
         >
-          {['Scholarships', 'Mentorships', 'Internships', 'Jobs'].map((tag) => (
+          {tagsList.map((tag) => (
             <Chip
               key={tag}
               label={tag}
@@ -280,19 +302,21 @@ export function HomeScreen() {
           style={styles.browseButton}
           onPress={() => navigation.navigate('Opportunities')}
           accessibilityRole="button"
-          accessibilityLabel="Browse Opportunities"
+          accessibilityLabel={t('common.browseOpportunities')}
         >
-          <Text style={styles.browseButtonText}>Browse Opportunities →</Text>
+          <Text style={styles.browseButtonText}>{t('common.browseOpportunities')} →</Text>
         </TouchableOpacity>
       </Card>
 
       {/* j. Governance Card */}
       <View style={styles.governanceCard}>
         <View style={styles.governanceHeader}>
-          <Text style={styles.governanceHeaderText}>GOVERNANCE & TRUST</Text>
+          <Text style={styles.governanceHeaderText}>
+            {isHi ? 'शासन और विश्वास' : 'GOVERNANCE & TRUST'}
+          </Text>
           <View style={styles.verifiedRow}>
             <Ionicons name="checkmark-circle" size={12} color={theme.colors.eduanchorsTeal} />
-            <Text style={styles.verifiedText}>Verified</Text>
+            <Text style={styles.verifiedText}>{isHi ? 'सत्यापित' : 'Verified'}</Text>
           </View>
         </View>
         <View style={styles.governanceGrid}>
@@ -311,8 +335,8 @@ export function HomeScreen() {
       {/* k. Partners */}
       <Card>
         <SectionHeader
-          eyebrow="Who We Work With"
-          title="Partners & Supporters"
+          eyebrow={t('home.partnersEyebrow')}
+          title={t('home.partnersTitle')}
           icon="people"
           iconColor={theme.colors.primary}
           iconBgColor={theme.colors.iconNavy}

@@ -11,6 +11,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 
 import { useContent } from '../hooks/useContent';
+import { useTranslation } from '../i18n/t';
 import { Card } from '../components/Card';
 import { Chip } from '../components/Chip';
 import { Text } from '../components/Text';
@@ -18,14 +19,6 @@ import { fontFamilies, theme } from '../theme';
 import type { EduanchorItem } from '../types/content';
 
 type FilterType = 'all' | 'scholarship' | 'mentorship' | 'internship' | 'job';
-
-const typeLabels: Record<FilterType, string> = {
-  all: 'All',
-  scholarship: 'Scholarships',
-  mentorship: 'Mentorships',
-  internship: 'Internships',
-  job: 'Jobs',
-};
 
 const typePillColor: Record<string, string> = {
   scholarship: '#FFF4DE',
@@ -47,12 +40,16 @@ function OpportunityCard({
   onToggleBookmark,
   applyEmail,
   applyBase,
+  applyText,
+  sampleText,
 }: {
   item: EduanchorItem;
   bookmarks: Set<string>;
   onToggleBookmark: (id: string) => void;
   applyEmail: string;
   applyBase: string;
+  applyText: string;
+  sampleText: string;
 }) {
   const [expanded, setExpanded] = useState(false);
   const isBookmarked = bookmarks.has(item.id);
@@ -95,7 +92,7 @@ function OpportunityCard({
       {item.placeholder && (
         <View style={styles.sampleLabel}>
           <Ionicons name="information-circle-outline" size={12} color={theme.colors.textMuted} />
-          <Text style={styles.sampleLabelText}>Sample listing</Text>
+          <Text style={styles.sampleLabelText}>{sampleText}</Text>
         </View>
       )}
 
@@ -133,22 +130,31 @@ function OpportunityCard({
         style={styles.applyBtn}
         onPress={handleApply}
         accessibilityRole="button"
-        accessibilityLabel="Apply Now"
+        accessibilityLabel={applyText}
       >
-        <Text style={styles.applyBtnText}>Apply Now →</Text>
+        <Text style={styles.applyBtnText}>{applyText} →</Text>
       </TouchableOpacity>
     </Card>
   );
 }
 
 export function OpportunitiesScreen() {
-  const { eduanchors } = useContent();
+  const { eduanchors, lang } = useContent();
+  const { t } = useTranslation();
   const [filter, setFilter] = useState<FilterType>('all');
   const [query, setQuery] = useState('');
   const [bookmarks, setBookmarks] = useState<Set<string>>(new Set());
   const [showProcess, setShowProcess] = useState(false);
 
   const filters: FilterType[] = ['all', 'scholarship', 'mentorship', 'internship', 'job'];
+
+  const typeLabels: Record<FilterType, string> = {
+    all: t('opportunities.all'),
+    scholarship: t('opportunities.scholarships'),
+    mentorship: t('opportunities.mentorships'),
+    internship: t('opportunities.internships'),
+    job: t('opportunities.jobs'),
+  };
 
   const counts = useMemo(() => {
     const all = eduanchors.items.length;
@@ -184,6 +190,8 @@ export function OpportunitiesScreen() {
     });
   }
 
+  const isHi = lang === 'hi';
+
   return (
     <FlatList
       data={filtered}
@@ -202,10 +210,10 @@ export function OpportunitiesScreen() {
               </View>
             </View>
             <Text variant="headlineMd" color="textPrimary" style={styles.headerTitle}>
-              EduAnchors Opportunities
+              {t('opportunities.title')}
             </Text>
             <Text variant="bodyMd" color="textSecondary">
-              {`Discover scholarships, mentorships, internships and careers. ${counts.all} listings.`}
+              {`${t('opportunities.subtitle')} ${counts.all} ${isHi ? 'अवसर उपलब्ध।' : 'listings.'}`}
             </Text>
           </Card>
 
@@ -214,12 +222,12 @@ export function OpportunitiesScreen() {
             <Ionicons name="search-outline" size={16} color={theme.colors.textMuted} />
             <TextInput
               style={styles.searchInput}
-              placeholder="Search opportunities..."
+              placeholder={t('opportunities.searchPlaceholder')}
               placeholderTextColor={theme.colors.textMuted}
               value={query}
               onChangeText={setQuery}
               returnKeyType="search"
-              accessibilityLabel="Search opportunities"
+              accessibilityLabel={t('opportunities.searchPlaceholder')}
             />
             {query.length > 0 && (
               <TouchableOpacity onPress={() => setQuery('')} hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
@@ -257,13 +265,15 @@ export function OpportunitiesScreen() {
           onToggleBookmark={toggleBookmark}
           applyEmail={eduanchors.applyEmail}
           applyBase={eduanchors.applyBase}
+          applyText={t('opportunities.applyNow')}
+          sampleText={t('opportunities.sampleLabel')}
         />
       )}
       ItemSeparatorComponent={() => <View style={styles.separator} />}
       ListEmptyComponent={
         <View style={styles.empty}>
           <Ionicons name="search" size={40} color={theme.colors.textMuted} />
-          <Text variant="bodyMd" color="textMuted" style={styles.emptyText}>No opportunities found.</Text>
+          <Text variant="bodyMd" color="textMuted" style={styles.emptyText}>{t('opportunities.noResults')}</Text>
         </View>
       }
       ListFooterComponent={
@@ -271,7 +281,7 @@ export function OpportunitiesScreen() {
           {/* Process steps (shown when Internships filter active) */}
           {showProcess && (
             <Card style={styles.processCard}>
-              <Text style={styles.processTitle}>How to Apply</Text>
+              <Text style={styles.processTitle}>{t('opportunities.process')}</Text>
               {eduanchors.process.map((step) => (
                 <View key={step.n} style={styles.processStep}>
                   <View style={styles.processNum}>
@@ -288,7 +298,7 @@ export function OpportunitiesScreen() {
 
           {/* Perks */}
           <Card>
-            <Text style={styles.processTitle}>Why Apply?</Text>
+            <Text style={styles.processTitle}>{t('opportunities.perks')}</Text>
             <View style={styles.perksWrap}>
               {eduanchors.perks.map((perk) => (
                 <Chip key={perk} label={perk} icon="checkmark-circle-outline" iconColor={theme.colors.eduanchorsTeal} backgroundColor={theme.colors.iconTeal} textColor={theme.colors.eduanchorsTeal} />
@@ -298,16 +308,18 @@ export function OpportunitiesScreen() {
 
           {/* Help card */}
           <Card leftAccentColor={theme.colors.primary}>
-            <Text style={styles.processTitle}>Need Help?</Text>
+            <Text style={styles.processTitle}>{t('opportunities.help')}</Text>
             <Text variant="bodySm" color="textSecondary" style={styles.helpText}>
-              Reach out to our team for guidance on applications and eligibility.
+              {isHi
+                ? 'आवेदन और पात्रता पर मार्गदर्शन के लिए हमारी टीम से संपर्क करें।'
+                : 'Reach out to our team for guidance on applications and eligibility.'}
             </Text>
             <View style={styles.helpRow}>
               <TouchableOpacity
                 style={styles.helpBtn}
                 onPress={() => Linking.openURL('tel:+919891625350')}
                 accessibilityRole="button"
-                accessibilityLabel="Call us"
+                accessibilityLabel={t('opportunities.helpCall')}
               >
                 <Ionicons name="call-outline" size={14} color={theme.colors.primary} />
                 <Text style={styles.helpBtnText}>+91 98916 25350</Text>
@@ -316,7 +328,7 @@ export function OpportunitiesScreen() {
                 style={styles.helpBtn}
                 onPress={() => Linking.openURL('mailto:support@awsarindia.org')}
                 accessibilityRole="button"
-                accessibilityLabel="Email us"
+                accessibilityLabel={t('opportunities.helpEmail')}
               >
                 <Ionicons name="mail-outline" size={14} color={theme.colors.primary} />
                 <Text style={styles.helpBtnText}>support@awsarindia.org</Text>

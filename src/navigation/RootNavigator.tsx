@@ -12,6 +12,7 @@ import { OpportunitiesScreen } from '../screens/OpportunitiesScreen';
 import { MediaScreen } from '../screens/MediaScreen';
 import { GetInvolvedScreen } from '../screens/GetInvolvedScreen';
 import { fontFamilies, theme } from '../theme';
+import { useLanguage } from '../contexts/LanguageContext';
 import type { MainTabParamList, ProgrammesStackParamList } from './types';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
@@ -28,6 +29,16 @@ function ProgrammesStackNavigator() {
 
 export function RootNavigator() {
   const insets = useSafeAreaInsets();
+  const { lang } = useLanguage();
+  const isHi = lang === 'hi';
+
+  const tabLabels = {
+    Home: isHi ? 'होम' : 'Home',
+    Programmes: isHi ? 'कार्यक्रम' : 'Programmes',
+    Opportunities: isHi ? 'अवसर' : 'Opportunities',
+    Media: isHi ? 'मीडिया' : 'Media',
+    GetInvolved: isHi ? 'जुड़ें' : 'Get Involved',
+  };
 
   return (
     <Tab.Navigator
@@ -45,7 +56,7 @@ export function RootNavigator() {
         },
         tabBarLabelStyle: {
           fontSize: 11,
-          fontFamily: fontFamilies.interSemiBold,
+          fontFamily: isHi ? fontFamilies.devanagariSemiBold : fontFamilies.interSemiBold,
         },
       }}
     >
@@ -53,8 +64,8 @@ export function RootNavigator() {
         name="Home"
         component={HomeScreen}
         options={{
-          title: 'Home',
-          tabBarLabel: 'Home',
+          title: tabLabels.Home,
+          tabBarLabel: tabLabels.Home,
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons name={focused ? 'home' : 'home-outline'} size={size} color={color} />
           ),
@@ -64,8 +75,8 @@ export function RootNavigator() {
         name="Programmes"
         component={ProgrammesStackNavigator}
         options={{
-          title: 'Programmes',
-          tabBarLabel: 'Programmes',
+          title: tabLabels.Programmes,
+          tabBarLabel: tabLabels.Programmes,
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons name={focused ? 'grid' : 'grid-outline'} size={size} color={color} />
           ),
@@ -75,8 +86,8 @@ export function RootNavigator() {
         name="Opportunities"
         component={OpportunitiesScreen}
         options={{
-          title: 'Opportunities',
-          tabBarLabel: 'Opportunities',
+          title: tabLabels.Opportunities,
+          tabBarLabel: tabLabels.Opportunities,
           tabBarActiveTintColor: theme.colors.eduanchorsTeal,
           tabBarIcon: ({ focused, color, size }) => (
             <View style={styles.iconWrapper}>
@@ -90,8 +101,8 @@ export function RootNavigator() {
         name="Media"
         component={MediaScreen}
         options={{
-          title: 'Media',
-          tabBarLabel: 'Media',
+          title: tabLabels.Media,
+          tabBarLabel: tabLabels.Media,
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons name={focused ? 'images' : 'images-outline'} size={size} color={color} />
           ),
@@ -101,8 +112,8 @@ export function RootNavigator() {
         name="GetInvolved"
         component={GetInvolvedScreen}
         options={{
-          title: 'Get Involved',
-          tabBarLabel: 'Get Involved',
+          title: tabLabels.GetInvolved,
+          tabBarLabel: tabLabels.GetInvolved,
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons name={focused ? 'heart-circle' : 'heart-circle-outline'} size={size} color={color} />
           ),
@@ -129,4 +140,3 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.eduanchorsTeal,
   },
 });
-
