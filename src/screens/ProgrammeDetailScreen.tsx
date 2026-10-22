@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Linking,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
@@ -7,268 +8,200 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute, type RouteProp } from '@react-navigation/native';
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 
-import awsarData from '../data/awsar.json';
+import { useContent } from '../hooks/useContent';
+import { getName } from '../utils/lang';
 import { Card } from '../components/Card';
 import { Chip } from '../components/Chip';
-import { SectionHeader } from '../components/SectionHeader';
 import { Text } from '../components/Text';
-import type {
-  MainTabParamList,
-  ProgrammesStackParamList,
-} from '../navigation/types';
-import { fontFamilies, theme, type ColorToken } from '../theme';
-import type { Programme } from '../types/programme';
-import { getName } from '../utils/lang';
+import { fontFamilies, theme } from '../theme';
+import type { ProgrammesStackParamList } from '../navigation/types';
+import type { MainTabParamList } from '../navigation/types';
+import type { Programme } from '../types/content';
 
-type DetailRouteProp = RouteProp<ProgrammesStackParamList, 'ProgrammeDetail'>;
-type DetailNavProp = NativeStackNavigationProp<
-  ProgrammesStackParamList,
-  'ProgrammeDetail'
->;
+type RouteT = RouteProp<ProgrammesStackParamList, 'ProgrammeDetail'>;
+type TabNav = BottomTabNavigationProp<MainTabParamList>;
+
+const tintMap: Record<string, { bg: string; icon: string }> = {
+  blue: { bg: theme.colors.iconBlue, icon: theme.colors.primary },
+  red: { bg: theme.colors.iconRed, icon: theme.colors.urgentHelpline },
+  green: { bg: theme.colors.iconTeal, icon: theme.colors.eduanchorsTeal },
+  pink: { bg: theme.colors.iconMagenta, icon: theme.colors.secondary },
+  amber: { bg: theme.colors.iconAmber, icon: '#D97706' },
+  purple: { bg: theme.colors.iconPurple, icon: '#7C3AED' },
+};
 
 export function ProgrammeDetailScreen() {
-  const route = useRoute<DetailRouteProp>();
-  const navigation = useNavigation<DetailNavProp>();
-  const parentNavigation =
-    navigation.getParent<BottomTabNavigationProp<MainTabParamList>>();
+  const route = useRoute<RouteT>();
+  const navigation = useNavigation();
+  const tabNav = useNavigation<TabNav>();
+  const { awsar } = useContent();
 
-  const programme = (awsarData.programmes as Programme[]).find(
-    (p) => p.id === route.params?.id
+  const programme: Programme | undefined = awsar.programmes.find(
+    (p) => p.id === route.params.id,
   );
 
   if (!programme) {
     return (
-      <View style={styles.notFoundContainer}>
-        <Text variant="headlineMd" color="primary">
-          Programme Not Found
-        </Text>
-        <Text variant="bodyMd" color="textSecondary" style={styles.notFoundText}>
-          The requested programme could not be located.
-        </Text>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => navigation.goBack()}
-          accessibilityRole="button"
-          accessibilityLabel="Go back to programmes"
-        >
-          <Ionicons name="arrow-back" size={20} color="#FFFFFF" />
-          <Text style={styles.backButtonText}>Back to Programmes</Text>
-        </TouchableOpacity>
+      <View style={styles.center}>
+        <Text variant="bodyMd" color="textMuted">Programme not found.</Text>
       </View>
     );
   }
 
-  const tintColor =
-    programme.tint in theme.colors
-      ? theme.colors[programme.tint as ColorToken]
-      : theme.colors.iconNavy;
-
-  const statIconColors = [
-    theme.colors.primary,
-    theme.colors.secondary,
-    theme.colors.eduanchorsTeal,
-  ];
+  const { bg, icon: iconColor } = tintMap[programme.tint] ?? tintMap.blue;
 
   return (
-    <View style={styles.screen}>
-      <ScrollView
-        contentContainerStyle={styles.content}
-        showsVerticalScrollIndicator={false}
+    <ScrollView
+      style={styles.screen}
+      contentContainerStyle={styles.content}
+      showsVerticalScrollIndicator={false}
+    >
+      {/* Back button */}
+      <TouchableOpacity
+        style={styles.backBtn}
+        onPress={() => navigation.goBack()}
+        accessibilityRole="button"
+        accessibilityLabel="Go back"
+        hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
       >
-        {/* Back Button Row */}
-        <View style={styles.backRow}>
-          <TouchableOpacity
-            style={styles.backTouchTarget}
-            onPress={() => navigation.goBack()}
-            accessibilityRole="button"
-            accessibilityLabel="Back to programmes"
-          >
-            <Ionicons name="arrow-back" size={22} color={theme.colors.primary} />
-            <Text style={styles.backRowText}>All Programmes</Text>
-          </TouchableOpacity>
+        <Ionicons name="arrow-back" size={20} color={theme.colors.primary} />
+        <Text style={styles.backText}>Programmes</Text>
+      </TouchableOpacity>
+
+      {/* Hero block */}
+      <View style={[styles.heroBlock, { backgroundColor: bg }]}>
+        <View style={[styles.heroIconCircle, { backgroundColor: iconColor + '22' }]}>
+          <Ionicons
+            name={programme.icon as keyof typeof Ionicons.glyphMap}
+            size={40}
+            color={iconColor}
+          />
         </View>
-
-        {/* Header Hero Area */}
-        <View style={[styles.heroBlock, { backgroundColor: tintColor }]}>
-          <View style={styles.heroContent}>
-            <View style={styles.heroPill}>
-              <Ionicons
-                name={programme.icon as keyof typeof Ionicons.glyphMap}
-                size={14}
-                color="#FFFFFF"
-              />
-              <Text style={styles.heroPillText}>
-                {getName(programme).toUpperCase()}
-              </Text>
-            </View>
-
-            <Text variant="headlineLg" style={styles.heroTitle}>
-              {getName(programme)}
-            </Text>
-
-            <View style={styles.locationRow}>
-              <Ionicons
-                name="location-sharp"
-                size={14}
-                color={theme.colors.primary}
-              />
-              <Text style={styles.locationText}>Delhi NCR & Partner Districts</Text>
-            </View>
-          </View>
+        <Text variant="headlineLg" style={[styles.heroTitle, { color: theme.colors.textPrimary }]}>
+          {getName(programme)}
+        </Text>
+        <Text variant="bodyMd" style={[styles.heroHi, { color: theme.colors.textMuted }]}>
+          {programme.hi}
+        </Text>
+        <View style={styles.metaRow}>
+          <Ionicons name="location-outline" size={13} color={theme.colors.textMuted} />
+          <Text style={styles.metaText}>Delhi NCR & India</Text>
         </View>
+      </View>
 
-        {/* Impact Section */}
-        <View style={styles.impactSection}>
-          <View style={styles.statsRow}>
-            {programme.impact.map((stat, idx) => (
-              <View key={stat.label} style={styles.statCard}>
-                <View
-                  style={[
-                    styles.statIconCircle,
-                    {
-                      backgroundColor:
-                        idx === 1
-                          ? theme.colors.iconMagenta
-                          : idx === 2
-                          ? theme.colors.iconTeal
-                          : theme.colors.iconNavy,
-                    },
-                  ]}
-                >
-                  <Ionicons
-                    name="sparkles"
-                    size={14}
-                    color={statIconColors[idx % statIconColors.length]}
-                  />
-                </View>
-                <Text
-                  style={[
-                    styles.statNumber,
-                    { color: statIconColors[idx % statIconColors.length] },
-                  ]}
-                >
-                  {stat.value}
-                </Text>
-                <Text style={styles.statLabel} numberOfLines={2}>
-                  {stat.label}
-                </Text>
+      {/* Impact stat cards */}
+      {programme.impact.length > 0 && (
+        <Card style={styles.sectionCard}>
+          <Text style={styles.sectionTitle}>Impact</Text>
+          <View style={styles.impactRow}>
+            {programme.impact.map((stat, i) => (
+              <View key={i} style={styles.impactItem}>
+                <Text style={styles.impactValue}>{stat.value}</Text>
+                <Text style={styles.impactLabel}>{stat.label}</Text>
               </View>
             ))}
           </View>
-        </View>
+        </Card>
+      )}
 
-        {/* Active Rapid Response Banner */}
-        <View style={styles.pulseCard}>
-          <View style={styles.pulseLeft}>
-            <View style={styles.pulseDot} />
-            <View style={styles.pulseTexts}>
-              <Text style={styles.pulseEyebrow}>ACTIVE RAPID RESPONSE</Text>
-              <Text style={styles.pulseSub}>
-                Field teams and community nodes mobilized across target clusters
+      {/* Intro / About */}
+      <Card style={styles.sectionCard}>
+        <Text style={styles.sectionTitle}>About</Text>
+        <Text variant="bodyMd" color="textSecondary">
+          {programme.intro ?? programme.summary}
+        </Text>
+      </Card>
+
+      {/* Services (research) */}
+      {programme.services && programme.services.length > 0 && (
+        <Card style={styles.sectionCard}>
+          <Text style={styles.sectionTitle}>Services</Text>
+          <View style={styles.chipsWrap}>
+            {programme.services.map((s) => (
+              <Chip key={s} label={s} backgroundColor={theme.colors.surfaceSubtle} />
+            ))}
+          </View>
+        </Card>
+      )}
+
+      {/* Portfolio (research) */}
+      {programme.portfolio && programme.portfolio.length > 0 && (
+        <Card style={styles.sectionCard}>
+          <Text style={styles.sectionTitle}>Research Portfolio</Text>
+          {programme.portfolio.map((p, i) => (
+            <View key={i} style={[styles.portfolioItem, i > 0 && styles.portfolioItemBorder]}>
+              <View style={styles.portfolioTag}>
+                <Text style={styles.portfolioTagText}>{p.tag}</Text>
+              </View>
+              <Text style={styles.portfolioTitle}>{p.title}</Text>
+              <Text variant="bodySm" color="textSecondary">{p.text}</Text>
+              <Text style={styles.portfolioMeta}>{p.meta}</Text>
+            </View>
+          ))}
+        </Card>
+      )}
+
+      {/* Interventions (child-protection) */}
+      {programme.interventions && programme.interventions.length > 0 && (
+        <Card style={styles.sectionCard}>
+          <Text style={styles.sectionTitle}>Key Interventions</Text>
+          {programme.interventions.map((intervention, i) => (
+            <View key={i} style={styles.interventionRow}>
+              <Ionicons name="checkmark-circle" size={16} color={theme.colors.eduanchorsTeal} />
+              <Text variant="bodyMd" color="textSecondary" style={styles.interventionText}>
+                {intervention}
               </Text>
             </View>
-          </View>
-        </View>
-
-        {/* About the Initiative */}
-        <Card>
-          <SectionHeader
-            eyebrow="OVERVIEW"
-            title="About the Initiative"
-            icon="information-circle"
-            iconColor={theme.colors.secondary}
-            iconBgColor={theme.colors.iconMagenta}
-          />
-          <Text variant="bodyMd" color="textSecondary" style={styles.bodyText}>
-            {programme.description}
-          </Text>
+          ))}
         </Card>
+      )}
 
-        {/* Key Pillars & Action */}
-        <Card>
-          <SectionHeader
-            eyebrow="ACTION"
-            title="Key Interventions"
-            icon="shield-checkmark"
-            iconColor={theme.colors.primary}
-            iconBgColor={theme.colors.iconNavy}
-            rightText="Core Strategy"
-          />
-          <View style={styles.interventionsList}>
-            <View style={styles.interventionItem}>
-              <View style={[styles.interventionIconCircle, { backgroundColor: theme.colors.iconNavy }]}>
-                <Ionicons name="navigate" size={16} color={theme.colors.primary} />
-              </View>
-              <View style={styles.interventionTexts}>
-                <Text style={styles.interventionTitle}>Grassroots Delivery</Text>
-                <Text style={styles.interventionDesc}>
-                  Direct field outreach ensuring essential support reaches the last mile without administrative friction.
-                </Text>
-              </View>
-            </View>
-
-            <View style={styles.interventionItem}>
-              <View style={[styles.interventionIconCircle, { backgroundColor: theme.colors.iconTeal }]}>
-                <Ionicons name="people" size={16} color={theme.colors.eduanchorsTeal} />
-              </View>
-              <View style={styles.interventionTexts}>
-                <Text style={styles.interventionTitle}>Community Safe Hubs</Text>
-                <Text style={styles.interventionDesc}>
-                  Locally anchored centers providing developmental guidance, counseling, and peer learning networks.
-                </Text>
-              </View>
+      {/* Child Protection Helpline card */}
+      {programme.showHelpline && (
+        <Card leftAccentColor={theme.colors.urgentHelpline} style={styles.sectionCard}>
+          <View style={styles.helplineRow}>
+            <Ionicons name="call" size={18} color={theme.colors.urgentHelpline} />
+            <View style={styles.helplineText}>
+              <Text style={styles.helplineTitle}>Child in danger? Call the national Child Helpline</Text>
+              <Text style={styles.helplineNum}>1098</Text>
+              <Text style={styles.helplineSub}>24 hrs, toll-free | Emergency: 112</Text>
             </View>
           </View>
+          <TouchableOpacity
+            style={styles.dialBtn}
+            onPress={() => Linking.openURL('tel:1098')}
+            accessibilityRole="button"
+            accessibilityLabel="Dial 1098"
+          >
+            <Text style={styles.dialBtnText}>Dial 1098</Text>
+          </TouchableOpacity>
         </Card>
+      )}
 
-        {/* Institutional Synergy */}
-        <View style={styles.synergyCard}>
-          <View style={styles.synergyHeader}>
-            <Ionicons name="business" size={18} color={theme.colors.primary} />
-            <Text style={styles.synergyTitle}>Institutional Synergy</Text>
-          </View>
-          <Text style={styles.synergyText}>
-            AWSAR India coordinates with statutory child welfare bodies, local administration, and verified NGO partners to ensure transparent governance and lasting impact.
-          </Text>
-          <View style={styles.synergyChips}>
-            <Chip label="Statutory Accredited" icon="checkmark-circle" iconColor={theme.colors.eduanchorsTeal} />
-            <Chip label="Field Verified" icon="checkmark-circle" iconColor={theme.colors.eduanchorsTeal} />
-          </View>
-        </View>
-      </ScrollView>
-
-      {/* Sticky Bottom CTA Action Bar */}
-      <View style={styles.bottomBar}>
+      {/* Get Involved CTA */}
+      <View style={styles.ctaRow}>
         <TouchableOpacity
-          style={styles.volunteerButton}
-          activeOpacity={0.8}
-          onPress={() => parentNavigation?.navigate('GetInvolved')}
+          style={styles.ctaVolunteer}
+          onPress={() => (tabNav as any).navigate('GetInvolved')}
           accessibilityRole="button"
-          accessibilityLabel="Volunteer for programme"
+          accessibilityLabel="Volunteer"
         >
-          <Ionicons
-            name="people-outline"
-            size={18}
-            color={theme.colors.textPrimary}
-          />
-          <Text style={styles.volunteerText}>Volunteer</Text>
+          <Ionicons name="hand-left-outline" size={16} color={theme.colors.primary} />
+          <Text style={styles.ctaVolunteerText}>Volunteer</Text>
         </TouchableOpacity>
-
         <TouchableOpacity
-          style={styles.supportButton}
-          activeOpacity={0.85}
-          onPress={() => parentNavigation?.navigate('GetInvolved')}
+          style={styles.ctaDonate}
+          onPress={() => (tabNav as any).navigate('GetInvolved')}
           accessibilityRole="button"
-          accessibilityLabel="Support this programme"
+          accessibilityLabel="Donate"
         >
-          <Ionicons name="heart" size={18} color="#FFFFFF" />
-          <Text style={styles.supportText}>Support Programme</Text>
+          <Ionicons name="heart-outline" size={16} color="#FFFFFF" />
+          <Text style={styles.ctaDonateText}>Donate</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -278,283 +211,222 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.background,
   },
   content: {
-    padding: theme.spacing.lg,
-    gap: theme.spacing.lg,
-    paddingBottom: 90,
+    padding: 16,
+    paddingBottom: 40,
+    gap: 12,
   },
-  notFoundContainer: {
+  center: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 24,
     backgroundColor: theme.colors.background,
   },
-  notFoundText: {
-    marginTop: 8,
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  backButton: {
+  backBtn: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
-    backgroundColor: theme.colors.primary,
-    paddingHorizontal: 20,
-    minHeight: 48,
-    borderRadius: theme.radius.sm,
-    justifyContent: 'center',
-  },
-  backButtonText: {
-    color: '#FFFFFF',
-    fontSize: 14,
-    fontFamily: fontFamilies.interSemiBold,
-  },
-  backRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  backTouchTarget: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    minHeight: 48,
     gap: 6,
-    paddingRight: 12,
+    paddingVertical: 4,
+    minHeight: 40,
   },
-  backRowText: {
+  backText: {
     fontSize: 14,
-    lineHeight: 18,
+    lineHeight: 20,
     fontFamily: fontFamilies.interSemiBold,
     color: theme.colors.primary,
   },
   heroBlock: {
     borderRadius: theme.radius.lg,
     padding: 20,
-    borderWidth: 1,
-    borderColor: theme.colors.borderSubtle,
-    overflow: 'hidden',
-  },
-  heroContent: {
+    alignItems: 'center',
     gap: 8,
   },
-  heroPill: {
-    flexDirection: 'row',
+  heroIconCircle: {
+    width: 72,
+    height: 72,
+    borderRadius: 36,
     alignItems: 'center',
-    gap: 6,
-    alignSelf: 'flex-start',
-    backgroundColor: theme.colors.secondary,
-    borderRadius: theme.radius.full,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-  },
-  heroPillText: {
-    color: '#FFFFFF',
-    fontSize: 10,
-    lineHeight: 14,
-    fontFamily: fontFamilies.interBold,
-    letterSpacing: 0.6,
+    justifyContent: 'center',
+    marginBottom: 4,
   },
   heroTitle: {
-    color: theme.colors.primary,
-    marginTop: 4,
+    textAlign: 'center',
   },
-  locationRow: {
+  heroHi: {
+    textAlign: 'center',
+  },
+  metaRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
     marginTop: 2,
   },
-  locationText: {
+  metaText: {
     fontSize: 12,
     lineHeight: 16,
-    fontFamily: fontFamilies.interMedium,
-    color: theme.colors.textSecondary,
+    fontFamily: fontFamilies.interRegular,
+    color: theme.colors.textMuted,
   },
-  impactSection: {
-    width: '100%',
-  },
-  statsRow: {
-    flexDirection: 'row',
+  sectionCard: {
     gap: 10,
   },
-  statCard: {
-    flex: 1,
-    backgroundColor: theme.colors.surfaceCard,
-    borderRadius: theme.radius.lg,
-    borderWidth: 1,
-    borderColor: theme.colors.borderSubtle,
-    paddingVertical: 14,
-    paddingHorizontal: 6,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    minHeight: 106,
-    ...theme.shadows.level1,
-  },
-  statIconCircle: {
-    width: 28,
-    height: 28,
-    borderRadius: 14,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 4,
-  },
-  statNumber: {
-    fontSize: 20,
-    lineHeight: 24,
+  sectionTitle: {
+    fontSize: 14,
+    lineHeight: 20,
     fontFamily: fontFamilies.interBold,
+    color: theme.colors.textPrimary,
+    letterSpacing: 0.5,
+    textTransform: 'uppercase',
   },
-  statLabel: {
+  impactRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 10,
+  },
+  impactItem: {
+    flex: 1,
+    minWidth: 100,
+    backgroundColor: theme.colors.surfaceSubtle,
+    borderRadius: theme.radius.md,
+    padding: 12,
+    alignItems: 'center',
+    gap: 4,
+  },
+  impactValue: {
+    fontSize: 22,
+    lineHeight: 26,
+    fontFamily: fontFamilies.interBold,
+    color: theme.colors.primary,
+  },
+  impactLabel: {
     fontSize: 11,
     lineHeight: 14,
-    fontFamily: fontFamilies.interMedium,
+    fontFamily: fontFamilies.interRegular,
     color: theme.colors.textSecondary,
     textAlign: 'center',
-    marginTop: 2,
   },
-  pulseCard: {
-    backgroundColor: theme.colors.primaryContainer,
-    borderRadius: theme.radius.md,
-    padding: 14,
-  },
-  pulseLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-  },
-  pulseDot: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    backgroundColor: theme.colors.secondary,
-  },
-  pulseTexts: {
-    flex: 1,
-  },
-  pulseEyebrow: {
-    fontSize: 10,
-    lineHeight: 14,
-    fontFamily: fontFamilies.interBold,
-    letterSpacing: 0.6,
-    color: theme.colors.primaryFixedDim,
-  },
-  pulseSub: {
-    fontSize: 12,
-    lineHeight: 16,
-    fontFamily: fontFamilies.interMedium,
-    color: '#FFFFFF',
-    marginTop: 2,
-  },
-  bodyText: {
-    marginTop: 12,
-    lineHeight: 22,
-  },
-  interventionsList: {
-    gap: 12,
-    marginTop: 14,
-  },
-  interventionItem: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    gap: 10,
-  },
-  interventionIconCircle: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 2,
-  },
-  interventionTexts: {
-    flex: 1,
-  },
-  interventionTitle: {
-    fontSize: 13,
-    lineHeight: 18,
-    fontFamily: fontFamilies.interBold,
-    color: theme.colors.textPrimary,
-  },
-  interventionDesc: {
-    fontSize: 12,
-    lineHeight: 17,
-    fontFamily: fontFamilies.interRegular,
-    color: theme.colors.textSecondary,
-    marginTop: 2,
-  },
-  synergyCard: {
-    backgroundColor: theme.colors.surfaceSubtle,
-    borderRadius: theme.radius.lg,
-    borderWidth: 1,
-    borderColor: theme.colors.borderSubtle,
-    padding: 16,
-    gap: 10,
-  },
-  synergyHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  synergyTitle: {
-    fontSize: 14,
-    lineHeight: 18,
-    fontFamily: fontFamilies.interBold,
-    color: theme.colors.textPrimary,
-  },
-  synergyText: {
-    fontSize: 12,
-    lineHeight: 18,
-    fontFamily: fontFamilies.interRegular,
-    color: theme.colors.textSecondary,
-  },
-  synergyChips: {
+  chipsWrap: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 8,
-    marginTop: 4,
   },
-  bottomBar: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: '#FFFFFF',
+  portfolioItem: {
+    paddingTop: 10,
+    gap: 4,
+  },
+  portfolioItemBorder: {
     borderTopWidth: 1,
     borderTopColor: theme.colors.borderSubtle,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-    ...theme.shadows.level2,
   },
-  volunteerButton: {
-    flex: 1,
-    minHeight: 48,
-    borderRadius: theme.radius.md,
-    backgroundColor: theme.colors.surfaceSubtle,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 6,
+  portfolioTag: {
+    backgroundColor: theme.colors.iconNavy,
+    borderRadius: theme.radius.sm,
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    alignSelf: 'flex-start',
   },
-  volunteerText: {
+  portfolioTagText: {
+    fontSize: 10,
+    lineHeight: 14,
+    fontFamily: fontFamilies.interBold,
+    color: theme.colors.primary,
+    letterSpacing: 0.5,
+  },
+  portfolioTitle: {
     fontSize: 14,
+    lineHeight: 20,
+    fontFamily: fontFamilies.interSemiBold,
+    color: theme.colors.textPrimary,
+  },
+  portfolioMeta: {
+    fontSize: 11,
+    lineHeight: 14,
+    fontFamily: fontFamilies.interRegular,
+    color: theme.colors.textMuted,
+  },
+  interventionRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: 8,
+  },
+  interventionText: {
+    flex: 1,
+  },
+  helplineRow: {
+    flexDirection: 'row',
+    gap: 10,
+    alignItems: 'flex-start',
+  },
+  helplineText: {
+    flex: 1,
+    gap: 2,
+  },
+  helplineTitle: {
+    fontSize: 13,
     lineHeight: 18,
     fontFamily: fontFamilies.interSemiBold,
     color: theme.colors.textPrimary,
   },
-  supportButton: {
-    flex: 1.4,
-    minHeight: 48,
-    borderRadius: theme.radius.md,
-    backgroundColor: theme.colors.secondary,
+  helplineNum: {
+    fontSize: 24,
+    lineHeight: 28,
+    fontFamily: fontFamilies.interBold,
+    color: theme.colors.urgentHelpline,
+  },
+  helplineSub: {
+    fontSize: 11,
+    lineHeight: 14,
+    fontFamily: fontFamilies.interRegular,
+    color: theme.colors.textMuted,
+  },
+  dialBtn: {
+    backgroundColor: theme.colors.urgentHelpline,
+    borderRadius: theme.radius.sm,
+    height: 44,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  dialBtnText: {
+    color: '#FFFFFF',
+    fontSize: 14,
+    lineHeight: 20,
+    fontFamily: fontFamilies.interSemiBold,
+  },
+  ctaRow: {
+    flexDirection: 'row',
+    gap: 10,
+    marginTop: 4,
+  },
+  ctaVolunteer: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     gap: 6,
+    height: 48,
+    borderRadius: theme.radius.sm,
+    borderWidth: 1.5,
+    borderColor: theme.colors.primary,
+    backgroundColor: theme.colors.surfaceCard,
   },
-  supportText: {
+  ctaVolunteerText: {
     fontSize: 14,
-    lineHeight: 18,
+    lineHeight: 20,
+    fontFamily: fontFamilies.interSemiBold,
+    color: theme.colors.primary,
+  },
+  ctaDonate: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    height: 48,
+    borderRadius: theme.radius.sm,
+    backgroundColor: theme.colors.secondary,
+  },
+  ctaDonateText: {
+    fontSize: 14,
+    lineHeight: 20,
     fontFamily: fontFamilies.interSemiBold,
     color: '#FFFFFF',
   },
