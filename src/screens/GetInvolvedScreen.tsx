@@ -1,19 +1,534 @@
-import { StyleSheet, View } from "react-native";
-import { Text } from "../components/Text";
+import React, { useState } from 'react';
+import {
+  KeyboardAvoidingView,
+  Linking,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
-export function GetInvolvedScreen() {
+import { useContent } from '../hooks/useContent';
+import { Card } from '../components/Card';
+import { Chip } from '../components/Chip';
+import { SectionHeader } from '../components/SectionHeader';
+import { Text } from '../components/Text';
+import { fontFamilies, theme } from '../theme';
+
+type Section = 'donate' | 'volunteer' | 'partner' | 'contact';
+
+const SECTIONS: { key: Section; label: string; icon: keyof typeof Ionicons.glyphMap }[] = [
+  { key: 'donate', label: 'Donate', icon: 'heart' },
+  { key: 'volunteer', label: 'Volunteer', icon: 'hand-left' },
+  { key: 'partner', label: 'Partner', icon: 'business' },
+  { key: 'contact', label: 'Contact', icon: 'mail' },
+];
+
+function useForm(fields: string[]) {
+  const [values, setValues] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  function setValue(field: string, value: string) {
+    setValues((prev) => ({ ...prev, [field]: value }));
+    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: '' }));
+  }
+
+  function validate(requiredFields: string[]): boolean {
+    const newErrors: Record<string, string> = {};
+    for (const f of requiredFields) {
+      if (!values[f] || values[f].trim() === '') {
+        newErrors[f] = 'This field is required';
+      }
+    }
+    if (values['Email'] && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values['Email'])) {
+      newErrors['Email'] = 'Please enter a valid email address';
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  }
+
+  return { values, errors, setValue, validate };
+}
+
+function FormField({
+  label,
+  required,
+  multiline,
+  values,
+  errors,
+  setValue,
+}: {
+  label: string;
+  required?: boolean;
+  multiline?: boolean;
+  values: Record<string, string>;
+  errors: Record<string, string>;
+  setValue: (field: string, value: string) => void;
+}) {
+  const cleanLabel = label.replace('*', '').trim();
+  const isRequired = required ?? label.includes('*');
+  const hasError = !!errors[cleanLabel];
   return (
-    <View style={styles.container}>
-      <Text variant="headlineMd">GetInvolvedScreen</Text>
+    <View style={styles.fieldWrapper}>
+      <Text style={styles.fieldLabel}>
+        {cleanLabel}
+        {isRequired && <Text style={styles.fieldRequired}> *</Text>}
+      </Text>
+      <TextInput
+        style={[styles.fieldInput, multiline && styles.fieldInputMulti, hasError && styles.fieldInputError]}
+        value={values[cleanLabel] ?? ''}
+        onChangeText={(v) => setValue(cleanLabel, v)}
+        placeholder={cleanLabel}
+        placeholderTextColor={theme.colors.textMuted}
+        multiline={multiline}
+        numberOfLines={multiline ? 4 : 1}
+        accessibilityLabel={cleanLabel}
+        returnKeyType={multiline ? 'default' : 'next'}
+      />
+      {hasError && <Text style={styles.fieldError}>{errors[cleanLabel]}</Text>}
     </View>
   );
 }
 
+function DonateSection() {
+  const { awsar } = useContent();
+  const { involve } = awsar;
+  const [selectedTier, setSelectedTier] = useState<number | null>(null);
+
+  return (
+    <View style={styles.sectionBody}>
+      <Card>
+        <SectionHeader
+          eyebrow="Make a Difference"
+          title="Donate"
+          icon="heart"
+          iconColor={theme.colors.secondary}
+          iconBgColor={theme.colors.iconMagenta}
+        />
+        <Text variant="bodyMd" color="textSecondary" style={styles.intro}>
+          {involve.donateIntro}
+        </Text>
+      </Card>
+
+      {involve.donateTiers.map((tier, i) => (
+        <TouchableOpacity
+          key={i}
+          onPress={() => setSelectedTier(selectedTier === i ? null : i)}
+          accessibilityRole="button"
+          accessibilityLabel={tier.title}
+        >
+          <Card
+            style={[styles.tierCard, selectedTier === i && styles.tierCardSelected]}
+            leftAccentColor={selectedTier === i ? theme.colors.secondary : undefined}
+          >
+            <View style={styles.tierRow}>
+              <View style={styles.tierLeft}>
+                <Text style={styles.tierAmount}>{tier.amount}</Text>
+                <Text variant="titleSm" color="textPrimary">{tier.title}</Text>
+                <Text variant="bodySm" color="textSecondary">{tier.sub}</Text>
+              </View>
+              <View style={[styles.tierRadio, selectedTier === i && styles.tierRadioSelected]}>
+                {selectedTier === i && <View style={styles.tierRadioInner} />}
+              </View>
+            </View>
+          </Card>
+        </TouchableOpacity>
+      ))}
+
+      <Card>
+        <Text style={styles.donateNote}>{involve.donateNote}</Text>
+      </Card>
+
+      <TouchableOpacity
+        style={styles.primaryBtn}
+        onPress={() => Linking.openURL(involve.donateUrl)}
+        accessibilityRole="button"
+        accessibilityLabel="Donate Now"
+      >
+        <Ionicons name="heart" size={16} color="#FFFFFF" />
+        <Text style={styles.primaryBtnText}>Donate Now</Text>
+      </TouchableOpacity>
+
+      {/* Ways */}
+      {involve.ways.map((w, i) => (
+        <Card key={i} style={styles.wayCard}>
+          <View style={styles.wayRow}>
+            <View style={[styles.wayIcon, { backgroundColor: theme.colors.iconNavy }]}>
+              <Ionicons name={w.icon as keyof typeof Ionicons.glyphMap} size={18} color={theme.colors.primary} />
+            </View>
+            <View style={styles.wayText}>
+              <Text variant="titleSm" color="textPrimary">{w.title}</Text>
+              <Text variant="bodySm" color="textSecondary">{w.text}</Text>
+            </View>
+          </View>
+        </Card>
+      ))}
+    </View>
+  );
+}
+
+function VolunteerSection() {
+  const { awsar } = useContent();
+  const { volunteer } = awsar.involve;
+  const form = useForm(volunteer.formFields);
+  const requiredFields = volunteer.formFields
+    .filter((f) => f.includes('*'))
+    .map((f) => f.replace('*', '').trim());
+
+  function handleSubmit() {
+    if (!form.validate(requiredFields)) return;
+    const body = volunteer.formFields
+      .map((f) => `${f.replace('*', '').trim()}: ${form.values[f.replace('*', '').trim()] ?? ''}`)
+      .join('%0A');
+    Linking.openURL(
+      `mailto:support@awsarindia.org?subject=Volunteer Application&body=${encodeURIComponent(body)}`,
+    );
+  }
+
+  return (
+    <View style={styles.sectionBody}>
+      <Card>
+        <SectionHeader
+          eyebrow="Give Your Time"
+          title={volunteer.title}
+          icon="hand-left"
+          iconColor={theme.colors.primary}
+          iconBgColor={theme.colors.iconNavy}
+        />
+        <Text variant="bodyMd" color="textSecondary" style={styles.intro}>{volunteer.intro}</Text>
+      </Card>
+
+      {/* Facts */}
+      <View style={styles.factsRow}>
+        {volunteer.facts.map((f, i) => (
+          <View key={i} style={styles.factCard}>
+            <Text style={styles.factValue}>{f.v}</Text>
+            <Text style={styles.factLabel}>{f.l}</Text>
+          </View>
+        ))}
+      </View>
+
+      {/* Areas */}
+      {volunteer.areas.map((area, i) => (
+        <Card key={i} leftAccentColor={theme.colors.eduanchorsTeal} style={styles.areaCard}>
+          <Text variant="titleSm" color="textPrimary">{area.title}</Text>
+          <Text variant="bodySm" color="textSecondary">{area.text}</Text>
+        </Card>
+      ))}
+
+      {/* Commitment */}
+      <Card>
+        <View style={styles.commitRow}>
+          <Ionicons name="time-outline" size={18} color={theme.colors.primary} />
+          <Text variant="bodySm" color="textSecondary" style={styles.commitText}>{volunteer.commitment}</Text>
+        </View>
+      </Card>
+
+      {/* Form */}
+      <Card>
+        <Text style={styles.formTitle}>Apply to Volunteer</Text>
+        {volunteer.formFields.map((field) => (
+          <FormField
+            key={field}
+            label={field}
+            multiline={field.includes('Why')}
+            values={form.values}
+            errors={form.errors}
+            setValue={form.setValue}
+          />
+        ))}
+        <Text variant="bodySm" color="textMuted" style={styles.respondText}>{volunteer.respond}</Text>
+        <TouchableOpacity
+          style={styles.primaryBtn}
+          onPress={handleSubmit}
+          accessibilityRole="button"
+          accessibilityLabel="Prepare my application"
+        >
+          <Text style={styles.primaryBtnText}>Prepare my application</Text>
+        </TouchableOpacity>
+      </Card>
+    </View>
+  );
+}
+
+function PartnerSection() {
+  const { awsar } = useContent();
+  const { partnerForm, ways } = awsar.involve;
+  const form = useForm(partnerForm.fields);
+
+  function handleSend() {
+    if (!form.validate(['Name', 'Email'])) return;
+    const body = partnerForm.fields
+      .map((f) => `${f.replace('*', '').trim()}: ${form.values[f.replace('*', '').trim()] ?? ''}`)
+      .join('%0A');
+    Linking.openURL(
+      `mailto:support@awsarindia.org?subject=Partnership Enquiry&body=${encodeURIComponent(body)}`,
+    );
+  }
+
+  return (
+    <View style={styles.sectionBody}>
+      <Card>
+        <SectionHeader
+          eyebrow="Work With Us"
+          title="Partner with AWSAR"
+          icon="business"
+          iconColor={theme.colors.primary}
+          iconBgColor={theme.colors.iconNavy}
+        />
+        <Text variant="bodyMd" color="textSecondary" style={styles.intro}>
+          We welcome partnerships with governments, foundations, corporates, academic institutions, and civil society.
+        </Text>
+      </Card>
+
+      {ways.slice(0, 2).map((w, i) => (
+        <Card key={i} style={styles.wayCard}>
+          <View style={styles.wayRow}>
+            <View style={[styles.wayIcon, { backgroundColor: theme.colors.iconNavy }]}>
+              <Ionicons name={w.icon as keyof typeof Ionicons.glyphMap} size={18} color={theme.colors.primary} />
+            </View>
+            <View style={styles.wayText}>
+              <Text variant="titleSm" color="textPrimary">{w.title}</Text>
+              <Text variant="bodySm" color="textSecondary">{w.text}</Text>
+            </View>
+          </View>
+        </Card>
+      ))}
+
+      <Card>
+        <Text style={styles.formTitle}>Send a Partnership Enquiry</Text>
+        {partnerForm.fields.map((field) => (
+          <FormField
+            key={field}
+            label={field}
+            multiline={field.toLowerCase().includes('message')}
+            values={form.values}
+            errors={form.errors}
+            setValue={form.setValue}
+          />
+        ))}
+        <TouchableOpacity
+          style={styles.primaryBtn}
+          onPress={handleSend}
+          accessibilityRole="button"
+          accessibilityLabel="Send Enquiry"
+        >
+          <Text style={styles.primaryBtnText}>Send Enquiry</Text>
+        </TouchableOpacity>
+      </Card>
+    </View>
+  );
+}
+
+function ContactSection() {
+  const { awsar } = useContent();
+  const { contact, involve } = awsar;
+  const form = useForm(involve.contactForm.fields);
+
+  function handleSend() {
+    if (!form.validate(['Full name', 'Email', 'Message'])) return;
+    const body = involve.contactForm.fields
+      .map((f) => `${f.replace('*', '').trim()}: ${form.values[f.replace('*', '').trim()] ?? ''}`)
+      .join('%0A');
+    Linking.openURL(
+      `mailto:${contact.email}?subject=Enquiry from App&body=${encodeURIComponent(body)}`,
+    );
+  }
+
+  return (
+    <View style={styles.sectionBody}>
+      {contact.offices.map((office, i) => (
+        <Card key={i}>
+          <Text variant="titleSm" color="textPrimary">{office.name}</Text>
+          {office.note && <Text variant="bodySm" color="textMuted">{office.note}</Text>}
+          <TouchableOpacity
+            onPress={() =>
+              Linking.openURL(
+                `https://maps.google.com/?q=${encodeURIComponent(office.address)}`,
+              )
+            }
+            accessibilityRole="button"
+            accessibilityLabel="Get Directions"
+            style={styles.officeAddressBtn}
+          >
+            <Ionicons name="location-outline" size={14} color={theme.colors.primary} />
+            <Text style={styles.officeAddress}>{office.address}</Text>
+          </TouchableOpacity>
+          <View style={styles.officeActionsRow}>
+            <TouchableOpacity
+              style={styles.officeBtn}
+              onPress={() => Linking.openURL(`tel:${contact.phone}`)}
+              accessibilityRole="button"
+              accessibilityLabel="Call Office"
+            >
+              <Ionicons name="call-outline" size={14} color={theme.colors.primary} />
+              <Text style={styles.officeBtnText}>Call</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.officeBtn}
+              onPress={() => Linking.openURL(`mailto:${office.email}`)}
+              accessibilityRole="button"
+              accessibilityLabel="Email Office"
+            >
+              <Ionicons name="mail-outline" size={14} color={theme.colors.primary} />
+              <Text style={styles.officeBtnText}>{office.email}</Text>
+            </TouchableOpacity>
+          </View>
+          {office.hours && (
+            <Text variant="bodySm" color="textMuted">{office.hours}</Text>
+          )}
+        </Card>
+      ))}
+
+      <Card>
+        <Text style={styles.formTitle}>Send a Message</Text>
+        {involve.contactForm.fields.map((field) => (
+          <FormField
+            key={field}
+            label={field}
+            multiline={field.toLowerCase().includes('message')}
+            values={form.values}
+            errors={form.errors}
+            setValue={form.setValue}
+          />
+        ))}
+        <Text variant="bodySm" color="textMuted" style={styles.respondText}>{involve.contactForm.respond}</Text>
+        <TouchableOpacity
+          style={styles.primaryBtn}
+          onPress={handleSend}
+          accessibilityRole="button"
+          accessibilityLabel="Send Message"
+        >
+          <Text style={styles.primaryBtnText}>Send Message</Text>
+        </TouchableOpacity>
+      </Card>
+    </View>
+  );
+}
+
+export function GetInvolvedScreen() {
+  const [section, setSection] = useState<Section>('donate');
+
+  return (
+    <KeyboardAvoidingView
+      style={styles.screen}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+    >
+      {/* Section tabs */}
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={styles.tabBar}
+        contentContainerStyle={styles.tabBarContent}
+      >
+        {SECTIONS.map((s) => (
+          <TouchableOpacity
+            key={s.key}
+            onPress={() => setSection(s.key)}
+            style={[styles.tabBtn, section === s.key && styles.tabBtnActive]}
+            accessibilityRole="tab"
+            accessibilityLabel={s.label}
+            accessibilityState={{ selected: section === s.key }}
+          >
+            <Ionicons
+              name={s.icon}
+              size={14}
+              color={section === s.key ? '#FFFFFF' : theme.colors.textSecondary}
+            />
+            <Text style={[styles.tabBtnText, section === s.key && styles.tabBtnTextActive]}>
+              {s.label}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+
+      {/* Account card placeholder (Stage 8 fills this) */}
+      <View style={styles.accountCardPlaceholder}>
+        <Ionicons name="person-circle-outline" size={22} color={theme.colors.textMuted} />
+        <Text variant="bodySm" color="textMuted" style={styles.accountText}>
+          Sign in to save bookmarks and track your applications
+        </Text>
+        <TouchableOpacity
+          style={styles.signInBtn}
+          accessibilityRole="button"
+          accessibilityLabel="Sign In"
+        >
+          <Text style={styles.signInBtnText}>Sign In</Text>
+        </TouchableOpacity>
+      </View>
+
+      <ScrollView
+        style={styles.scrollArea}
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+      >
+        {section === 'donate' && <DonateSection />}
+        {section === 'volunteer' && <VolunteerSection />}
+        {section === 'partner' && <PartnerSection />}
+        {section === 'contact' && <ContactSection />}
+      </ScrollView>
+    </KeyboardAvoidingView>
+  );
+}
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F4F6FB",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  screen: { flex: 1, backgroundColor: theme.colors.background },
+  tabBar: { flexGrow: 0, backgroundColor: theme.colors.surfaceCard, borderBottomWidth: 1, borderBottomColor: theme.colors.borderSubtle },
+  tabBarContent: { flexDirection: 'row', paddingHorizontal: 16, paddingVertical: 10, gap: 6 },
+  tabBtn: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: 14, paddingVertical: 8, borderRadius: theme.radius.full, minHeight: 36 },
+  tabBtnActive: { backgroundColor: theme.colors.primary },
+  tabBtnText: { fontSize: 13, lineHeight: 18, fontFamily: fontFamilies.interSemiBold, color: theme.colors.textSecondary },
+  tabBtnTextActive: { color: '#FFFFFF' },
+  accountCardPlaceholder: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingHorizontal: 16, paddingVertical: 10, backgroundColor: theme.colors.surfaceSubtle, borderBottomWidth: 1, borderBottomColor: theme.colors.borderSubtle },
+  accountText: { flex: 1 },
+  signInBtn: { paddingHorizontal: 14, paddingVertical: 6, borderRadius: theme.radius.full, borderWidth: 1, borderColor: theme.colors.primary, minHeight: 36, justifyContent: 'center' },
+  signInBtnText: { fontSize: 12, lineHeight: 16, fontFamily: fontFamilies.interSemiBold, color: theme.colors.primary },
+  scrollArea: { flex: 1 },
+  scrollContent: { padding: 16, paddingBottom: 40 },
+  sectionBody: { gap: 12 },
+  intro: { marginTop: 10 },
+  // Donate
+  tierCard: { marginBottom: 0 },
+  tierCardSelected: { borderColor: theme.colors.secondary },
+  tierRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
+  tierLeft: { gap: 2, flex: 1 },
+  tierAmount: { fontSize: 20, lineHeight: 24, fontFamily: fontFamilies.interBold, color: theme.colors.secondary },
+  tierRadio: { width: 22, height: 22, borderRadius: 11, borderWidth: 2, borderColor: theme.colors.borderSubtle, alignItems: 'center', justifyContent: 'center' },
+  tierRadioSelected: { borderColor: theme.colors.secondary },
+  tierRadioInner: { width: 10, height: 10, borderRadius: 5, backgroundColor: theme.colors.secondary },
+  donateNote: { fontSize: 12, lineHeight: 18, fontFamily: fontFamilies.interRegular, color: theme.colors.textSecondary },
+  primaryBtn: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, backgroundColor: theme.colors.primary, borderRadius: theme.radius.sm, height: 48, minHeight: 48 },
+  primaryBtnText: { color: '#FFFFFF', fontSize: 14, lineHeight: 20, fontFamily: fontFamilies.interSemiBold },
+  wayCard: { gap: 0 },
+  wayRow: { flexDirection: 'row', gap: 12, alignItems: 'flex-start' },
+  wayIcon: { width: 40, height: 40, borderRadius: theme.radius.md, alignItems: 'center', justifyContent: 'center' },
+  wayText: { flex: 1, gap: 2 },
+  // Volunteer
+  factsRow: { flexDirection: 'row', gap: 8 },
+  factCard: { flex: 1, backgroundColor: theme.colors.surfaceCard, borderRadius: theme.radius.md, borderWidth: 1, borderColor: theme.colors.borderSubtle, padding: 12, alignItems: 'center', gap: 4, ...theme.shadows.level1 },
+  factValue: { fontSize: 18, lineHeight: 22, fontFamily: fontFamilies.interBold, color: theme.colors.primary },
+  factLabel: { fontSize: 10, lineHeight: 14, fontFamily: fontFamilies.interRegular, color: theme.colors.textSecondary, textAlign: 'center' },
+  areaCard: { gap: 4 },
+  commitRow: { flexDirection: 'row', alignItems: 'flex-start', gap: 10 },
+  commitText: { flex: 1 },
+  formTitle: { fontSize: 14, lineHeight: 20, fontFamily: fontFamilies.interBold, color: theme.colors.textPrimary, letterSpacing: 0.4, textTransform: 'uppercase', marginBottom: 8 },
+  // Form
+  fieldWrapper: { gap: 4, marginBottom: 12 },
+  fieldLabel: { fontSize: 12, lineHeight: 16, fontFamily: fontFamilies.interSemiBold, color: theme.colors.textPrimary },
+  fieldRequired: { color: theme.colors.urgentHelpline },
+  fieldInput: { borderWidth: 1, borderColor: theme.colors.borderSubtle, borderRadius: theme.radius.sm, paddingHorizontal: 12, paddingVertical: 10, fontSize: 14, lineHeight: 20, fontFamily: fontFamilies.interRegular, color: theme.colors.textPrimary, backgroundColor: theme.colors.surfaceCard, minHeight: 44 },
+  fieldInputMulti: { height: 100, textAlignVertical: 'top' },
+  fieldInputError: { borderColor: theme.colors.urgentHelpline },
+  fieldError: { fontSize: 11, lineHeight: 14, fontFamily: fontFamilies.interRegular, color: theme.colors.urgentHelpline },
+  respondText: { marginBottom: 8, fontStyle: 'italic' },
+  // Contact
+  officeAddressBtn: { flexDirection: 'row', alignItems: 'flex-start', gap: 6, marginTop: 8, minHeight: 40 },
+  officeAddress: { fontSize: 13, lineHeight: 18, fontFamily: fontFamilies.interRegular, color: theme.colors.primary, flex: 1, textDecorationLine: 'underline' },
+  officeActionsRow: { flexDirection: 'row', gap: 8, marginTop: 8, flexWrap: 'wrap' },
+  officeBtn: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: 12, paddingVertical: 8, borderRadius: theme.radius.sm, borderWidth: 1, borderColor: theme.colors.borderSubtle, backgroundColor: theme.colors.surfaceCard, minHeight: 40 },
+  officeBtnText: { fontSize: 12, lineHeight: 16, fontFamily: fontFamilies.interSemiBold, color: theme.colors.primary },
 });
