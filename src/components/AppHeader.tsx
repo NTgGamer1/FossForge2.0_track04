@@ -2,11 +2,14 @@ import { Linking, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import type { BottomTabHeaderProps } from '@react-navigation/bottom-tabs';
+import { useNavigation } from '@react-navigation/native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { fontFamilies, theme } from '../theme';
 import { Text } from './Text';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
+import type { AuthStackParamList } from '../navigation/types';
 
 export interface AppHeaderProps extends Partial<BottomTabHeaderProps> {
   title?: string;
@@ -24,6 +27,7 @@ export function AppHeader({ options, route, title }: AppHeaderProps) {
   const insets = useSafeAreaInsets();
   const { lang, toggleLang } = useLanguage();
   const { user } = useAuth();
+  const navigation = useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
 
   const rawRouteName = route?.name ?? 'Home';
   const localizedTitle =
@@ -34,6 +38,14 @@ export function AppHeader({ options, route, title }: AppHeaderProps) {
 
   const callHelpline = () => {
     Linking.openURL('tel:1098');
+  };
+
+  const openAuth = () => {
+    if (user) {
+      navigation.navigate('Profile');
+    } else {
+      navigation.navigate('SignIn');
+    }
   };
 
   const userInitials = user?.displayName
@@ -79,13 +91,20 @@ export function AppHeader({ options, route, title }: AppHeaderProps) {
             <Text style={styles.helplineText}>1098</Text>
           </TouchableOpacity>
 
-          <View style={styles.profileCircle}>
-            {userInitials ? (
-              <Text style={styles.initialsText}>{userInitials}</Text>
-            ) : (
-              <Ionicons name="person" size={20} color="#FFFFFF" />
-            )}
-          </View>
+          <TouchableOpacity
+            onPress={openAuth}
+            activeOpacity={0.8}
+            accessibilityRole="button"
+            accessibilityLabel={user ? 'View profile' : 'Sign in'}
+          >
+            <View style={styles.profileCircle}>
+              {userInitials ? (
+                <Text style={styles.initialsText}>{userInitials}</Text>
+              ) : (
+                <Ionicons name="person" size={20} color="#FFFFFF" />
+              )}
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
     </View>

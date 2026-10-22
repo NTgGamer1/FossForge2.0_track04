@@ -11,12 +11,15 @@ import { ProgrammeDetailScreen } from '../screens/ProgrammeDetailScreen';
 import { OpportunitiesScreen } from '../screens/OpportunitiesScreen';
 import { MediaScreen } from '../screens/MediaScreen';
 import { GetInvolvedScreen } from '../screens/GetInvolvedScreen';
+import { SignInScreen } from '../screens/SignInScreen';
+import { ProfileScreen } from '../screens/ProfileScreen';
 import { fontFamilies, theme } from '../theme';
 import { useLanguage } from '../contexts/LanguageContext';
-import type { MainTabParamList, ProgrammesStackParamList } from './types';
+import type { MainTabParamList, ProgrammesStackParamList, AuthStackParamList } from './types';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 const ProgrammesStack = createNativeStackNavigator<ProgrammesStackParamList>();
+const RootStack = createNativeStackNavigator<AuthStackParamList & { MainTabs: undefined }>();
 
 function ProgrammesStackNavigator() {
   return (
@@ -27,7 +30,7 @@ function ProgrammesStackNavigator() {
   );
 }
 
-export function RootNavigator() {
+function MainTabNavigator() {
   const insets = useSafeAreaInsets();
   const { lang } = useLanguage();
   const isHi = lang === 'hi';
@@ -120,6 +123,40 @@ export function RootNavigator() {
         }}
       />
     </Tab.Navigator>
+  );
+}
+
+export function RootNavigator() {
+  return (
+    <RootStack.Navigator screenOptions={{ headerShown: false }}>
+      <RootStack.Screen name="MainTabs" component={MainTabNavigator} />
+      <RootStack.Screen
+        name="SignIn"
+        component={SignInScreen}
+        options={{
+          presentation: 'modal',
+          headerShown: true,
+          headerTitle: '',
+          headerBackTitle: 'Back',
+          headerStyle: { backgroundColor: theme.colors.background },
+          headerShadowVisible: false,
+          headerTintColor: theme.colors.primary,
+        }}
+      />
+      <RootStack.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          presentation: 'modal',
+          headerShown: true,
+          headerTitle: 'My Profile',
+          headerBackTitle: 'Back',
+          headerStyle: { backgroundColor: theme.colors.background },
+          headerShadowVisible: false,
+          headerTintColor: theme.colors.primary,
+        }}
+      />
+    </RootStack.Navigator>
   );
 }
 

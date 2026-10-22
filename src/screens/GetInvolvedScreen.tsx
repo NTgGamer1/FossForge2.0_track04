@@ -10,6 +10,8 @@ import {
   View,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { useContent } from '../hooks/useContent';
 import { useTranslation } from '../i18n/t';
@@ -17,6 +19,8 @@ import { Card } from '../components/Card';
 import { SectionHeader } from '../components/SectionHeader';
 import { Text } from '../components/Text';
 import { fontFamilies, theme } from '../theme';
+import { useAuth } from '../contexts/AuthContext';
+import type { AuthStackParamList } from '../navigation/types';
 
 type Section = 'donate' | 'volunteer' | 'partner' | 'contact';
 
@@ -416,6 +420,8 @@ export function GetInvolvedScreen() {
   const [section, setSection] = useState<Section>('donate');
   const { lang } = useContent();
   const { t } = useTranslation();
+  const { user } = useAuth();
+  const navigation = useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
   const isHi = lang === 'hi';
 
   const sectionsList: { key: Section; label: string; icon: keyof typeof Ionicons.glyphMap }[] = [
@@ -458,22 +464,42 @@ export function GetInvolvedScreen() {
         ))}
       </ScrollView>
 
-      {/* Account card placeholder */}
-      <View style={styles.accountCardPlaceholder}>
-        <Ionicons name="person-circle-outline" size={22} color={theme.colors.textMuted} />
-        <Text variant="bodySm" color="textMuted" style={styles.accountText}>
-          {isHi
-            ? 'बुकमार्क सहेजने और अपने आवेदनों को ट्रैक करने के लिए साइन इन करें'
-            : 'Sign in to save bookmarks and track your applications'}
-        </Text>
+      {/* Account card */}
+      {user ? (
         <TouchableOpacity
-          style={styles.signInBtn}
+          style={styles.accountCardPlaceholder}
+          onPress={() => navigation.navigate('Profile')}
           accessibilityRole="button"
-          accessibilityLabel={t('involve.signIn')}
+          accessibilityLabel={t('involve.account')}
         >
-          <Text style={styles.signInBtnText}>{t('involve.signIn')}</Text>
+          <View style={styles.accountAvatar}>
+            <Text style={styles.accountAvatarText}>
+              {user.displayName.slice(0, 2).toUpperCase()}
+            </Text>
+          </View>
+          <Text variant="bodySm" color="textPrimary" style={styles.accountText}>
+            {isHi ? `${user.displayName} के रूप में लॉग इन` : `Signed in as ${user.displayName}`}
+          </Text>
+          <Ionicons name="chevron-forward" size={16} color={theme.colors.textMuted} />
         </TouchableOpacity>
-      </View>
+      ) : (
+        <View style={styles.accountCardPlaceholder}>
+          <Ionicons name="person-circle-outline" size={22} color={theme.colors.textMuted} />
+          <Text variant="bodySm" color="textMuted" style={styles.accountText}>
+            {isHi
+              ? 'बुकमार्क सहेजने और अपने आवेदनों को ट्रैक करने के लिए साइन इन करें'
+              : 'Sign in to save bookmarks and track your applications'}
+          </Text>
+          <TouchableOpacity
+            style={styles.signInBtn}
+            onPress={() => navigation.navigate('SignIn')}
+            accessibilityRole="button"
+            accessibilityLabel={t('involve.signIn')}
+          >
+            <Text style={styles.signInBtnText}>{t('involve.signIn')}</Text>
+          </TouchableOpacity>
+        </View>
+      )}
 
       <ScrollView
         style={styles.scrollArea}
@@ -500,6 +526,8 @@ const styles = StyleSheet.create({
   tabBtnTextActive: { color: '#FFFFFF' },
   accountCardPlaceholder: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingHorizontal: 16, paddingVertical: 10, backgroundColor: theme.colors.surfaceSubtle, borderBottomWidth: 1, borderBottomColor: theme.colors.borderSubtle },
   accountText: { flex: 1 },
+  accountAvatar: { width: 32, height: 32, borderRadius: 16, backgroundColor: theme.colors.primary, alignItems: 'center', justifyContent: 'center' },
+  accountAvatarText: { color: '#FFFFFF', fontSize: 12, fontFamily: fontFamilies.interBold, lineHeight: 16 },
   signInBtn: { paddingHorizontal: 14, paddingVertical: 6, borderRadius: theme.radius.full, borderWidth: 1, borderColor: theme.colors.primary, minHeight: 36, justifyContent: 'center' },
   signInBtnText: { fontSize: 12, lineHeight: 16, fontFamily: fontFamilies.interSemiBold, color: theme.colors.primary },
   scrollArea: { flex: 1 },

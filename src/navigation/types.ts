@@ -15,3 +15,9 @@ export type ProgrammesStackParamList = {
   ProgrammesList: undefined;
   ProgrammeDetail: { id: string };
 };
+
+/** Modal stack for auth screens (Sign In / Profile). */
+export type AuthStackParamList = {
+  SignIn: undefined;
+  Profile: undefined;
+};
