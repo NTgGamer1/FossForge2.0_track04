@@ -259,3 +259,4 @@ const styles = StyleSheet.create({
   switchBtn: { alignItems: 'center', paddingVertical: 4 },
   switchText: { fontSize: 13, lineHeight: 18, fontFamily: fontFamilies.interRegular, color: theme.colors.primary },
 });
+

@@ -109,3 +109,4 @@ const styles = StyleSheet.create({
   },
   signOutText: { fontSize: 15, lineHeight: 20, fontFamily: fontFamilies.interSemiBold, color: theme.colors.urgentHelpline },
 });
+
