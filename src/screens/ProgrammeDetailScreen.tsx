@@ -16,8 +16,7 @@ import { Card } from '../components/Card';
 import { Chip } from '../components/Chip';
 import { Text } from '../components/Text';
 import { fontFamilies, theme } from '../theme';
-import type { ProgrammesStackParamList } from '../navigation/types';
-import type { MainTabParamList } from '../navigation/types';
+import type { MainTabParamList, ProgrammesStackParamList } from '../navigation/types';
 import type { Programme } from '../types/content';
 
 type RouteT = RouteProp<ProgrammesStackParamList, 'ProgrammeDetail'>;

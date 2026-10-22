@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import React, { createContext, useCallback, useContext, useState } from 'react';
 import type { AuthUser } from '../services/auth';
 
 interface AuthContextValue {
@@ -36,7 +36,7 @@ function hashSimple(s: string): string {
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const signUp = useCallback(async (email: string, password: string, name: string) => {

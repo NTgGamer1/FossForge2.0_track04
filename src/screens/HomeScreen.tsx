@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  Linking,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
@@ -215,7 +214,7 @@ export function HomeScreen() {
           iconBgColor={theme.colors.iconNavy}
         />
         <View style={styles.founderQuote}>
-          <Text style={styles.founderQuoteText}>"{org.founderQuote.text}"</Text>
+          <Text style={styles.founderQuoteText}>{`"${org.founderQuote.text}"`}</Text>
           <Text style={styles.founderQuoteBy}>— {org.founderQuote.by}</Text>
         </View>
         {timelineExpanded && (

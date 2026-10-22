@@ -13,7 +13,6 @@ import { Ionicons } from '@expo/vector-icons';
 
 import { useContent } from '../hooks/useContent';
 import { Card } from '../components/Card';
-import { Chip } from '../components/Chip';
 import { SectionHeader } from '../components/SectionHeader';
 import { Text } from '../components/Text';
 import { fontFamilies, theme } from '../theme';
