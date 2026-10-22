@@ -1,5 +1,5 @@
 {
-  "_todo": "verify all values against awsarindia.org",
+  "_todo": "verify all values against awsarindia.org. Placeholders in programmes must be replaced with real site content.",
   "about": {
     "foundedYear": 2001,
     "helpline": "1098",
@@ -38,6 +38,142 @@
         "sub": "NITI Aayog"
       }
     ]
-  }
+  },
+  "programmes": [
+    {
+      "id": "research-and-analysis",
+      "nameEn": "Research & Analysis",
+      "nameHi": "अनुसंधान और विश्लेषण",
+      "icon": "analytics",
+      "tint": "iconNavy",
+      "summary": "Sample summary, replace with content from awsarindia.org",
+      "description": "Sample description sentence one for Research & Analysis detailing methodology and field assessments. Sample description sentence two outlining policy formulation and grassroots monitoring.",
+      "impact": [
+        { "value": "34+", "label": "Policy Briefs" },
+        { "value": "14", "label": "Field Surveys" },
+        { "value": "100%", "label": "Evidence-Led" }
+      ],
+      "image": null
+    },
+    {
+      "id": "child-protection-and-safety",
+      "nameEn": "Child Protection & Safety",
+      "nameHi": "बाल संरक्षण और सुरक्षा",
+      "icon": "shield-checkmark",
+      "tint": "iconRed",
+      "summary": "Sample summary, replace with content from awsarindia.org",
+      "description": "Sample description sentence one for Child Protection & Safety focusing on child rights and emergency rescue. Sample description sentence two describing 1098 collaboration and community safety nodes.",
+      "impact": [
+        { "value": "15k+", "label": "Children Protected" },
+        { "value": "24/7", "label": "Helpline 1098" },
+        { "value": "42", "label": "Active Centers" }
+      ],
+      "image": null
+    },
+    {
+      "id": "education-and-early-childhood",
+      "nameEn": "Education & Early Childhood",
+      "nameHi": "शिक्षा और प्रारंभिक बाल्यावस्था",
+      "icon": "school",
+      "tint": "iconBlue",
+      "summary": "Sample summary, replace with content from awsarindia.org",
+      "description": "Sample description sentence one for Education & Early Childhood delivering early learning access. Sample description sentence two tracking digital learning labs and remedial foundational support.",
+      "impact": [
+        { "value": "48", "label": "Digital Labs" },
+        { "value": "12k+", "label": "Students Supported" },
+        { "value": "95%", "label": "Retention Rate" }
+      ],
+      "image": null
+    },
+    {
+      "id": "health-and-mental-wellbeing",
+      "nameEn": "Health & Mental Well-being",
+      "nameHi": "स्वास्थ्य और मानसिक कल्याण",
+      "icon": "heart",
+      "tint": "iconMagenta",
+      "summary": "Sample summary, replace with content from awsarindia.org",
+      "description": "Sample description sentence one for Health & Mental Well-being promoting primary medical access. Sample description sentence two providing adolescent psychosocial support and nutrition drives.",
+      "impact": [
+        { "value": "25k+", "label": "Health Checkups" },
+        { "value": "18", "label": "Wellness Pods" },
+        { "value": "100+", "label": "Camps Conducted" }
+      ],
+      "image": null
+    },
+    {
+      "id": "womens-empowerment",
+      "nameEn": "Women's Empowerment",
+      "nameHi": "महिला सशक्तिकरण",
+      "icon": "woman",
+      "tint": "iconPurple",
+      "summary": "Sample summary, replace with content from awsarindia.org",
+      "description": "Sample description sentence one for Women's Empowerment building economic independence and vocational skills. Sample description sentence two creating micro-enterprise self-help clusters across districts.",
+      "impact": [
+        { "value": "8.5k+", "label": "Women Trained" },
+        { "value": "120", "label": "SHGs Formed" },
+        { "value": "78%", "label": "Income Growth" }
+      ],
+      "image": null
+    },
+    {
+      "id": "disaster-relief",
+      "nameEn": "Disaster Relief",
+      "nameHi": "आपदा राहत",
+      "icon": "umbrella",
+      "tint": "iconAmber",
+      "summary": "Sample summary, replace with content from awsarindia.org",
+      "description": "Sample description sentence one for Disaster Relief facilitating emergency response in climate vulnerabilities. Sample description sentence two restoring essential livelihoods and distribution of ration kits.",
+      "impact": [
+        { "value": "50k+", "label": "Ration Kits" },
+        { "value": "24h", "label": "Rapid Mobilization" },
+        { "value": "32", "label": "Relief Shelters" }
+      ],
+      "image": null
+    },
+    {
+      "id": "environment-and-climate-resilience",
+      "nameEn": "Environment & Climate Resilience",
+      "nameHi": "पर्यावरण और जलवायु लचीलापन",
+      "icon": "leaf",
+      "tint": "iconTeal",
+      "summary": "Sample summary, replace with content from awsarindia.org",
+      "description": "Sample description sentence one for Environment & Climate Resilience advancing rainwater harvesting. Sample description sentence two leading village sapling plantation and waste management.",
+      "impact": [
+        { "value": "75k+", "label": "Saplings Planted" },
+        { "value": "45", "label": "Water Bodies" },
+        { "value": "14", "label": "Eco Clubs" }
+      ],
+      "image": null
+    },
+    {
+      "id": "model-villages",
+      "nameEn": "Model Villages",
+      "nameHi": "आदर्श गाँव",
+      "icon": "business",
+      "tint": "iconNavy",
+      "summary": "Sample summary, replace with content from awsarindia.org",
+      "description": "Sample description sentence one for Model Villages implementing integrated rural infrastructure. Sample description sentence two establishing digital panchayats and holistic sanitation access.",
+      "impact": [
+        { "value": "28", "label": "Adarsh Villages" },
+        { "value": "100%", "label": "Solar Streetlights" },
+        { "value": "18k+", "label": "Villagers Benefited" }
+      ],
+      "image": null
+    },
+    {
+      "id": "technical-assistance",
+      "nameEn": "Technical Assistance",
+      "nameHi": "तकनीकी सहायता",
+      "icon": "construct",
+      "tint": "iconBlue",
+      "summary": "Sample summary, replace with content from awsarindia.org",
+      "description": "Sample description sentence one for Technical Assistance empowering grassroots non-profits. Sample description sentence two providing digital governance tools and monitoring frameworks.",
+      "impact": [
+        { "value": "150+", "label": "NGOs Mentored" },
+        { "value": "22", "label": "Toolkits Published" },
+        { "value": "90%", "label": "Compliance Index" }
+      ],
+      "image": null
+    }
+  ]
 }
-
