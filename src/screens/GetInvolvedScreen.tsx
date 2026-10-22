@@ -24,7 +24,7 @@ import type { AuthStackParamList } from '../navigation/types';
 
 type Section = 'donate' | 'volunteer' | 'partner' | 'contact';
 
-function useForm(fields: string[]) {
+function useForm(isHi: boolean) {
   const [values, setValues] = useState<Record<string, string>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -37,11 +37,13 @@ function useForm(fields: string[]) {
     const newErrors: Record<string, string> = {};
     for (const f of requiredFields) {
       if (!values[f] || values[f].trim() === '') {
-        newErrors[f] = 'This field is required';
+        newErrors[f] = isHi ? 'यह फ़ील्ड आवश्यक है' : 'This field is required';
       }
     }
-    if (values['Email'] && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values['Email'])) {
-      newErrors['Email'] = 'Please enter a valid email address';
+    const emailField = Object.keys(values).find((field) => field === 'Email' || field === 'ईमेल');
+    const email = emailField ? values[emailField]?.trim() : '';
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      newErrors[emailField!] = isHi ? 'कृपया एक मान्य ईमेल पता दर्ज करें' : 'Please enter a valid email address';
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -174,16 +176,19 @@ function VolunteerSection() {
   const { t } = useTranslation();
   const { volunteer } = awsar.involve;
   const isHi = lang === 'hi';
-  const form = useForm(volunteer.formFields);
+  const form = useForm(isHi);
   const requiredFields = volunteer.formFields
-    .filter((f) => f.includes('*'))
-    .map((f) => f.replace('*', '').trim());
+    .filter((field) => field.includes('*'))
+    .map((field) => field.replace('*', '').trim());
+  const volunteerRequiredFields = isHi
+    ? requiredFields
+    : ['Full name', 'Email', 'Phone', 'City / Location', 'Area of interest', 'Availability', 'Why do you want to volunteer with AWSAR?'];
 
   function handleSubmit() {
-    if (!form.validate(requiredFields)) return;
+    if (!form.validate(volunteerRequiredFields)) return;
     const body = volunteer.formFields
       .map((f) => `${f.replace('*', '').trim()}: ${form.values[f.replace('*', '').trim()] ?? ''}`)
-      .join('%0A');
+      .join('\n');
     Linking.openURL(
       `mailto:support@awsarindia.org?subject=Volunteer Application&body=${encodeURIComponent(body)}`,
     );
@@ -260,13 +265,13 @@ function PartnerSection() {
   const { t } = useTranslation();
   const { partnerForm, ways } = awsar.involve;
   const isHi = lang === 'hi';
-  const form = useForm(partnerForm.fields);
+  const form = useForm(isHi);
 
   function handleSend() {
-    if (!form.validate(['Name', 'Email', 'नाम', 'ईमेल'])) return;
+    if (!form.validate(isHi ? ['नाम', 'ईमेल'] : ['Name', 'Email'])) return;
     const body = partnerForm.fields
       .map((f) => `${f.replace('*', '').trim()}: ${form.values[f.replace('*', '').trim()] ?? ''}`)
-      .join('%0A');
+      .join('\n');
     Linking.openURL(
       `mailto:support@awsarindia.org?subject=Partnership Enquiry&body=${encodeURIComponent(body)}`,
     );
@@ -333,13 +338,16 @@ function ContactSection() {
   const { t } = useTranslation();
   const { contact, involve } = awsar;
   const isHi = lang === 'hi';
-  const form = useForm(involve.contactForm.fields);
+  const form = useForm(isHi);
 
   function handleSend() {
-    if (!form.validate(['Full name', 'Email', 'Message', 'पूरा नाम', 'ईमेल', 'संदेश'])) return;
+    const requiredFields = isHi
+      ? ['पूरा नाम', 'ईमेल', 'पूछताछ का प्रकार', 'संदेश']
+      : ['Full name', 'Email', 'Inquiry type', 'Message'];
+    if (!form.validate(requiredFields)) return;
     const body = involve.contactForm.fields
       .map((f) => `${f.replace('*', '').trim()}: ${form.values[f.replace('*', '').trim()] ?? ''}`)
-      .join('%0A');
+      .join('\n');
     Linking.openURL(
       `mailto:${contact.email}?subject=Enquiry from App&body=${encodeURIComponent(body)}`,
     );

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Image,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
@@ -11,6 +12,7 @@ import { useNavigation } from '@react-navigation/native';
 import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 
 import { useContent } from '../hooks/useContent';
+import { getImage } from '../data/images';
 import { useTranslation } from '../i18n/t';
 import { Card } from '../components/Card';
 import { Chip } from '../components/Chip';
@@ -87,6 +89,12 @@ export function HomeScreen() {
         </Text>
 
         <View style={styles.heroImagePlaceholder}>
+          <Image
+            source={getImage('hero.jpg')}
+            style={StyleSheet.absoluteFill}
+            resizeMode="cover"
+            accessible={false}
+          />
           <View style={styles.heroCaptionOverlay}>
             <Ionicons name="heart" size={14} color="#FFFFFF" />
             <Text style={styles.heroCaptionText}>{org.est}</Text>
@@ -368,7 +376,7 @@ const styles = StyleSheet.create({
   heroHindiText: { color: '#B3C6FF', fontSize: 13, lineHeight: 18, fontFamily: fontFamilies.interSemiBold },
   heroTitleText: { color: '#FFFFFF' },
   heroBodyText: { color: '#B3C6FF' },
-  heroImagePlaceholder: { backgroundColor: 'rgba(0,11,55,0.4)', height: 140, borderRadius: 16, justifyContent: 'flex-end', padding: 10 },
+  heroImagePlaceholder: { backgroundColor: 'rgba(0,11,55,0.4)', height: 180, borderRadius: 16, overflow: 'hidden', justifyContent: 'flex-end', padding: 10 },
   heroCaptionOverlay: { flexDirection: 'row', alignItems: 'center', gap: 6, backgroundColor: 'rgba(0,11,55,0.55)', borderRadius: 8, padding: 6 },
   heroCaptionText: { color: '#FFFFFF', fontSize: 11, lineHeight: 14, fontFamily: fontFamilies.interMedium, flex: 1 },
   heroButtonRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },

@@ -8,6 +8,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
+  useWindowDimensions,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -60,7 +61,9 @@ function NewsTab() {
 function PhotosTab() {
   const { awsar } = useContent();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const { width, height } = useWindowDimensions();
   const gallery = awsar.media.gallery;
+  const lightboxImageSize = Math.max(0, Math.min(width - 32, height * 0.62));
 
   return (
     <View style={styles.segContent}>
@@ -79,6 +82,7 @@ function PhotosTab() {
             <Image
               source={getImage(`${item.img}.jpg`) ?? { uri: 'about:blank' }}
               style={styles.photoThumb}
+              resizeMode="cover"
               accessibilityLabel={item.caption}
             />
           </TouchableOpacity>
@@ -108,13 +112,13 @@ function PhotosTab() {
               pagingEnabled
               initialScrollIndex={lightboxIndex}
               showsHorizontalScrollIndicator={false}
-              getItemLayout={(_, index) => ({ length: 400, offset: 400 * index, index })}
+              getItemLayout={(_, index) => ({ length: width, offset: width * index, index })}
               keyExtractor={(_, i) => String(i)}
               renderItem={({ item }: { item: GalleryItem }) => (
-                <View style={styles.lightboxSlide}>
+                <View style={[styles.lightboxSlide, { width }]}>
                   <Image
                     source={getImage(`${item.img}.jpg`) ?? { uri: 'about:blank' }}
-                    style={styles.lightboxImg}
+                    style={[styles.lightboxImg, { width: lightboxImageSize, height: lightboxImageSize }]}
                     resizeMode="contain"
                     accessibilityLabel={item.caption}
                   />
@@ -345,14 +349,14 @@ const styles = StyleSheet.create({
   newsTitle: { marginBottom: 2 },
   // Photos
   photoNote: { fontStyle: 'italic', marginBottom: 4 },
-  photoGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 4 },
-  photoCell: { width: '48.5%' },
-  photoThumb: { width: '100%', aspectRatio: 1, borderRadius: theme.radius.sm, backgroundColor: theme.colors.surfaceSubtle },
+  photoGrid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', rowGap: 4 },
+  photoCell: { width: '48%', aspectRatio: 1, borderRadius: theme.radius.sm, overflow: 'hidden' },
+  photoThumb: { width: '100%', height: '100%', backgroundColor: theme.colors.surfaceSubtle },
   // Lightbox
   lightboxBg: { flex: 1, backgroundColor: '#000000', justifyContent: 'center' },
   lightboxClose: { position: 'absolute', top: 48, right: 16, zIndex: 10, padding: 8, minWidth: 44, minHeight: 44, alignItems: 'center', justifyContent: 'center' },
-  lightboxSlide: { width: 400, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 16 },
-  lightboxImg: { width: 368, height: 368, borderRadius: theme.radius.md },
+  lightboxSlide: { justifyContent: 'center', alignItems: 'center', paddingHorizontal: 16 },
+  lightboxImg: { borderRadius: theme.radius.md },
   lightboxCaption: { marginTop: 12, fontSize: 12, lineHeight: 18, fontFamily: fontFamilies.interRegular, color: 'rgba(255,255,255,0.8)', textAlign: 'center', paddingHorizontal: 8 },
   lightboxNav: { position: 'absolute', bottom: 48, left: 0, right: 0, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 24 },
   lightboxNavBtn: { padding: 8, minWidth: 44, minHeight: 44, alignItems: 'center', justifyContent: 'center' },

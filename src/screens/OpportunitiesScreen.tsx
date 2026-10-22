@@ -41,7 +41,6 @@ function OpportunityCard({
   applyEmail,
   applyBase,
   applyText,
-  sampleText,
 }: {
   item: EduanchorItem;
   bookmarks: Set<string>;
@@ -49,7 +48,6 @@ function OpportunityCard({
   applyEmail: string;
   applyBase: string;
   applyText: string;
-  sampleText: string;
 }) {
   const [expanded, setExpanded] = useState(false);
   const isBookmarked = bookmarks.has(item.id);
@@ -88,13 +86,6 @@ function OpportunityCard({
           />
         </TouchableOpacity>
       </View>
-
-      {item.placeholder && (
-        <View style={styles.sampleLabel}>
-          <Ionicons name="information-circle-outline" size={12} color={theme.colors.textMuted} />
-          <Text style={styles.sampleLabelText}>{sampleText}</Text>
-        </View>
-      )}
 
       <Text variant="titleSm" color="textPrimary">{item.title}</Text>
       <Text variant="bodySm" color="textSecondary">{item.org}</Text>
@@ -147,6 +138,7 @@ export function OpportunitiesScreen() {
   const [showProcess, setShowProcess] = useState(false);
 
   const filters: FilterType[] = ['all', 'scholarship', 'mentorship', 'internship', 'job'];
+  const availableItems = eduanchors.items;
 
   const typeLabels: Record<FilterType, string> = {
     all: t('opportunities.all'),
@@ -157,16 +149,16 @@ export function OpportunitiesScreen() {
   };
 
   const counts = useMemo(() => {
-    const all = eduanchors.items.length;
-    const scholarship = eduanchors.items.filter((i) => i.type === 'scholarship').length;
-    const mentorship = eduanchors.items.filter((i) => i.type === 'mentorship').length;
-    const internship = eduanchors.items.filter((i) => i.type === 'internship').length;
-    const job = eduanchors.items.filter((i) => i.type === 'job').length;
+    const all = availableItems.length;
+    const scholarship = availableItems.filter((i) => i.type === 'scholarship').length;
+    const mentorship = availableItems.filter((i) => i.type === 'mentorship').length;
+    const internship = availableItems.filter((i) => i.type === 'internship').length;
+    const job = availableItems.filter((i) => i.type === 'job').length;
     return { all, scholarship, mentorship, internship, job };
-  }, [eduanchors.items]);
+  }, [availableItems]);
 
   const filtered = useMemo(() => {
-    let items = eduanchors.items;
+    let items = availableItems;
     if (filter !== 'all') items = items.filter((i) => i.type === filter);
     if (query.trim()) {
       const q = query.toLowerCase();
@@ -179,7 +171,7 @@ export function OpportunitiesScreen() {
       );
     }
     return items;
-  }, [filter, query, eduanchors.items]);
+  }, [filter, query, availableItems]);
 
   function toggleBookmark(id: string) {
     setBookmarks((prev) => {
@@ -266,7 +258,6 @@ export function OpportunitiesScreen() {
           applyEmail={eduanchors.applyEmail}
           applyBase={eduanchors.applyBase}
           applyText={t('opportunities.applyNow')}
-          sampleText={t('opportunities.sampleLabel')}
         />
       )}
       ItemSeparatorComponent={() => <View style={styles.separator} />}
@@ -360,8 +351,6 @@ const styles = StyleSheet.create({
   oppHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   typePill: { borderRadius: theme.radius.full, paddingHorizontal: 10, paddingVertical: 3 },
   typePillText: { fontSize: 10, lineHeight: 14, fontFamily: fontFamilies.interBold, letterSpacing: 0.4 },
-  sampleLabel: { flexDirection: 'row', alignItems: 'center', gap: 4 },
-  sampleLabelText: { fontSize: 11, lineHeight: 14, fontFamily: fontFamilies.interRegular, color: theme.colors.textMuted, fontStyle: 'italic' },
   metaRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
   metaText: { fontSize: 12, lineHeight: 16, fontFamily: fontFamilies.interRegular, color: theme.colors.textSecondary, flex: 1 },
   expandedText: { marginTop: 4 },

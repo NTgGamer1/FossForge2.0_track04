@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Image,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -48,6 +49,7 @@ export function SignInScreen({ navigation }: Props) {
       return;
     }
 
+    let succeeded = false;
     if (mode === 'signup') {
       if (!name.trim()) {
         setLocalError('Name is required.');
@@ -57,15 +59,12 @@ export function SignInScreen({ navigation }: Props) {
         setLocalError(t('auth.passwordMismatch'));
         return;
       }
-      await signUp(email.trim(), password, name.trim());
+      succeeded = await signUp(email.trim(), password, name.trim());
     } else {
-      await signIn(email.trim(), password);
+      succeeded = await signIn(email.trim(), password);
     }
 
-    // If no error was set, auth succeeded — pop back
-    if (!error) {
-      navigation.goBack();
-    }
+    if (succeeded) navigation.goBack();
   }
 
   return (
@@ -81,7 +80,7 @@ export function SignInScreen({ navigation }: Props) {
         {/* Logo / Brand */}
         <View style={styles.brand}>
           <View style={styles.logoCircle}>
-            <Text style={styles.logoLetter}>A</Text>
+            <Image source={require('../../assets/logo.png')} style={styles.logoImage} resizeMode="contain" />
           </View>
           <Text style={styles.brandName}>AWSAR INDIA</Text>
           <Text style={styles.brandSub}>
@@ -209,11 +208,12 @@ const styles = StyleSheet.create({
   brand: { alignItems: 'center', marginBottom: 32, gap: 8 },
   logoCircle: {
     width: 64, height: 64, borderRadius: 32,
-    backgroundColor: theme.colors.primary,
+    backgroundColor: '#FFFFFF',
     alignItems: 'center', justifyContent: 'center',
     marginBottom: 4,
+    overflow: 'hidden',
   },
-  logoLetter: { color: '#FFFFFF', fontFamily: fontFamilies.interBold, fontSize: 28, lineHeight: 34 },
+  logoImage: { width: 64, height: 64 },
   brandName: { fontSize: 20, lineHeight: 24, fontFamily: fontFamilies.interBold, color: theme.colors.primary },
   brandSub: { fontSize: 14, lineHeight: 20, fontFamily: fontFamilies.interRegular, color: theme.colors.textSecondary },
 

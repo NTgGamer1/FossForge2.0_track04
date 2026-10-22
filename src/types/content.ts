@@ -128,7 +128,6 @@ export interface Office {
 export interface EduanchorItem {
   id: string;
   type: 'scholarship' | 'mentorship' | 'internship' | 'job';
-  placeholder?: boolean;
   title: string;
   org: string;
   badge: string;
@@ -222,7 +221,6 @@ export interface AwsarData {
 }
 
 export interface EduanchorsData {
-  _todo: string;
   applyBase: string;
   applyEmail: string;
   process: ProcessStep[];

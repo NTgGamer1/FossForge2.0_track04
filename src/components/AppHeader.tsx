@@ -1,4 +1,4 @@
-import { Linking, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Image, Linking, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import type { BottomTabHeaderProps } from '@react-navigation/bottom-tabs';
@@ -57,7 +57,7 @@ export function AppHeader({ options, route, title }: AppHeaderProps) {
       <View style={styles.header}>
         <View style={styles.left}>
           <View style={styles.logoCircle}>
-            <Text style={styles.logoText}>A</Text>
+            <Image source={require('../../assets/logo.png')} style={styles.logoImage} resizeMode="contain" />
           </View>
           <View style={styles.titleColumn}>
             <Text variant="titleSm" color="primary" style={styles.appTitle}>
@@ -133,16 +133,12 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: theme.colors.primary,
+    backgroundColor: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center',
+    overflow: 'hidden',
   },
-  logoText: {
-    color: '#FFFFFF',
-    fontFamily: fontFamilies.interBold,
-    fontSize: 18,
-    lineHeight: 22,
-  },
+  logoImage: { width: 40, height: 40 },
   titleColumn: {
     justifyContent: 'center',
   },

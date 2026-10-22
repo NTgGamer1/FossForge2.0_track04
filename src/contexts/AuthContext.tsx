@@ -4,8 +4,8 @@ import type { AuthUser } from '../services/auth';
 interface AuthContextValue {
   user: AuthUser | null;
   loading: boolean;
-  signIn: (email: string, password: string) => Promise<void>;
-  signUp: (email: string, password: string, name: string) => Promise<void>;
+  signIn: (email: string, password: string) => Promise<boolean>;
+  signUp: (email: string, password: string, name: string) => Promise<boolean>;
   signOut: () => Promise<void>;
   error: string | null;
   clearError: () => void;
@@ -14,8 +14,8 @@ interface AuthContextValue {
 const AuthContext = createContext<AuthContextValue>({
   user: null,
   loading: true,
-  signIn: async () => {},
-  signUp: async () => {},
+  signIn: async () => false,
+  signUp: async () => false,
   signOut: async () => {},
   error: null,
   clearError: () => {},
@@ -43,17 +43,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setError(null);
     if (memStore.users.find((u) => u.email.toLowerCase() === email.toLowerCase())) {
       setError('An account with this email already exists.');
-      return;
+      return false;
     }
     if (password.length < 6) {
       setError('Password must be at least 6 characters.');
-      return;
+      return false;
     }
     const uid = `local_${Date.now()}`;
     memStore.users.push({ uid, email, name, password: hashSimple(password) });
     const authUser: AuthUser = { uid, email, displayName: name };
     memStore.session = authUser;
     setUser(authUser);
+    return true;
   }, []);
 
   const signIn = useCallback(async (email: string, password: string) => {
@@ -63,11 +64,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     );
     if (!found) {
       setError('Invalid email or password.');
-      return;
+      return false;
     }
     const authUser: AuthUser = { uid: found.uid, email: found.email, displayName: found.name };
     memStore.session = authUser;
     setUser(authUser);
+    return true;
   }, []);
 
   const signOut = useCallback(async () => {
