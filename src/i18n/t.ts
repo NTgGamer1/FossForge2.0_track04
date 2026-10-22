@@ -1,6 +1,6 @@
-import en from './en.json';
-import hi from './hi.json';
-import { useLanguage, type Language } from '../contexts/LanguageContext';
+import en from "./en.json";
+import hi from "./hi.json";
+import { useLanguage, type Language } from "../contexts/LanguageContext";
 
 type NestedKeyOf<T> = {
   [K in keyof T & string]: T[K] extends Record<string, string>
@@ -10,9 +10,9 @@ type NestedKeyOf<T> = {
 
 export type TranslationKey = NestedKeyOf<typeof en>;
 
-export function translate(key: TranslationKey, lang: Language = 'en'): string {
-  const dict = lang === 'hi' ? hi : en;
-  const [section, field] = key.split('.') as [keyof typeof en, string];
+export function translate(key: TranslationKey, lang: Language = "en"): string {
+  const dict = lang === "hi" ? hi : en;
+  const [section, field] = key.split(".") as [keyof typeof en, string];
   const sectionObj = (dict as Record<string, any>)[section];
   if (sectionObj && field in sectionObj) {
     return sectionObj[field];
@@ -26,7 +26,7 @@ export function translate(key: TranslationKey, lang: Language = 'en'): string {
 }
 
 export function t(key: TranslationKey): string {
-  return translate(key, 'en');
+  return translate(key, "en");
 }
 
 export function useTranslation() {
