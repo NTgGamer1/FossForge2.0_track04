@@ -1,0 +1,43 @@
+{
+  "_todo": "verify all values against awsarindia.org",
+  "about": {
+    "foundedYear": 2001,
+    "helpline": "1098",
+    "heroTitle": "Creating Opportunities for Development",
+    "heroText": "Empowering underprivileged communities across India through education, health, sustainable livelihoods, and evidence-based action since 2001.",
+    "heroCaption": "Grassroots Impact in 14 Districts",
+    "vision": "An equitable society where every child, woman, and youth has unfettered access to dignity, quality learning, and self-reliance.",
+    "values": [
+      "Community First",
+      "Transparency (80G/FCRA)",
+      "Equity & Inclusion",
+      "Last-Mile Delivery"
+    ],
+    "programmeCount": 9,
+    "eduanchorsBlurb": "Access verified scholarships, student mentorships, and social sector internships for youth across Delhi NCR and beyond.",
+    "eduanchorsTags": [
+      "Higher Ed Grants",
+      "Field Internships",
+      "1-on-1 Mentorship"
+    ],
+    "governance": [
+      {
+        "title": "80G Certified",
+        "sub": "Tax Exemption"
+      },
+      {
+        "title": "FCRA Compliant",
+        "sub": "MHA Registered"
+      },
+      {
+        "title": "GuideStar Gold",
+        "sub": "Transparency"
+      },
+      {
+        "title": "NGO Darpan",
+        "sub": "NITI Aayog"
+      }
+    ]
+  }
+}
+
